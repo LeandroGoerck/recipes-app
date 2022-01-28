@@ -1,5 +1,22 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import Login from '../pages/Login';
+import MainFoods from '../pages/MainFoods';
+import MainDrinks from '../pages/MainDrinks';
+import FoodDetails from '../pages/FoodDetails';
+import DrinkDetails from '../pages/DrinkDetails';
+import FoodInProgress from '../pages/FoodInProgress';
+import DrinkInProgress from '../pages/DrinkInProgress';
+import Explore from '../pages/Explore';
+import ExploreFoods from '../pages/ExploreFoods';
+import ExploreDrinks from '../pages/ExploreDrinks';
+import ExploreFoodsIngredients from '../pages/ExploreFoodsIngredients';
+import ExploreDrinksIngredients from '../pages/ExploreDrinksIngredients';
+import ExploreFoodsNationalities from '../pages/ExploreFoodsNationalities';
+import Profile from '../pages/Profile';
+import DoneRecipes from '../pages/DoneRecipes';
+import FavoriteRecipes from '../pages/FavoriteRecipes';
+import NotFound from '../pages/NotFound';
 
 function Routes() {
   return (
@@ -40,6 +57,7 @@ function Routes() {
       <Route exact path="/profile" component={ Profile } />
       <Route exact path="/done-recipes" component={ DoneRecipes } />
       <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
+      <Route path="*" component={ NotFound } />
     </Switch>
   );
 }

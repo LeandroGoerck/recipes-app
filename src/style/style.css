@@ -1,0 +1,20 @@
+.icon-user {
+  margin-left: 5px;
+  position: absolute;
+  right: 40px;
+  top: 45px;
+}
+
+.icon-password {
+  bottom: 85px;
+  margin-left: 5px;
+  position: absolute;
+  right: 40px;
+}
+
+.image-cook {
+  left: 70px;
+  position: relative;
+  top: -70px;
+  width: 180px;
+}
