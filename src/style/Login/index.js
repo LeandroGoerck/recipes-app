@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
 const Sform = styled.form`
-  box-shadow: 2px 2px 2px black;
+  box-shadow: 1px 1px 5px 1px gray;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   max-width: 80vw;
-  max-heigth: 80vh;
-  padding: 5px;
+  heigth: 10vh;
+  padding: 40px;
+  position: relative;
 `;
 
 const Sinput = styled.input`
@@ -20,8 +21,10 @@ const Sinput = styled.input`
 `;
 
 const Sbutton = styled.button`
-  max-width: 63vw;
+  min-width: 10vw;
   margin-top: 10px;
+  text-transform: uppercase;
+  border-radius: 5px;
 `;
 
 export {
