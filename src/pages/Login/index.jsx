@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 import { BsFillEyeSlashFill } from 'react-icons/bs';
 // import { IoEyeSharp } from 'react-icons/io';
+import { useHistory } from 'react-router-dom';
 import { Sform, Sinput, Sbutton } from '../../style/Login/index';
 import '../../style/style.css';
 import ImageCook from './image/cookLogin.svg';
@@ -9,15 +10,26 @@ import globalContext from '../../Context/globalContext';
 
 function Login() {
   const contextValue = useContext(globalContext);
+  const history = useHistory();
 
   const handleChange = ({ target: { value, type } }) => {
     const { email, password, setEmail, setBtnLogin, setPassword } = contextValue;
     const minCharacter = 6;
+
     if (email.includes('@') && email.includes('.com')
       && password.length >= minCharacter) {
       setBtnLogin(false);
     }
     return type === 'password' ? setPassword(value) : setEmail(value);
+  };
+
+  const handleSubmit = (event) => {
+    const { email } = contextValue;
+    event.preventDefault();
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+    localStorage.setItem('user', JSON.stringify({ email }));
+    history.push('/foods');
   };
 
   return (
@@ -47,6 +59,7 @@ function Login() {
           disabled={ contextValue.btnLogin }
           type="submit"
           data-testid="login-submit-btn"
+          onClick={ (ev) => handleSubmit(ev) }
         >
           Enter
         </Sbutton>
