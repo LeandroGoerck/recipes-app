@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Login from '../pages/Login';
-import MainFoods from '../pages/MainFoods';
+import MainFoods from '../pages/Foods';
 import MainDrinks from '../pages/MainDrinks';
 import FoodDetails from '../pages/FoodDetails';
 import DrinkDetails from '../pages/DrinkDetails';
@@ -24,16 +24,16 @@ function Routes() {
       <Route exact path="/" component={ Login } />
       <Route exact path="/foods" component={ MainFoods } />
       <Route exact path="/drinks" component={ MainDrinks } />
-      <Route exact path={ `foods/${recipeId}` } component={ FoodDetails } />
-      <Route exact path={ `drinks/${recipeId}` } component={ DrinkDetails } />
+      <Route exact path="foods/:recipeId" component={ FoodDetails } />
+      <Route exact path="drinks/:recipeId" component={ DrinkDetails } />
       <Route
         exact
-        path={ `foods/${recipeId}/in-progress` }
+        path="foods/:recipeId/in-progress"
         component={ FoodInProgress }
       />
       <Route
         exact
-        path={ `drinks/${recipeId}/in-progress` }
+        path="drinks/:recipeId/in-progress"
         component={ DrinkInProgress }
       />
       <Route exact path="/explore" component={ Explore } />
