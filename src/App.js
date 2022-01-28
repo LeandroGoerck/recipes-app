@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Routes from './routes/index';
 import globalContext from './Context/globalContext';
 
 function App() {
+  // =================== Login ======================
   const [email, setEmail] = React.useState('');
   const [btnLogin, setBtnLogin] = React.useState(true);
   const [password, setPassword] = React.useState('');
+  // =================== SearchBar ==================
+  const [displayInputSearch, setDisplayInputSearch] = useState(false);
 
   const contextValue = {
-    email,
-    setEmail,
-    btnLogin,
-    setBtnLogin,
-    password,
-    setPassword,
+    login: {
+      email,
+      setEmail,
+      btnLogin,
+      setBtnLogin,
+      password,
+      setPassword,
+    },
+    searchBar: {
+      displayInputSearch,
+      setDisplayInputSearch,
+    },
   };
 
   return (

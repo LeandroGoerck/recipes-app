@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
+import globalContext from '../../Context/globalContext';
 
 function Header({ children, displayIconSearch }) {
-  const [displayInputSearch, setDisplayInputSearch] = useState(false);
+  const {
+    searchBar: { displayInputSearch, setDisplayInputSearch },
+  } = useContext(globalContext);
 
   return (
     <header>
@@ -25,7 +28,6 @@ function Header({ children, displayIconSearch }) {
           />
         </button>
       )}
-      {displayInputSearch !== false && <input data-testid="search-input" type="text" />}
     </header>
   );
 }

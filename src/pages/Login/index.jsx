@@ -9,11 +9,11 @@ import ImageCook from './image/cookLogin.svg';
 import globalContext from '../../Context/globalContext';
 
 function Login() {
-  const contextValue = useContext(globalContext);
+  const { login } = useContext(globalContext);
   const history = useHistory();
 
   const handleChange = ({ target: { value, type } }) => {
-    const { email, password, setEmail, setBtnLogin, setPassword } = contextValue;
+    const { email, password, setEmail, setBtnLogin, setPassword } = login;
     const minCharacter = 6;
 
     if (email.includes('@') && email.includes('.com')
@@ -24,7 +24,7 @@ function Login() {
   };
 
   const handleSubmit = (event) => {
-    const { email } = contextValue;
+    const { email } = login;
     event.preventDefault();
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
@@ -37,7 +37,7 @@ function Login() {
       <img className="image-cook" src={ ImageCook } alt="CookImage" />
       <Sform>
         <Sinput
-          value={ contextValue.email }
+          value={ login.email }
           id="input-email"
           type="text"
           data-testid="email-input"
@@ -47,7 +47,7 @@ function Login() {
         <AiOutlineUser className="icon-user" />
 
         <Sinput
-          value={ contextValue.password }
+          value={ login.password }
           id="input-password"
           type="password"
           data-testid="password-input"
@@ -56,7 +56,7 @@ function Login() {
         />
         <BsFillEyeSlashFill className="icon-password" />
         <Sbutton
-          disabled={ contextValue.btnLogin }
+          disabled={ login.btnLogin }
           type="submit"
           data-testid="login-submit-btn"
           onClick={ (ev) => handleSubmit(ev) }
