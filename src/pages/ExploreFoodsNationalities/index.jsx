@@ -1,8 +1,9 @@
 import React from 'react';
+import Header from '../../components/Header';
 
 function ExploreFoodsNationalities() {
   return (
-    <h1>ExploreFoodsNationalities</h1>
+    <Header>Explore Nationalities</Header>
   );
 }
 
