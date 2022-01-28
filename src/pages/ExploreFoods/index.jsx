@@ -1,8 +1,9 @@
 import React from 'react';
+import Header from '../../components/Header';
 
 function ExploreFoods() {
   return (
-    <h1>ExploreFoods</h1>
+    <Header displayIconSearch={ false }>Explore Foods</Header>
   );
 }
 
