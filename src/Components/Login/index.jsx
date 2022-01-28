@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 import { BsFillEyeSlashFill } from 'react-icons/bs';
 // import { IoEyeSharp } from 'react-icons/io';
@@ -7,6 +7,8 @@ import '../../style/style.css';
 import ImageCook from './image/cookLogin.svg';
 
 function Login() {
+  const [btnDisabled] = useState(true);
+
   return (
     <>
       <img
@@ -30,7 +32,11 @@ function Login() {
           placeholder="Enter your password"
         />
         <BsFillEyeSlashFill className="icon-password" />
-        <Sbutton type="submit" data-testid="login-submit-btn">
+        <Sbutton
+          type="submit"
+          data-testid="login-submit-btn"
+          disabled={ btnDisabled }
+        >
           Enter
         </Sbutton>
       </Sform>
