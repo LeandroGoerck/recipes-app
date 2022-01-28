@@ -1,8 +1,12 @@
 import React from 'react';
+import Footer from '../../components/Footer';
 
 function MainFoods() {
   return (
-    <h1>MainFoods</h1>
+    <div>
+      <h1>MainFoods</h1>
+      <Footer />
+    </div>
   );
 }
 
