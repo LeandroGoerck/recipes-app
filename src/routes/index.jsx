@@ -1,15 +1,16 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import Login from '../pages/Login/index';
 
 function Routes() {
   return (
     <Switch>
       <Route exact path="/" component={ Login } />
-      <Route exact path="/foods" component={ MainFoods } />
+      {/* <Route exact path="/foods" component={ MainFoods } />
       <Route exact path="/drinks" component={ MainDrinks } />
       <Route exact path={ `foods/${recipeId}` } component={ FoodDetails } />
-      <Route exact path={ `drinks/${recipeId}` } component={ DrinkDetails } />
-      <Route
+      <Route exact path={ `drinks/${recipeId}` } component={ DrinkDetails } /> */}
+      {/* <Route
         exact
         path={ `foods/${recipeId}/in-progress` }
         component={ FoodInProgress }
@@ -39,7 +40,7 @@ function Routes() {
       />
       <Route exact path="/profile" component={ Profile } />
       <Route exact path="/done-recipes" component={ DoneRecipes } />
-      <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
+      <Route exact path="/favorite-recipes" component={ FavoriteRecipes } /> */}
     </Switch>
   );
 }
