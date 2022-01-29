@@ -36,9 +36,13 @@ function Header({ children, displayIconSearch }) {
   );
 }
 
+Header.defaultProps = {
+  displayIconSearch: false,
+};
+
 Header.propTypes = {
   children: PropTypes.string.isRequired,
-  displayIconSearch: PropTypes.bool.isRequired,
+  displayIconSearch: PropTypes.bool,
 };
 
 export default Header;
