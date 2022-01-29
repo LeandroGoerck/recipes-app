@@ -1,14 +1,21 @@
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import globalContext from '../../Context/globalContext';
 import ButtonGeneric from '../../subcomponents/ButtonGeneric';
 import InputGeneric from '../../subcomponents/InputGeneric';
 import {
-  fetchRecipesForIngredients,
-  fetchRecipesForName,
-  fetchRecipesForFirstLetter,
-} from '../../services/fetchRecipes';
+  fetchFoodsForIngredients,
+  fetchFoodsForName,
+  fetchFoodsForFirstLetter,
+} from '../../services/fetchFoods';
+import {
+  fetchDrinksForIngredients,
+  fetchDrinksForName,
+  fetchDrinksForFirstLetter,
+} from '../../services/fetchDrinks';
 
 function SearchBar() {
+  const { location: { pathname } } = useHistory();
   const { searchBar: { displayInputSearch } } = useContext(globalContext);
   const [radioValue, setRadioValue] = useState('');
   const [inputValue, setInputValue] = useState('');
@@ -21,26 +28,53 @@ function SearchBar() {
     setRadioValue(target.value);
   };
 
-  const handleClick = () => {
-    if (radioValue === 'ingredient') {
-      fetchRecipesForIngredients(inputValue)
-        .then((data) => console.log(data));
+  const searchFoodForFilter = (filter) => {
+    if (filter === 'ingredient') {
+      fetchFoodsForIngredients(inputValue)
+        .then(({ meals }) => console.log(meals));
     }
-    if (radioValue === 'name') {
-      fetchRecipesForName(inputValue)
-        .then((data) => console.log(data));
+    if (filter === 'name') {
+      fetchFoodsForName(inputValue)
+        .then(({ meals }) => console.log(meals));
     }
-    if (radioValue === 'first-letter') {
+    if (filter === 'first-letter') {
       if (inputValue.length > 1) {
         return global.alert('Your search must have only 1 (one) character');
       }
-      fetchRecipesForFirstLetter(inputValue)
-        .then((data) => console.log(data));
+      fetchFoodsForFirstLetter(inputValue)
+        .then(({ meals }) => console.log(meals));
+    }
+  };
+
+  const searchDrinksForFilter = (filter) => {
+    if (filter === 'ingredient') {
+      fetchDrinksForIngredients(inputValue)
+        .then(({ drinks }) => console.log(drinks));
+    }
+    if (filter === 'name') {
+      fetchDrinksForName(inputValue)
+        .then(({ drinks }) => console.log(drinks));
+    }
+    if (filter === 'first-letter') {
+      if (inputValue.length > 1) {
+        return global.alert('Your search must have only 1 (one) character');
+      }
+      fetchDrinksForFirstLetter(inputValue)
+        .then(({ drinks }) => console.log(drinks));
+    }
+  };
+
+  const handleClick = () => {
+    if (pathname === '/foods') {
+      searchFoodForFilter(radioValue);
+    }
+    if (pathname === '/drinks') {
+      searchDrinksForFilter(radioValue);
     }
   };
 
   return (
-    <form>
+    <section>
       {displayInputSearch !== false && (
         <InputGeneric
           TestId="search-input"
@@ -74,7 +108,7 @@ function SearchBar() {
         ChangeEvent={ handleRadioChange }
       />
       <ButtonGeneric TestId="exec-search-btn" Text="Search" ClickEvent={ handleClick } />
-    </form>
+    </section>
   );
 }
 
