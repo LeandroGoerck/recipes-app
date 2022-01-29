@@ -2,6 +2,11 @@ import React, { useContext, useState } from 'react';
 import globalContext from '../../Context/globalContext';
 import ButtonGeneric from '../../subcomponents/ButtonGeneric';
 import InputGeneric from '../../subcomponents/InputGeneric';
+import {
+  fetchRecipesForIngredients,
+  fetchRecipesForName,
+  fetchRecipesForFirstLetter,
+} from '../../services/fetchRecipes';
 
 function SearchBar() {
   const { searchBar: { displayInputSearch } } = useContext(globalContext);
@@ -17,7 +22,21 @@ function SearchBar() {
   };
 
   const handleClick = () => {
-    console.log(radioValue);
+    if (radioValue === 'ingredient') {
+      fetchRecipesForIngredients(inputValue)
+        .then((data) => console.log(data));
+    }
+    if (radioValue === 'name') {
+      fetchRecipesForName(inputValue)
+        .then((data) => console.log(data));
+    }
+    if (radioValue === 'first-letter') {
+      if (inputValue.length > 1) {
+        return global.alert('Your search must have only 1 (one) character');
+      }
+      fetchRecipesForFirstLetter(inputValue)
+        .then((data) => console.log(data));
+    }
   };
 
   return (

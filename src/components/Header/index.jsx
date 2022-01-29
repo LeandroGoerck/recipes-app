@@ -37,7 +37,7 @@ function Header({ children, displayIconSearch }) {
 }
 
 Header.defaultProps = {
-  displayIconSearch: false,
+  displayIconSearch: true,
 };
 
 Header.propTypes = {
