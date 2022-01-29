@@ -1,25 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
-import globalContext from '../../Context/globalContext';
 import SearchBar from '../SearchBar';
+import {
+  Stitle,
+  Sdiv,
+  Sheader,
+  Simg,
+  SinvDiv,
+  SbuttonSearch,
+  SdivBarSearch } from '../../style/Header';
 
 function Header({ children, displayIconSearch }) {
-  const {
-    searchBar: { displayInputSearch, setDisplayInputSearch },
-  } = useContext(globalContext);
-
+  const [displayInputSearch, setDisplayInputSearch] = useState(false);
   return (
-    <>
-      <header>
+    <Sheader>
+      <Sdiv>
         <Link to="/profile">
-          <img data-testid="profile-top-btn" src={ profileIcon } alt="Profile icon" />
+          <Simg data-testid="profile-top-btn" src={ profileIcon } alt="Profile icon" />
         </Link>
-        <p data-testid="page-title">{children}</p>
-        {displayIconSearch !== false && (
-          <button
+        <Stitle data-testid="page-title">{children}</Stitle>
+        {displayIconSearch !== false ? (
+          <SbuttonSearch
             onClick={ () => setDisplayInputSearch(!displayInputSearch) }
             type="button"
           >
@@ -28,11 +32,14 @@ function Header({ children, displayIconSearch }) {
               src={ searchIcon }
               alt="Search icon"
             />
-          </button>
-        )}
-      </header>
-      <SearchBar />
-    </>
+          </SbuttonSearch>)
+          : (<SinvDiv />)}
+      </Sdiv>
+      <SdivBarSearch>
+        {displayInputSearch !== false
+          && <SearchBar /> }
+      </SdivBarSearch>
+    </Sheader>
   );
 }
 

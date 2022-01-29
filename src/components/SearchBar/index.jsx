@@ -1,6 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import globalContext from '../../Context/globalContext';
 import ButtonGeneric from '../../subcomponents/ButtonGeneric';
 import InputGeneric from '../../subcomponents/InputGeneric';
 import {
@@ -13,10 +12,10 @@ import {
   fetchDrinksForName,
   fetchDrinksForFirstLetter,
 } from '../../services/fetchDrinks';
+import { Sinput, SdivSearch } from '../../style/SearchBar';
 
 function SearchBar() {
   const { location: { pathname } } = useHistory();
-  const { searchBar: { displayInputSearch } } = useContext(globalContext);
   const [radioValue, setRadioValue] = useState('');
   const [inputValue, setInputValue] = useState('');
 
@@ -74,15 +73,20 @@ function SearchBar() {
   };
 
   return (
-    <section>
-      {displayInputSearch !== false && (
-        <InputGeneric
-          TestId="search-input"
-          Value={ inputValue }
-          ChangeEvent={ handleInputChange }
-          Placeholder="Search Recipe"
+    <>
+      <SdivSearch>
+        <Sinput
+          data-testid="search-input"
+          value={ inputValue }
+          onChange={ handleInputChange }
+          placeholder="Search Recipe"
         />
-      )}
+        <ButtonGeneric
+          TestId="exec-search-btn"
+          Text="Search"
+          ClickEvent={ handleClick }
+        />
+      </SdivSearch>
       <InputGeneric
         Type="radio"
         TestId="ingredient-search-radio"
@@ -107,8 +111,7 @@ function SearchBar() {
         Value="first-letter"
         ChangeEvent={ handleRadioChange }
       />
-      <ButtonGeneric TestId="exec-search-btn" Text="Search" ClickEvent={ handleClick } />
-    </section>
+    </>
   );
 }
 

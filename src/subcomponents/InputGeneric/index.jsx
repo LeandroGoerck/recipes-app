@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { SradioFilter, SlabelFilter } from '../../style/SearchBar';
 
 function InputGeneric(
-  { TestId, Type, Label, Placeholder, Class, ChangeEvent, Value, Name },
+  { TestId, Type, Label, Placeholder, ChangeEvent, Value, Name, Class },
 ) {
   return (
-    <label htmlFor={ TestId }>
+    <SlabelFilter htmlFor={ TestId }>
       {Label}
-      <input
+      <SradioFilter
         id={ TestId }
         data-testid={ TestId }
         type={ Type }
@@ -17,7 +18,7 @@ function InputGeneric(
         name={ Name }
         onChange={ ChangeEvent }
       />
-    </label>
+    </SlabelFilter>
   );
 }
 
@@ -26,8 +27,8 @@ InputGeneric.defaultProps = {
   Type: 'text',
   Label: '',
   Placeholder: '',
-  Class: '',
   Name: '',
+  Class: '',
 };
 
 InputGeneric.propTypes = {
@@ -35,9 +36,9 @@ InputGeneric.propTypes = {
   Type: PropTypes.string,
   Label: PropTypes.string,
   Placeholder: PropTypes.string,
-  Class: PropTypes.string,
   ChangeEvent: PropTypes.func.isRequired,
   Value: PropTypes.string.isRequired,
+  Class: PropTypes.string,
   Name: PropTypes.string,
 };
 

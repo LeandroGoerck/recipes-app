@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { SbuttonSearch } from '../../style/SearchBar';
 
 function ButtonGeneric({ TestId, Type, Text, Class, Disabled, ClickEvent }) {
   const buttonDisabled = (
-    <button
+    <SbuttonSearch
       id={ TestId }
       data-testid={ TestId }
       type={ Type !== 'button' ? 'submit' : 'button' }
@@ -11,11 +12,11 @@ function ButtonGeneric({ TestId, Type, Text, Class, Disabled, ClickEvent }) {
       disabled
     >
       {Text}
-    </button>
+    </SbuttonSearch>
   );
 
   const buttonEnabled = (
-    <button
+    <SbuttonSearch
       id={ TestId }
       data-testid={ TestId }
       type={ Type !== 'button' ? 'submit' : 'button' }
@@ -23,7 +24,7 @@ function ButtonGeneric({ TestId, Type, Text, Class, Disabled, ClickEvent }) {
       onClick={ ClickEvent }
     >
       {Text}
-    </button>
+    </SbuttonSearch>
   );
 
   return (Disabled ? buttonDisabled : buttonEnabled);

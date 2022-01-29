@@ -10,6 +10,7 @@ const footerStyle = {
   'border-top-left-radius': '20%',
   'border-top-right-radius': '20%',
   'border-top': '5px solid rgba(196,0,0,1)',
+  borderBottom: '2px solid black',
 };
 
 export default footerStyle;
