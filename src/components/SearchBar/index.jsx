@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import ButtonGeneric from '../../subcomponents/ButtonGeneric';
 import InputGeneric from '../../subcomponents/InputGeneric';
@@ -13,11 +13,14 @@ import {
   fetchDrinksForFirstLetter,
 } from '../../services/fetchDrinks';
 import { Sinput, SdivSearch } from '../../style/SearchBar';
+import GlobalContext from '../../Context/GlobalContext';
 
 function SearchBar() {
   const { location: { pathname } } = useHistory();
+  const history = useHistory();
   const [radioValue, setRadioValue] = useState('');
   const [inputValue, setInputValue] = useState('');
+  const { recipesList } = useContext(GlobalContext);
 
   const handleInputChange = ({ target }) => {
     setInputValue(target.value);
@@ -30,36 +33,54 @@ function SearchBar() {
   const searchFoodForFilter = (filter) => {
     if (filter === 'ingredient') {
       fetchFoodsForIngredients(inputValue)
-        .then(({ meals }) => console.log(meals));
+        .then(({ meals }) => {
+          console.log(meals);
+          recipesList.setMeals(meals);
+        });
     }
     if (filter === 'name') {
       fetchFoodsForName(inputValue)
-        .then(({ meals }) => console.log(meals));
+        .then(({ meals }) => {
+          console.log(meals);
+          recipesList.setMeals(meals);
+        });
     }
     if (filter === 'first-letter') {
       if (inputValue.length > 1) {
         return global.alert('Your search must have only 1 (one) character');
       }
       fetchFoodsForFirstLetter(inputValue)
-        .then(({ meals }) => console.log(meals));
+        .then(({ meals }) => {
+          console.log(meals);
+          recipesList.setMeals(meals);
+        });
     }
   };
 
   const searchDrinksForFilter = (filter) => {
     if (filter === 'ingredient') {
       fetchDrinksForIngredients(inputValue)
-        .then(({ drinks }) => console.log(drinks));
+        .then(({ drinks }) => {
+          console.log(drinks);
+          recipesList.setDrinks(drinks);
+        });
     }
     if (filter === 'name') {
       fetchDrinksForName(inputValue)
-        .then(({ drinks }) => console.log(drinks));
+        .then(({ drinks }) => {
+          console.log(drinks);
+          recipesList.setDrinks(drinks);
+        });
     }
     if (filter === 'first-letter') {
       if (inputValue.length > 1) {
         return global.alert('Your search must have only 1 (one) character');
       }
       fetchDrinksForFirstLetter(inputValue)
-        .then(({ drinks }) => console.log(drinks));
+        .then(({ drinks }) => {
+          console.log(drinks);
+          recipesList.setDrinks(drinks);
+        });
     }
   };
 
@@ -71,6 +92,24 @@ function SearchBar() {
       searchDrinksForFilter(radioValue);
     }
   };
+
+  useEffect(() => {
+    const handleRedirectToMealDetails = () => {
+      if (recipesList.meals !== [] && recipesList.meals.length === 1) {
+        history.push(`/foods/${recipesList.meals[0].idMeal}`);
+      }
+    };
+    handleRedirectToMealDetails();
+  }, [recipesList.meals]);
+
+  useEffect(() => {
+    const handleRedirectToDrinkDetails = () => {
+      if (recipesList.drinks !== [] && recipesList.drinks.length === 1) {
+        history.push(`/drinks/${recipesList.drinks[0].idDrink}`);
+      }
+    };
+    handleRedirectToDrinkDetails();
+  }, [recipesList.drinks]);
 
   return (
     <>

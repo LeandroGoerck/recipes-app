@@ -6,10 +6,10 @@ import { useHistory } from 'react-router-dom';
 import { Sform, Sinput, Sbutton } from '../../style/Login/index';
 import '../../style/style.css';
 import ImageCook from './image/cookLogin.svg';
-import globalContext from '../../Context/globalContext';
+import GlobalContext from '../../Context/GlobalContext';
 
 function Login() {
-  const { login } = useContext(globalContext);
+  const { login } = useContext(GlobalContext);
   const history = useHistory();
 
   const handleChange = ({ target: { value, type } }) => {
