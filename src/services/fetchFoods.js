@@ -1,3 +1,9 @@
+function fetchFoods() {
+  return fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
+    .then((response) => response.json())
+    .catch((error) => global.alert(error));
+}
+
 function fetchFoodsForIngredients(ingredient) {
   return fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`)
     .then((response) => response.json())
@@ -17,6 +23,7 @@ function fetchFoodsForFirstLetter(firstLetter) {
 }
 
 export {
+  fetchFoods,
   fetchFoodsForIngredients,
   fetchFoodsForName,
   fetchFoodsForFirstLetter,

@@ -1,3 +1,9 @@
+function fetchDrinks() {
+  return fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
+    .then((response) => response.json())
+    .catch((error) => global.alert(error));
+}
+
 function fetchDrinksForIngredients(ingredient) {
   return fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`)
     .then((response) => response.json())
@@ -17,6 +23,7 @@ function fetchDrinksForFirstLetter(firstLetter) {
 }
 
 export {
+  fetchDrinks,
   fetchDrinksForIngredients,
   fetchDrinksForName,
   fetchDrinksForFirstLetter,
