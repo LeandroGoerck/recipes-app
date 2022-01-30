@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import SdivProfile from '../../style/Profile';
 
 function Profile() {
   const emailStorage = JSON.parse(localStorage.getItem('user'));
@@ -15,8 +16,8 @@ function Profile() {
   return (
     <div>
       <Header displayIconSearch={ false }>Profile</Header>
-      <div>
-        <p data-testid="profile-email">{emailStorage.email}</p>
+      <SdivProfile>
+        {emailStorage && <p data-testid="profile-email">{emailStorage.email}</p>}
 
         <button
           data-testid="profile-done-btn"
@@ -42,7 +43,7 @@ function Profile() {
           Logout
         </button>
 
-      </div>
+      </SdivProfile>
       <Footer />
     </div>
   );
