@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import SdivProfile from '../../style/Profile';
+import { SdivProfile, SbuttonProfile, SbuttonLogout } from '../../style/Profile/index';
 
 function Profile() {
   const emailStorage = JSON.parse(localStorage.getItem('user'));
@@ -19,29 +19,29 @@ function Profile() {
       <SdivProfile>
         {emailStorage && <p data-testid="profile-email">{emailStorage.email}</p>}
 
-        <button
+        <SbuttonProfile
           data-testid="profile-done-btn"
           type="button"
           onClick={ () => history.push('/done-recipes') }
         >
           Done Recipes
-        </button>
+        </SbuttonProfile>
 
-        <button
+        <SbuttonProfile
           data-testid="profile-favorite-btn"
           type="button"
           onClick={ () => history.push('/favorite-recipes') }
         >
           Favorite Recipes
-        </button>
+        </SbuttonProfile>
 
-        <button
+        <SbuttonLogout
           data-testid="profile-logout-btn"
           type="button"
           onClick={ handleLogout }
         >
           Logout
-        </button>
+        </SbuttonLogout>
 
       </SdivProfile>
       <Footer />
