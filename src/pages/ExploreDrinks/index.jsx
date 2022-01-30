@@ -3,9 +3,16 @@ import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import SdivExploreFoods from '../../style/ExploreFoodsDrinks';
+import { fetchRandomDrink } from '../../services/fetchRandom';
 
 function ExploreDrinks() {
   const history = useHistory();
+
+  async function generateRandomDrink() {
+    const api = await fetchRandomDrink();
+    const { idDrink } = api.drinks[0];
+    return history.push(history.push(`/drinks/${idDrink}`));
+  }
 
   return (
     <div>
@@ -19,7 +26,11 @@ function ExploreDrinks() {
           By Ingredient
         </button>
 
-        <button data-testid="explore-surprise" type="button">
+        <button
+          data-testid="explore-surprise"
+          type="button"
+          onClick={ generateRandomDrink }
+        >
           Surprise me!
         </button>
       </SdivExploreFoods>

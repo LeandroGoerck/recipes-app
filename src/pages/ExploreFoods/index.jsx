@@ -3,9 +3,16 @@ import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import SdivExploreFoods from '../../style/ExploreFoodsDrinks';
+import { fetchRandomMeal } from '../../services/fetchRandom';
 
 function ExploreFoods() {
   const history = useHistory();
+
+  async function generateRandomMeal() {
+    const api = await fetchRandomMeal();
+    const { idMeal } = api.meals[0];
+    return history.push(history.push(`/foods/${idMeal}`));
+  }
 
   return (
     <div>
@@ -30,6 +37,7 @@ function ExploreFoods() {
         <button
           data-testid="explore-surprise"
           type="button"
+          onClick={ generateRandomMeal }
         >
           Surprise me!
         </button>
