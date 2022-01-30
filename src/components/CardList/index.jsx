@@ -8,11 +8,10 @@ function CardList() {
   const { recipesList } = useContext(GlobalContext);
 
   function handleList() {
-    const LIST_LIMIT = 12;
     if (pathname === '/foods') {
       return (
         <div>
-          {recipesList.meals.slice(0, LIST_LIMIT).map((recipe, index) => (
+          {recipesList.meals.map((recipe, index) => (
             <MealCard
               key={ index }
               recipeCardId={ `${index}-recipe-card` }
@@ -29,7 +28,7 @@ function CardList() {
     if (pathname === '/drinks') {
       return (
         <div>
-          {recipesList.drinks.slice(0, LIST_LIMIT).map((recipe, index) => (
+          {recipesList.drinks.map((recipe, index) => (
             <MealCard
               key={ index }
               recipeCardId={ `${index}-recipe-card` }

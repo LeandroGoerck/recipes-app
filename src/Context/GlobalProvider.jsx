@@ -12,6 +12,7 @@ function GlobalProvider({ children }) {
   // =================== RecipesList ================
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
+  const [canShow, setCanShow] = useState(false);
 
   const contextValue = {
     login: {
@@ -31,6 +32,8 @@ function GlobalProvider({ children }) {
       setMeals,
       drinks,
       setDrinks,
+      canShow,
+      setCanShow,
     },
   };
 
