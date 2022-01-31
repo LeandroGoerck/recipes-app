@@ -24,18 +24,16 @@ function CardList() {
 
     if (pathname === '/drinks') {
       return (
-        <div>
-          {drinks.map((recipe, index) => (
-            <MealCard
-              key={ index }
-              recipeCardId={ `${index}-recipe-card` }
-              cardImgId={ `${index}-card-img` }
-              imgSrc={ recipe.strDrinkThumb }
-              imgStr={ recipe.strDrink }
-              cardName={ `${index}-card-name` }
-            />
-          ))}
-        </div>
+        drinks.map((recipe, index) => (
+          <MealCard
+            key={ index }
+            recipeCardId={ `${index}-recipe-card` }
+            cardImgId={ `${index}-card-img` }
+            imgSrc={ recipe.strDrinkThumb }
+            imgStr={ recipe.strDrink }
+            cardName={ `${index}-card-name` }
+          />
+        ))
       );
     }
   }

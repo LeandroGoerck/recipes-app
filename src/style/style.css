@@ -18,3 +18,15 @@
   top: -70px;
   width: 180px;
 }
+
+.recipes {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 150px;
+}
+
+.categories {
+  margin-top: 150px;
+}

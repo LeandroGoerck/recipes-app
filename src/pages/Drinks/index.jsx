@@ -21,8 +21,10 @@ function Drinks() {
   return (
     <div>
       <Header>Drinks</Header>
-      <Categories fetchCategories={ fetchCategoryDrinks } topicRecipe="drinks" />
-      <CardList />
+      <div className="recipes">
+        <Categories fetchCategories={ fetchCategoryDrinks } topicRecipe="drinks" />
+        <CardList />
+      </div>
       <Footer />
     </div>
   );
