@@ -43,16 +43,18 @@ function CardList() {
 
     if (pathname === '/explore/foods/ingredients') {
       return (
-        ingredients.map((ingredient, index) => (
-          <IngredientCard
-            key={ index }
-            ingredientCardId={ `${index}-ingredient-card` }
-            cardImgId={ `${index}-card-img` }
-            imgSrc={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}.png` }
-            imgStr={ ingredient.strIngredient }
-            cardName={ `${index}-card-name` }
-          />
-        ))
+        <div>
+          {ingredients.map((ingredient, index) => (
+            <IngredientCard
+              key={ index }
+              ingredientCardId={ `${index}-ingredient-card` }
+              cardImgId={ `${index}-card-img` }
+              imgSrc={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
+              imgStr={ ingredient.strIngredient }
+              cardName={ `${index}-card-name` }
+            />
+          ))}
+        </div>
       );
     }
   }
