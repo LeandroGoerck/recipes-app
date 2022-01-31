@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import SdivExploreFoods from '../../style/ExploreFoodsDrinks';
+import { SdivExploreFoods, SbuttonExplore } from '../../style/ExploreFoodsDrinks';
 import { fetchRandomDrink } from '../../services/fetchRandom';
 
 function ExploreDrinks() {
@@ -18,21 +18,21 @@ function ExploreDrinks() {
     <div>
       <Header displayIconSearch={ false }>Explore Drinks</Header>
       <SdivExploreFoods>
-        <button
+        <SbuttonExplore
           data-testid="explore-by-ingredient"
           type="button"
           onClick={ () => history.push('/explore/drinks/ingredients') }
         >
           By Ingredient
-        </button>
+        </SbuttonExplore>
 
-        <button
+        <SbuttonExplore
           data-testid="explore-surprise"
           type="button"
-          onClick={ generateRandomDrink }
+          onClick={ () => generateRandomDrink() }
         >
           Surprise me!
-        </button>
+        </SbuttonExplore>
       </SdivExploreFoods>
       <Footer />
     </div>
