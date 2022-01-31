@@ -28,10 +28,17 @@ function fetchFoodsForFirstLetter(firstLetter) {
     .catch((error) => global.alert(error));
 }
 
+function fetchFoodsDetailsForRecipeId(recipeId) {
+  return fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`)
+    .then((response) => response.json())
+    .catch((error) => global.alert(error));
+}
+
 export {
   fetchFoods,
   fetchCategoryFoods,
   fetchFoodsForIngredients,
   fetchFoodsForName,
   fetchFoodsForFirstLetter,
+  fetchFoodsDetailsForRecipeId,
 };
