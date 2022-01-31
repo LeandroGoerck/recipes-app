@@ -5,30 +5,27 @@ import MealCard from '../MealCard';
 
 function CardList() {
   const { location: { pathname } } = useHistory();
-  const { recipesList } = useContext(GlobalContext);
-
+  const { recipesList: { meals, drinks } } = useContext(GlobalContext);
   function handleList() {
     if (pathname === '/foods') {
       return (
-        <div>
-          {recipesList.meals.map((recipe, index) => (
-            <MealCard
-              key={ index }
-              recipeCardId={ `${index}-recipe-card` }
-              cardImgId={ `${index}-card-img` }
-              imgSrc={ recipe.strMealThumb }
-              imgStr={ recipe.strMeal }
-              cardName={ `${index}-card-name` }
-            />
-          ))}
-        </div>
+        meals.map((recipe, index) => (
+          <MealCard
+            key={ index }
+            recipeCardId={ `${index}-recipe-card` }
+            cardImgId={ `${index}-card-img` }
+            imgSrc={ recipe.strMealThumb }
+            imgStr={ recipe.strMeal }
+            cardName={ `${index}-card-name` }
+          />
+        ))
       );
     }
 
     if (pathname === '/drinks') {
       return (
         <div>
-          {recipesList.drinks.map((recipe, index) => (
+          {drinks.map((recipe, index) => (
             <MealCard
               key={ index }
               recipeCardId={ `${index}-recipe-card` }

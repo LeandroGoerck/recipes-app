@@ -41,6 +41,8 @@ const SradioFilter = styled.input`
     margin: 5px 0;
     width: 20px;
     height: 20px;
+    cursor: pointer;
+    accent-color: black;
 `;
 
 const SlabelFilter = styled.label`
