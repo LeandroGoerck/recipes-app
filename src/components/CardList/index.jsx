@@ -6,8 +6,9 @@ import MealCard from '../MealCard';
 
 function CardList() {
   const { location: { pathname } } = useHistory();
-  const { recipesList: { meals, drinks } } = useContext(GlobalContext);
-  const { ingredientsList: { ingredients } } = useContext(GlobalContext);
+  const {
+    recipesList: { meals, drinks },
+    ingredientsList: { ingredients } } = useContext(GlobalContext);
   function handleList() {
     if (pathname === '/foods') {
       return (
