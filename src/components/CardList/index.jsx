@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import GlobalContext from '../../Context/GlobalContext';
+import IngredientCard from '../IngredientCard';
 import MealCard from '../MealCard';
 
 function CardList() {
   const { location: { pathname } } = useHistory();
   const { recipesList: { meals, drinks } } = useContext(GlobalContext);
+  const { ingredientsList: { ingredients } } = useContext(GlobalContext);
   function handleList() {
     if (pathname === '/foods') {
       return (
@@ -36,6 +38,21 @@ function CardList() {
             />
           ))}
         </div>
+      );
+    }
+
+    if (pathname === '/explore/foods/ingredients') {
+      return (
+        ingredients.map((ingredient, index) => (
+          <IngredientCard
+            key={ index }
+            ingredientCardId={ `${index}-ingredient-card` }
+            cardImgId={ `${index}-card-img` }
+            imgSrc={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}.png` }
+            imgStr={ ingredient.strIngredient }
+            cardName={ `${index}-card-name` }
+          />
+        ))
       );
     }
   }
