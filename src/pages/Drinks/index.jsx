@@ -13,7 +13,7 @@ function Drinks() {
     fetchDrinks()
       .then(({ drinks }) => {
         const TWELVE = 12;
-        const firstTwelveDrinks = drinks.splice(0, TWELVE);
+        const firstTwelveDrinks = drinks.slice(0, TWELVE);
         setDrinks(firstTwelveDrinks);
       });
   }, []);

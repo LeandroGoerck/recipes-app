@@ -50,7 +50,6 @@ function SearchBar() {
   };
 
   const searchFoodForFilter = (filter) => {
-    console.log(filter);
     if (filter === 'ingredient') {
       fetchFoodsForIngredients(inputValue)
         .then(({ meals }) => recipesList.setMeals(handleConditions(meals, 'meals')));

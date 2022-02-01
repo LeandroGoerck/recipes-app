@@ -15,7 +15,8 @@ function Categories({ fetchCategories, topicRecipe }) {
       .then((data) => {
         const listCategories = topicRecipe;
         const FIVE = 5;
-        setCategories(data[listCategories].splice(0, FIVE));
+        const firstFiveCategories = data[listCategories].slice(0, FIVE);
+        setCategories(firstFiveCategories);
       });
   }, []);
 
@@ -24,7 +25,7 @@ function Categories({ fetchCategories, topicRecipe }) {
       setLoading(true);
       fetchFilterCategoryDrinks(strCategory).then((data) => {
         const TWELVE = 12;
-        const firstTwelveDrinks = data.splice(0, TWELVE);
+        const firstTwelveDrinks = data.slice(0, TWELVE);
         setDrinks(firstTwelveDrinks);
         setLoading(false);
       });
@@ -32,7 +33,7 @@ function Categories({ fetchCategories, topicRecipe }) {
       fetchFilterCategoryFoods(strCategory).then((data) => {
         setLoading(true);
         const TWELVE = 12;
-        const firstTwelveFoods = data.splice(0, TWELVE);
+        const firstTwelveFoods = data.slice(0, TWELVE);
         setMeals(firstTwelveFoods);
         setLoading(false);
       });
