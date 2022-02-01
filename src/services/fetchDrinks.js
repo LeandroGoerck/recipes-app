@@ -28,10 +28,17 @@ function fetchDrinksForFirstLetter(firstLetter) {
     .catch((error) => global.alert(error));
 }
 
+function fetchDrinkDetailsForRecipeId(recipeId) {
+  return fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${recipeId}`)
+    .then((response) => response.json())
+    .catch((error) => global.alert(error));
+}
+
 export {
   fetchDrinks,
   fetchCategoryDrinks,
   fetchDrinksForIngredients,
   fetchDrinksForName,
   fetchDrinksForFirstLetter,
+  fetchDrinkDetailsForRecipeId,
 };
