@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import GlobalContext from '../../Context/GlobalContext';
+import { fetchDrinksForName } from '../../services/fetchDrinks';
 import { fetchFoodsDetailsForRecipeId } from '../../services/fetchFoods';
 
 function FoodDetails(props) {
@@ -38,6 +39,13 @@ function FoodDetails(props) {
         setDetails(meals[0]);
         const ingAndMeasure = formatIngredientList(meals[0]);
         setIngredients(ingAndMeasure);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetchDrinksForName('')
+      .then(({ drinks }) => {
+        console.log(drinks);
       });
   }, []);
 
@@ -108,3 +116,5 @@ FoodDetails.propTypes = {
 };
 
 export default FoodDetails;
+
+// https://www.thecocktaildb.com/api/json/v1/1/search.php?s=

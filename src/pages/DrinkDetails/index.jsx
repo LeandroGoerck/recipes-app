@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import GlobalContext from '../../Context/GlobalContext';
 import { fetchDrinkDetailsForRecipeId } from '../../services/fetchDrinks';
+import { fetchFoodsForName } from '../../services/fetchFoods';
 
 function DrinksDetails(props) {
   const { drinkDetails: { drinkDetails } } = useContext(GlobalContext);
@@ -38,6 +39,13 @@ function DrinksDetails(props) {
         setDrinkDetails(drinks[0]);
         const ingAndMeasure = formatIngredientList(drinks[0]);
         setDrinkIngredients(ingAndMeasure);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetchFoodsForName('')
+      .then(({ meals }) => {
+        console.log(meals);
       });
   }, []);
 
