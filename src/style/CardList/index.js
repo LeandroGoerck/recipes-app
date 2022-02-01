@@ -5,22 +5,25 @@ const Simg = styled.img`
   cursor: pointer;
   margin-top: 10px;
   margin-bottom: 10px;
-  height: 35px;
-  width: 35px;
+  height: 120px;
+  width: 150px;
 `;
 
-const Sdiv = styled.div`
-  // align-items: center;
-  // border: 2px solid black;
-  // border-radius: 20px;
+const SdivCard = styled.div`
+  align-items: center;
+  border: 2px solid #F0F0EB;
+  border-radius: 20px;
   cursor: pointer;
-  // display: flex;
-  // flex-direction: column;
-  // margin-top: 10px;
-  // padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  padding-bottom: 15px;
+  &:hover {
+    box-shadow: 0px 0px 50px 0px #A9B1A1;
+  }
 `;
 
 export {
   Simg,
-  Sdiv,
+  SdivCard,
 };

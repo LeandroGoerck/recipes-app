@@ -17,14 +17,14 @@ function Foods() {
       });
   }, []);
   return (
-    <div>
+    <>
       <Header>Foods</Header>
       <div className="recipes">
         <Categories />
         <CardList />
       </div>
       <Footer />
-    </div>
+    </>
   );
 }
 

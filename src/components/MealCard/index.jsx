@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Simg, Sdiv } from '../../style/CardList';
+import { Simg, SdivCard } from '../../style/CardList';
 
 function MealCard({ recipeCardId, cardImgId, imgSrc, imgStr, cardName }) {
   return (
-    <Sdiv data-testid={ recipeCardId }>
+    <SdivCard data-testid={ recipeCardId }>
       <Simg src={ imgSrc } alt={ imgStr } data-testid={ cardImgId } />
       <span data-testid={ cardName }>{imgStr}</span>
-    </Sdiv>
+    </SdivCard>
   );
 }
 

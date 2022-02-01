@@ -22,11 +22,9 @@
 .recipes {
   align-items: center;
   display: flex;
-  flex-direction: column;
+  flex-flow: column wrap;
   justify-content: center;
-  margin-bottom: 150px;
-}
-
-.categories {
-  margin-top: 150px;
+  margin-bottom: 100px;
+  margin-top: 200px;
+  width: 90%;
 }

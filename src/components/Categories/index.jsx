@@ -11,6 +11,7 @@ import {
   fetchFilterCategoryFoods,
   fetchCategoryFoods,
 } from '../../services/fetchFoods';
+import { SdivCategories, SbuttonCategories } from '../../style/Categories';
 
 function Categories() {
   const { location: { pathname } } = useHistory();
@@ -102,20 +103,20 @@ function Categories() {
   };
 
   return (
-    <div className="categories">
+    <SdivCategories>
       {categories.map(({ strCategory }) => {
         const btnCategory = (
-          <button
+          <SbuttonCategories
             type="button"
             data-testid={ `${strCategory}-category-filter` }
             key={ strCategory }
             onClick={ () => handleClick(strCategory) }
           >
             { strCategory }
-          </button>);
+          </SbuttonCategories>);
         return btnCategory;
       })}
-    </div>
+    </SdivCategories>
   );
 }
 
