@@ -1,36 +1,67 @@
 import React, { useEffect, useState, useContext } from 'react';
-import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import GlobalContext from '../../Context/GlobalContext';
-import { fetchFilterCategoryDrinks } from '../../services/fetchDrinks';
-import { fetchFilterCategoryFoods } from '../../services/fetchFoods';
-import Loading from '../Loading';
+import {
+  fetchDrinks,
+  fetchFilterCategoryDrinks,
+  fetchCategoryDrinks,
+} from '../../services/fetchDrinks';
+import {
+  fetchFoods,
+  fetchFilterCategoryFoods,
+  fetchCategoryFoods,
+} from '../../services/fetchFoods';
 
-function Categories({ fetchCategories, topicRecipe }) {
+function Categories() {
+  const { location: { pathname } } = useHistory();
+
+  //  ================== Contexto ================
   const { recipesList: { setMeals, setDrinks },
-    requestAPI: { loading, setLoading } } = useContext(GlobalContext);
+    requestAPI: { setLoading } } = useContext(GlobalContext);
+
+  // =================== State ===================
   const [categories, setCategories] = useState([]);
+  const [filterCategory, setFilterCategory] = useState({ filter: false, category: '' });
+
+  // =================== Categorias ==============
+  const handleCategories = () => {
+    if (pathname === '/foods') {
+      setLoading(true);
+      fetchCategoryFoods()
+        .then(({ meals }) => {
+          const FIVE = 5;
+          const firstFiveCategories = meals.slice(0, FIVE);
+          setCategories(firstFiveCategories);
+          setLoading(false);
+        });
+    } else {
+      setLoading(true);
+      fetchCategoryDrinks()
+        .then(({ drinks }) => {
+          const FIVE = 5;
+          const firstFiveCategories = drinks.slice(0, FIVE);
+          setCategories(firstFiveCategories);
+          setLoading(false);
+        });
+    }
+  };
 
   useEffect(() => {
-    fetchCategories()
-      .then((data) => {
-        const listCategories = topicRecipe;
-        const FIVE = 5;
-        const firstFiveCategories = data[listCategories].slice(0, FIVE);
-        setCategories(firstFiveCategories);
-      });
+    handleCategories();
   }, []);
 
-  function handleFilterCategory(strCategory) {
-    if (topicRecipe === 'drinks') {
+  // ================== Filtro por Categoria =================
+  const handleSearchFilterCategory = () => {
+    if (pathname === '/drinks') {
       setLoading(true);
-      fetchFilterCategoryDrinks(strCategory).then((data) => {
+      fetchFilterCategoryDrinks(filterCategory.category).then((data) => {
         const TWELVE = 12;
         const firstTwelveDrinks = data.slice(0, TWELVE);
         setDrinks(firstTwelveDrinks);
         setLoading(false);
       });
     } else {
-      fetchFilterCategoryFoods(strCategory).then((data) => {
+      fetchFilterCategoryFoods(filterCategory.category).then((data) => {
         setLoading(true);
         const TWELVE = 12;
         const firstTwelveFoods = data.slice(0, TWELVE);
@@ -38,30 +69,54 @@ function Categories({ fetchCategories, topicRecipe }) {
         setLoading(false);
       });
     }
-  }
+  };
+
+  const handleNoFilter = () => {
+    if (pathname === '/foods') {
+      fetchFoods()
+        .then(({ meals }) => {
+          const TWELVE = 12;
+          const firstTwelveFoods = meals.slice(0, TWELVE);
+          setMeals(firstTwelveFoods);
+        });
+    } else {
+      fetchDrinks()
+        .then(({ drinks }) => {
+          const TWELVE = 12;
+          const firstTwelveDrinks = drinks.slice(0, TWELVE);
+          setDrinks(firstTwelveDrinks);
+        });
+    }
+  };
+
+  useEffect(() => {
+    if (filterCategory.filter === false) {
+      handleNoFilter();
+    } else {
+      handleSearchFilterCategory();
+    }
+  }, [filterCategory]);
+
+  const handleClick = (strCategory) => {
+    setFilterCategory({ filter: !filterCategory.filter, category: strCategory });
+  };
 
   return (
-    loading ? <Loading /> : (
-      <div className="categories">
-        {categories.map(({ strCategory }) => {
-          const btnCategory = (
-            <button
-              type="button"
-              data-testid={ `${strCategory}-category-filter` }
-              key={ strCategory }
-              onClick={ () => handleFilterCategory(strCategory) }
-            >
-              { strCategory }
-            </button>);
-          return btnCategory;
-        })}
-      </div>
-    ));
+    <div className="categories">
+      {categories.map(({ strCategory }) => {
+        const btnCategory = (
+          <button
+            type="button"
+            data-testid={ `${strCategory}-category-filter` }
+            key={ strCategory }
+            onClick={ () => handleClick(strCategory) }
+          >
+            { strCategory }
+          </button>);
+        return btnCategory;
+      })}
+    </div>
+  );
 }
-
-Categories.propTypes = {
-  fetchCategories: PropTypes.func.isRequired,
-  topicRecipe: PropTypes.string.isRequired,
-};
 
 export default Categories;

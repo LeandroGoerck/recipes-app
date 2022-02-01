@@ -3,7 +3,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import CardList from '../../components/CardList';
 import GlobalContext from '../../Context/GlobalContext';
-import { fetchDrinks, fetchCategoryDrinks } from '../../services/fetchDrinks';
+import { fetchDrinks } from '../../services/fetchDrinks';
 import Categories from '../../components/Categories';
 
 function Drinks() {
@@ -22,7 +22,7 @@ function Drinks() {
     <div>
       <Header>Drinks</Header>
       <div className="recipes">
-        <Categories fetchCategories={ fetchCategoryDrinks } topicRecipe="drinks" />
+        <Categories />
         <CardList />
       </div>
       <Footer />
