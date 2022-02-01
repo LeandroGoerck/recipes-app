@@ -99,6 +99,9 @@ function Categories() {
   }, [filterCategory]);
 
   const handleClick = (strCategory) => {
+    if (strCategory === 'All') {
+      setFilterCategory({ ...filterCategory, filter: false });
+    }
     setFilterCategory({ filter: !filterCategory.filter, category: strCategory });
   };
 
@@ -116,6 +119,13 @@ function Categories() {
           </SbuttonCategories>);
         return btnCategory;
       })}
+      <SbuttonCategories
+        type="button"
+        data-testid="All-category-filter"
+        onClick={ () => handleClick('All') }
+      >
+        All
+      </SbuttonCategories>
     </SdivCategories>
   );
 }
