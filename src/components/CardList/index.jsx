@@ -17,6 +17,7 @@ function CardList() {
             imgSrc={ recipe.strMealThumb }
             imgStr={ recipe.strMeal }
             cardName={ `${index}-card-name` }
+            recipeId={ recipe.idMeal }
           />
         ))
       );
@@ -32,6 +33,7 @@ function CardList() {
             imgSrc={ recipe.strDrinkThumb }
             imgStr={ recipe.strDrink }
             cardName={ `${index}-card-name` }
+            recipeId={ recipe.idDrink }
           />
         ))
       );

@@ -9,6 +9,11 @@ const Simg = styled.img`
   width: 150px;
 `;
 
+const SspanCard = styled.span`
+  text-decoration: none;
+  color: black;
+`;
+
 const SdivCard = styled.div`
   align-items: center;
   border: 2px solid #F0F0EB;
@@ -26,4 +31,5 @@ const SdivCard = styled.div`
 export {
   Simg,
   SdivCard,
+  SspanCard,
 };
