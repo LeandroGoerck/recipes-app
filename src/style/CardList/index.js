@@ -1,35 +1,52 @@
 import styled from 'styled-components';
 
 const Simg = styled.img`
-  border-radius: 5px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
   cursor: pointer;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  height: 120px;
-  width: 150px;
+  inset: 0;
+  margin-bottom: 15px;
+  height: 5%;
+  width: 100%;
 `;
 
-const SspanCard = styled.span`
-  text-decoration: none;
-  color: black;
+const Stitle = styled.span`
+  font-size: 22;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #3D3D3D;
+  width: 100%;
+  text-align: center;
+  &:hover {
+    color: black;
+  }
 `;
 
-const SdivCard = styled.div`
+const Scard = styled.div`
+  inset: 0;
+  margin: 20px auto;
   align-items: center;
-  border: 2px solid #F0F0EB;
-  border-radius: 20px;
+  justify-content: center;
   cursor: pointer;
   display: flex;
-  flex-direction: column;
-  margin-top: 20px;
-  padding-bottom: 15px;
+  flex-wrap: wrap;
+  border: 3px solid lightgray;
+  border-radius: 15px;
+  background: lightgray;
+  width: 50%;
   &:hover {
-    box-shadow: 0px 0px 50px 0px #A9B1A1;
+    transition: 0.5s;
+    box-shadow: 0px 15px 25px -4px #959595;
   }
+`;
+
+const ScardList = styled.div`
+  margin-bottom: 80px;
 `;
 
 export {
   Simg,
-  SdivCard,
-  SspanCard,
+  Scard,
+  Stitle,
+  ScardList,
 };

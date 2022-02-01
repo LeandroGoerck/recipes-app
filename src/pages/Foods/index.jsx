@@ -19,10 +19,8 @@ function Foods() {
   return (
     <>
       <Header>Foods</Header>
-      <div className="recipes">
-        <Categories />
-        <CardList />
-      </div>
+      <Categories />
+      <CardList />
       <Footer />
     </>
   );

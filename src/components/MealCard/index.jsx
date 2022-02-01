@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { Simg, SdivCard, SspanCard } from '../../style/CardList';
+import { useHistory, Link } from 'react-router-dom';
+import { Simg, Scard, Stitle } from '../../style/CardList';
 
 function MealCard({ recipeCardId, cardImgId, imgSrc, imgStr, cardName, recipeId }) {
   const { location: { pathname } } = useHistory();
   return (
     <Link to={ `${pathname}/${recipeId}` }>
-      <SdivCard data-testid={ recipeCardId }>
+      <Scard data-testid={ recipeCardId }>
         <Simg src={ imgSrc } alt={ imgStr } data-testid={ cardImgId } />
-        <SspanCard data-testid={ cardName }>{imgStr}</SspanCard>
-      </SdivCard>
+        <Stitle data-testid={ cardName }>{imgStr}</Stitle>
+      </Scard>
     </Link>
   );
 }

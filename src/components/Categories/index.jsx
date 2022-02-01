@@ -11,7 +11,7 @@ import {
   fetchFilterCategoryFoods,
   fetchCategoryFoods,
 } from '../../services/fetchFoods';
-import { SdivCategories, SbuttonCategories } from '../../style/Categories';
+import { Scategories, Scategory } from '../../style/Categories';
 
 function Categories() {
   const { location: { pathname } } = useHistory();
@@ -98,27 +98,27 @@ function Categories() {
   };
 
   return (
-    <SdivCategories>
+    <Scategories>
       {categories.map(({ strCategory }) => {
         const btnCategory = (
-          <SbuttonCategories
+          <Scategory
             type="button"
             data-testid={ `${strCategory}-category-filter` }
             key={ strCategory }
             onClick={ () => handleClick(strCategory) }
           >
             { strCategory }
-          </SbuttonCategories>);
+          </Scategory>);
         return btnCategory;
       })}
-      <SbuttonCategories
+      <Scategory
         type="button"
         data-testid="All-category-filter"
         onClick={ () => handleClick('All') }
       >
         All
-      </SbuttonCategories>
-    </SdivCategories>
+      </Scategory>
+    </Scategories>
   );
 }
 

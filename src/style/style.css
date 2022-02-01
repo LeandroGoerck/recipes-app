@@ -19,12 +19,6 @@
   width: 180px;
 }
 
-.recipes {
-  align-items: center;
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
-  margin-bottom: 100px;
-  margin-top: 200px;
-  width: 90%;
+a {
+  text-decoration: none;
 }

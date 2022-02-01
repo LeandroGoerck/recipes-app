@@ -21,10 +21,8 @@ function Drinks() {
   return (
     <div>
       <Header>Drinks</Header>
-      <div className="recipes">
-        <Categories />
-        <CardList />
-      </div>
+      <Categories />
+      <CardList />
       <Footer />
     </div>
   );

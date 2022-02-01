@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import GlobalContext from '../../Context/GlobalContext';
 import MealCard from '../MealCard';
+import { ScardList } from '../../style/CardList';
 
 function CardList() {
   const { location: { pathname } } = useHistory();
@@ -41,9 +42,9 @@ function CardList() {
   }
 
   return (
-    <div>
+    <ScardList>
       {handleList()}
-    </div>
+    </ScardList>
   );
 }
 
