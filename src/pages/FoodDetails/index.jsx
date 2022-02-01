@@ -5,31 +5,73 @@ import GlobalContext from '../../Context/GlobalContext';
 import { fetchFoodsDetailsForRecipeId } from '../../services/fetchFoods';
 
 function FoodDetails(props) {
-  const { recipesList: { setMeals } } = useContext(GlobalContext);
+  const { foodDetails: { setDetails } } = useContext(GlobalContext);
+  const { foodDetails: { setIngredients } } = useContext(GlobalContext);
+  const { foodDetails: { ingredients } } = useContext(GlobalContext);
   const { match } = props;
   const { params } = match;
   const { recipeId } = params;
   const { location: { pathname } } = useHistory();
+
+  const formatIngredientList = (data) => {
+    const ingredientKeys = Object
+      .keys(data[0]).filter((item) => item?.includes('strIngredient'));
+    const measureKeys = Object
+      .keys(data[0]).filter((item) => item?.includes('strMeasure'));
+
+    const ingredientsValues = ingredientKeys?.map((key) => (data[0][key]))
+      .filter((item) => item !== '');
+
+    const measureValues = measureKeys?.map((key) => (data[0][key]))
+      .filter((item) => item !== '');
+
+    const ingAndMeasure = ingredientsValues
+      .map((ingr, index) => (`${[ingr]} - ${measureValues[index]}`));
+    return ingAndMeasure;
+  };
+
   useEffect(() => {
     const TEST_NUMBER = 52977;
     fetchFoodsDetailsForRecipeId(TEST_NUMBER)
       .then(({ meals }) => {
-        console.log({ pathname });
-        console.log({ recipeId });
-        const TWELVE = 12;
-        const firstTwelveFoods = meals.splice(0, TWELVE);
-        setMeals(firstTwelveFoods);
-        console.log(firstTwelveFoods);
+        setDetails(meals);
+        const ingAndMeasure = formatIngredientList(meals);
+        setIngredients(ingAndMeasure);
       });
   }, []);
+
   return (
     <div>
       <h1>FoodDetails</h1>
       <p>{pathname}</p>
       <p>{recipeId}</p>
+      <img data-testid="recipe-photo" alt="x" />
+      <span data-testid="recipe-title" />
+      <button type="button" data-testid="share-btn">
+        Compartilhar
+      </button>
+      <button type="button" data-testid="favorite-btn">
+        Favoritar
+      </button>
+      <span data-testid="recipe-category" />
+      {ingredients !== undefined && (
+        <ul>
+          {ingredients.map((item, index) => (
+            <li
+              key={ index }
+              data-testid={ `${'index'}-ingredient-name-and-measure` }
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <span data-testid={ `${'index'}-ingredient-name-and-measure` } />
     </div>
   );
 }
+
 FoodDetails.defaultProps = {
   match: true,
 };
