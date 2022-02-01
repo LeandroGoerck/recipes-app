@@ -17,8 +17,7 @@ function Categories() {
   const { location: { pathname } } = useHistory();
 
   //  ================== Contexto ================
-  const { recipesList: { setMeals, setDrinks },
-    requestAPI: { setLoading } } = useContext(GlobalContext);
+  const { recipesList: { setMeals, setDrinks } } = useContext(GlobalContext);
 
   // =================== State ===================
   const [categories, setCategories] = useState([]);
@@ -27,22 +26,18 @@ function Categories() {
   // =================== Categorias ==============
   const handleCategories = () => {
     if (pathname === '/foods') {
-      setLoading(true);
       fetchCategoryFoods()
         .then(({ meals }) => {
           const FIVE = 5;
           const firstFiveCategories = meals.slice(0, FIVE);
           setCategories(firstFiveCategories);
-          setLoading(false);
         });
     } else {
-      setLoading(true);
       fetchCategoryDrinks()
         .then(({ drinks }) => {
           const FIVE = 5;
           const firstFiveCategories = drinks.slice(0, FIVE);
           setCategories(firstFiveCategories);
-          setLoading(false);
         });
     }
   };

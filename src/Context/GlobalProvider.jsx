@@ -13,8 +13,6 @@ function GlobalProvider({ children }) {
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [canShow, setCanShow] = useState(false);
-  // =================== Loading =====================
-  const [loading, setLoading] = useState(false);
 
   const contextValue = {
     login: {
@@ -36,10 +34,6 @@ function GlobalProvider({ children }) {
       setDrinks,
       canShow,
       setCanShow,
-    },
-    requestAPI: {
-      loading,
-      setLoading,
     },
   };
 
