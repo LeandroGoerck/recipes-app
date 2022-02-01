@@ -49,20 +49,16 @@ function Categories() {
   // ================== Filtro por Categoria =================
   const handleSearchFilterCategory = () => {
     if (pathname === '/drinks') {
-      setLoading(true);
       fetchFilterCategoryDrinks(filterCategory.category).then((data) => {
         const TWELVE = 12;
         const firstTwelveDrinks = data.slice(0, TWELVE);
         setDrinks(firstTwelveDrinks);
-        setLoading(false);
       });
     } else {
       fetchFilterCategoryFoods(filterCategory.category).then((data) => {
-        setLoading(true);
         const TWELVE = 12;
         const firstTwelveFoods = data.slice(0, TWELVE);
         setMeals(firstTwelveFoods);
-        setLoading(false);
       });
     }
   };
