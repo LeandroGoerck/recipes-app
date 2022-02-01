@@ -99,10 +99,11 @@ function Categories() {
   }, [filterCategory]);
 
   const handleClick = (strCategory) => {
-    if (strCategory === 'All') {
-      setFilterCategory({ ...filterCategory, filter: false });
+    if (strCategory === 'All' || filterCategory.category === strCategory) {
+      setFilterCategory({ filter: false, category: '' });
+    } else {
+      setFilterCategory({ filter: true, category: strCategory });
     }
-    setFilterCategory({ filter: !filterCategory.filter, category: strCategory });
   };
 
   return (
