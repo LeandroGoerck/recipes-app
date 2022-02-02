@@ -32,6 +32,7 @@ function CardList() {
             imgSrc={ recipe.strMealThumb }
             imgStr={ recipe.strMeal }
             cardName={ `${index}-card-name` }
+            recipeId={ recipe.idMeal }
           />
         ))
       );
