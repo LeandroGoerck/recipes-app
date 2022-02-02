@@ -12,7 +12,7 @@ function Foods() {
     fetchFoods()
       .then(({ meals }) => {
         const TWELVE = 12;
-        const firstTwelveFoods = meals.splice(0, TWELVE);
+        const firstTwelveFoods = meals.slice(0, TWELVE);
         setMeals(firstTwelveFoods);
       });
   }, []);
