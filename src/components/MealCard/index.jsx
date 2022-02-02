@@ -5,10 +5,15 @@ import { Simg } from '../../style/CardList';
 
 function MealCard({ recipeCardId, cardImgId, imgSrc, imgStr, cardName, recipeId }) {
   const { location: { pathname } } = useHistory();
+
+  const handleRoute = () => {
+    if (pathname !== '/explore/foods/nationalities') return `${pathname}/${recipeId}`;
+    return `/foods/${recipeId}`;
+  };
+
   return (
     <Link
-      to={ pathname !== '/explore/foods/nationalities' ? (
-        `${pathname}/${recipeId}`) : `/foods/${recipeId}` }
+      to={ handleRoute() }
     >
       <div data-testid={ recipeCardId }>
         <Simg src={ imgSrc } alt={ imgStr } data-testid={ cardImgId } />

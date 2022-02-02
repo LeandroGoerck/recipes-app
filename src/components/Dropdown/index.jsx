@@ -1,7 +1,8 @@
 import React, { useEffect, useContext, useState } from 'react';
 import {
   fetchFoodsNationalities,
-  fetchFoodsForNationality } from '../../services/fetchFoods';
+  fetchFoodsForNationality,
+  fetchFoods } from '../../services/fetchFoods';
 import GlobalContext from '../../Context/GlobalContext';
 
 function DropDown() {
@@ -15,14 +16,23 @@ function DropDown() {
   };
 
   const fetchFilterNationality = () => {
-    fetchFoodsForNationality(nationality)
-      .then(({ meals }) => {
-        const TWELVE = 12;
-        if (meals !== undefined) {
-          const firstTwelveFoods = meals.slice(0, TWELVE);
+    if (nationality === 'All') {
+      fetchFoods()
+        .then((data) => {
+          const TWELVE = 12;
+          const firstTwelveFoods = data.meals.slice(0, TWELVE);
           setMeals(firstTwelveFoods);
-        }
-      });
+        });
+    } else {
+      fetchFoodsForNationality(nationality)
+        .then(({ meals }) => {
+          const TWELVE = 12;
+          if (meals !== undefined) {
+            const firstTwelveFoods = meals.slice(0, TWELVE);
+            setMeals(firstTwelveFoods);
+          }
+        });
+    }
   };
 
   useEffect(() => {
@@ -47,6 +57,7 @@ function DropDown() {
           onChange={ handleChangeNationality }
           value={ nationality }
         >
+          <option data-testid="All-option">All</option>
           { nationalities !== undefined ? nationalities.map(({ strArea }) => (
             <option data-testid={ `${strArea}-option` } key={ strArea }>{strArea}</option>
           )) : null}
