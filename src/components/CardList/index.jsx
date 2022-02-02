@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import GlobalContext from '../../Context/GlobalContext';
 import IngredientCard from '../IngredientCard';
 import MealCard from '../MealCard';
+import { ScardList } from '../../style/CardList';
 
 function CardList() {
   const { location: { pathname } } = useHistory();
@@ -20,6 +21,7 @@ function CardList() {
             imgSrc={ recipe.strMealThumb }
             imgStr={ recipe.strMeal }
             cardName={ `${index}-card-name` }
+            recipeId={ recipe.idMeal }
           />
         ))
       );
@@ -27,18 +29,17 @@ function CardList() {
 
     if (pathname === '/drinks') {
       return (
-        <div>
-          {drinks.map((recipe, index) => (
-            <MealCard
-              key={ index }
-              recipeCardId={ `${index}-recipe-card` }
-              cardImgId={ `${index}-card-img` }
-              imgSrc={ recipe.strDrinkThumb }
-              imgStr={ recipe.strDrink }
-              cardName={ `${index}-card-name` }
-            />
-          ))}
-        </div>
+        drinks.map((recipe, index) => (
+          <MealCard
+            key={ index }
+            recipeCardId={ `${index}-recipe-card` }
+            cardImgId={ `${index}-card-img` }
+            imgSrc={ recipe.strDrinkThumb }
+            imgStr={ recipe.strDrink }
+            cardName={ `${index}-card-name` }
+            recipeId={ recipe.idDrink }
+          />
+        ))
       );
     }
 
@@ -78,9 +79,9 @@ function CardList() {
   }
 
   return (
-    <div>
+    <ScardList>
       {handleList()}
-    </div>
+    </ScardList>
   );
 }
 

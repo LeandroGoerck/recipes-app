@@ -10,6 +10,13 @@ function fetchCategoryFoods() {
     .catch((error) => global.alert(error));
 }
 
+function fetchFilterCategoryFoods(category) {
+  return fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
+    .then((response) => response.json())
+    .then((data) => data.meals)
+    .catch((error) => global.alert(error));
+}
+
 function fetchFoodsForIngredients(ingredient) {
   return fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`)
     .then((response) => response.json())
@@ -31,6 +38,7 @@ function fetchFoodsForFirstLetter(firstLetter) {
 export {
   fetchFoods,
   fetchCategoryFoods,
+  fetchFilterCategoryFoods,
   fetchFoodsForIngredients,
   fetchFoodsForName,
   fetchFoodsForFirstLetter,
