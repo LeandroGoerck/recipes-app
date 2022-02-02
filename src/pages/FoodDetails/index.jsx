@@ -72,7 +72,12 @@ function FoodDetails(props) {
       <p>{pathname}</p>
       <p>{recipeId}</p>
 
-      <img data-testid="recipe-photo" alt="x" />
+      <img
+        style={ { width: 100, display: 'flex', flexDirection: 'row' } }
+        src={ details?.strMealThumb }
+        data-testid="recipe-photo"
+        alt="x"
+      />
 
       <span data-testid="recipe-title">{strMeal !== undefined && strMeal}</span>
 
@@ -129,5 +134,3 @@ FoodDetails.propTypes = {
 };
 
 export default FoodDetails;
-
-// https://www.thecocktaildb.com/api/json/v1/1/search.php?s=

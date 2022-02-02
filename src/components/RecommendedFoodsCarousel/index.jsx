@@ -1,8 +1,8 @@
 import Carousel from 'react-bootstrap/Carousel';
 import React from 'react';
-import RecommendedDrinkCard from '../RecommendedDrinkCard';
+import RecommendedFoodCard from '../RecommendedFoodCard';
 
-function RecommendedDrinksCarousel() {
+function RecommendedFoodsCarousel() {
   const INTERVAL_TIME = 1000;
   return (
     <Carousel
@@ -11,23 +11,23 @@ function RecommendedDrinksCarousel() {
     >
       <Carousel.Item interval={ INTERVAL_TIME }>
         <div className="d-flex flex-row w-100">
-          <RecommendedDrinkCard index={ 0 } />
-          <RecommendedDrinkCard index={ 1 } />
+          <RecommendedFoodCard index={ 0 } />
+          <RecommendedFoodCard index={ 1 } />
         </div>
       </Carousel.Item>
       <Carousel.Item interval={ INTERVAL_TIME }>
         <div className="d-flex flex-row w-100">
-          <RecommendedDrinkCard index={ 2 } />
-          <RecommendedDrinkCard index={ 3 } />
+          <RecommendedFoodCard index={ 2 } />
+          <RecommendedFoodCard index={ 3 } />
         </div>
       </Carousel.Item>
       <Carousel.Item interval={ INTERVAL_TIME }>
         <div className="d-flex flex-row w-100">
-          <RecommendedDrinkCard index={ 4 } />
-          <RecommendedDrinkCard index={ 5 } />
+          <RecommendedFoodCard index={ 4 } />
+          <RecommendedFoodCard index={ 5 } />
         </div>
       </Carousel.Item>
     </Carousel>
   );
 }
-export default RecommendedDrinksCarousel;
+export default RecommendedFoodsCarousel;

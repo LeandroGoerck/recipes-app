@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import BSCarousel from '../../components/BSCarousel';
+import RecommendedFoodsCarousel from '../../components/RecommendedFoodsCarousel';
 import GlobalContext from '../../Context/GlobalContext';
 import { fetchDrinkDetailsForRecipeId } from '../../services/fetchDrinks';
 import { fetchFoods } from '../../services/fetchFoods';
@@ -59,20 +59,18 @@ function DrinksDetails(props) {
       });
   }, []);
 
-  // useEffect(() => {
-  //   fetchFoodsForName('')
-  //     .then(({ meals }) => {
-  //       console.log(meals);
-  //     });
-  // }, []);
-
   return (
     <div>
       <h1>DrinksDetails</h1>
       <p>{pathname}</p>
       <p>{recipeId}</p>
 
-      <img data-testid="recipe-photo" alt="x" />
+      <img
+        style={ { width: 100, display: 'flex', flexDirection: 'row' } }
+        src={ drinkDetails?.strDrinkThumb }
+        data-testid="recipe-photo"
+        alt="x"
+      />
 
       <span
         data-testid="recipe-title"
@@ -119,7 +117,7 @@ function DrinksDetails(props) {
         ))}
       </div>
 
-      <BSCarousel />
+      <RecommendedFoodsCarousel />
 
       <button type="button" data-testid="start-recipe-btn">
         Iniciar receita
