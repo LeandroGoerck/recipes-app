@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import GlobalContext from './GlobalContext';
+import { fetchFoods } from '../services/fetchFoods';
 
 function GlobalProvider({ children }) {
   // =================== Login ======================
@@ -15,6 +16,15 @@ function GlobalProvider({ children }) {
   const [canShow, setCanShow] = useState(false);
   // =================== Explore ================
   const [nationalities, setNationalities] = useState([]);
+  // =================== Request Api ============
+  const firstTwelveFoods = () => {
+    fetchFoods()
+      .then((data) => {
+        const TWELVE = 12;
+        const firstTwelve = data.meals.slice(0, TWELVE);
+        setMeals(firstTwelve);
+      });
+  };
 
   const contextValue = {
     login: {
@@ -40,6 +50,9 @@ function GlobalProvider({ children }) {
     explore: {
       nationalities,
       setNationalities,
+    },
+    requestAPI: {
+      firstTwelveFoods,
     },
   };
 

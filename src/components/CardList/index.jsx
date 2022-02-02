@@ -2,21 +2,14 @@ import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import GlobalContext from '../../Context/GlobalContext';
 import MealCard from '../MealCard';
-import { fetchFoods } from '../../services/fetchFoods';
 
 function CardList() {
   const { location: { pathname } } = useHistory();
-  const { recipesList: { meals, drinks, setMeals } } = useContext(GlobalContext);
+  const { recipesList: { meals, drinks },
+    requestAPI: { firstTwelveFoods } } = useContext(GlobalContext);
 
   const verificateFetchFood = () => {
-    if (meals.length === 0) {
-      fetchFoods()
-        .then((data) => {
-          const TWELVE = 12;
-          const firstTwelveFoods = data.meals.slice(0, TWELVE);
-          setMeals(firstTwelveFoods);
-        });
-    }
+    if (meals.length === 0) firstTwelveFoods();
   };
 
   useEffect(() => verificateFetchFood(), []);

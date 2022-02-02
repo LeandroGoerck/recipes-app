@@ -1,13 +1,13 @@
 import React, { useEffect, useContext, useState } from 'react';
 import {
   fetchFoodsNationalities,
-  fetchFoodsForNationality,
-  fetchFoods } from '../../services/fetchFoods';
+  fetchFoodsForNationality } from '../../services/fetchFoods';
 import GlobalContext from '../../Context/GlobalContext';
 
 function DropDown() {
   const { explore: { setNationalities, nationalities },
-    recipesList: { setMeals } } = useContext(GlobalContext);
+    recipesList: { setMeals },
+    requestAPI: { firstTwelveFoods } } = useContext(GlobalContext);
   const [nationality, setNationality] = useState('');
 
   const fetchNationalities = () => {
@@ -15,28 +15,27 @@ function DropDown() {
       .then(({ meals }) => setNationalities(meals));
   };
 
-  const fetchFilterNationality = () => {
+  const foodsForNationality = () => {
+    fetchFoodsForNationality(nationality)
+      .then(({ meals }) => {
+        const TWELVE = 12;
+        if (meals !== undefined) {
+          const firstTwelve = meals.slice(0, TWELVE);
+          setMeals(firstTwelve);
+        }
+      });
+  };
+
+  const filterNationality = () => {
     if (nationality === 'All') {
-      fetchFoods()
-        .then((data) => {
-          const TWELVE = 12;
-          const firstTwelveFoods = data.meals.slice(0, TWELVE);
-          setMeals(firstTwelveFoods);
-        });
+      firstTwelveFoods();
     } else {
-      fetchFoodsForNationality(nationality)
-        .then(({ meals }) => {
-          const TWELVE = 12;
-          if (meals !== undefined) {
-            const firstTwelveFoods = meals.slice(0, TWELVE);
-            setMeals(firstTwelveFoods);
-          }
-        });
+      foodsForNationality();
     }
   };
 
   useEffect(() => {
-    fetchFilterNationality();
+    filterNationality();
   }, [nationality]);
 
   useEffect(() => {

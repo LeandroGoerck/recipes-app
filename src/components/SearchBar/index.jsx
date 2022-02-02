@@ -32,7 +32,6 @@ function SearchBar() {
 
   const handleConditions = (listArray, option) => {
     const LIST_LIMIT = 12;
-    console.log(listArray);
     if (listArray !== null && listArray.length === 1) {
       if (option === 'meals') {
         history.push(`/foods/${listArray[0].idMeal}`);
