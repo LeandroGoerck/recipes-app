@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import BSCarousel from '../../components/BSCarousel';
 import GlobalContext from '../../Context/GlobalContext';
 import { fetchDrinkDetailsForRecipeId } from '../../services/fetchDrinks';
-import { fetchFoodsForName } from '../../services/fetchFoods';
+import { fetchFoods } from '../../services/fetchFoods';
 
 function DrinksDetails(props) {
   const { drinkDetails: { drinkDetails } } = useContext(GlobalContext);
@@ -11,6 +12,9 @@ function DrinksDetails(props) {
   const { drinkDetails: { setDrinkIngredients } } = useContext(GlobalContext);
   const { drinkDetails: { drinkIngredients } } = useContext(GlobalContext);
   const { strDrink, strAlcoholic, strInstructions } = drinkDetails;
+  // =================== mealRecommendations ================
+  const { drinkDetails: { mealRecommendations } } = useContext(GlobalContext);
+  const { drinkDetails: { setMealRecommendations } } = useContext(GlobalContext);
   const { match } = props;
   const { params } = match;
   const { recipeId } = params;
@@ -18,14 +22,14 @@ function DrinksDetails(props) {
 
   const formatIngredientList = (data) => {
     const ingredientKeys = Object
-      .keys(data).filter((item) => item?.includes('strIngredient'));
+      .keys(data).filter((item) => item.includes('strIngredient'));
     const measureKeys = Object
-      .keys(data).filter((item) => item?.includes('strMeasure'));
+      .keys(data).filter((item) => item.includes('strMeasure'));
 
-    const ingredientsValues = ingredientKeys?.map((key) => (data[key]))
+    const ingredientsValues = ingredientKeys.map((key) => (data[key]))
       .filter((item) => item !== '');
 
-    const measureValues = measureKeys?.map((key) => (data[key]))
+    const measureValues = measureKeys.map((key) => (data[key]))
       .filter((item) => item !== '');
 
     const ingAndMeasure = ingredientsValues
@@ -37,20 +41,31 @@ function DrinksDetails(props) {
     fetchDrinkDetailsForRecipeId(recipeId)
       .then(({ drinks }) => {
         setDrinkDetails(drinks[0]);
+        console.log(drinks[0]);
         const ingAndMeasure = formatIngredientList(drinks[0]);
         setDrinkIngredients(ingAndMeasure);
       });
-  }, []);
 
-  useEffect(() => {
-    fetchFoodsForName('')
+    fetchFoods()
       .then(({ meals }) => {
-        console.log(meals);
+        const MAX_MEALS = 6;
+        if (meals.length > MAX_MEALS) {
+          const newMeals = [...meals];
+          const firstSixMeals = newMeals.splice(0, MAX_MEALS);
+          setMealRecommendations(firstSixMeals);
+        } else {
+          setMealRecommendations(meals);
+        }
       });
   }, []);
 
-  const testArray = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
-  console.log(testArray);
+  // useEffect(() => {
+  //   fetchFoodsForName('')
+  //     .then(({ meals }) => {
+  //       console.log(meals);
+  //     });
+  // }, []);
+
   return (
     <div>
       <h1>DrinksDetails</h1>
@@ -90,9 +105,21 @@ function DrinksDetails(props) {
 
       <span data-testid="instructions">{strInstructions}</span>
 
-      {pathname === `/drinks/${recipeId}` && (<iFrame data-testid="video">Video</iFrame>)}
+      {pathname === `/drinks/${recipeId}` && (
+        <iframe title="frametitle" data-testid="video">
+          Video
+        </iframe>
+      )}
 
-      <div data-testid="0-recomendation-card">Recomendations</div>
+      <div>
+        {mealRecommendations !== [] && mealRecommendations.map((meal, index) => (
+          <div key={ index } data-testid={ `${index}-recomendation-card` }>
+            <span data-testid={ `${index}-recomendation-title` }>{meal.strMeal}</span>
+          </div>
+        ))}
+      </div>
+
+      <BSCarousel />
 
       <button type="button" data-testid="start-recipe-btn">
         Iniciar receita

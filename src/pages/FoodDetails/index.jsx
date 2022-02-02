@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import RecommendedDrinksCarousel from '../../components/RecommendedDrinksCarousel';
 import GlobalContext from '../../Context/GlobalContext';
-import { fetchDrinksForName } from '../../services/fetchDrinks';
+import { fetchDrinks } from '../../services/fetchDrinks';
 import { fetchFoodsDetailsForRecipeId } from '../../services/fetchFoods';
 
 function FoodDetails(props) {
@@ -11,6 +12,11 @@ function FoodDetails(props) {
   const { foodDetails: { setIngredients } } = useContext(GlobalContext);
   const { foodDetails: { ingredients } } = useContext(GlobalContext);
   const { strMeal, strCategory, strInstructions } = details;
+  // =================== drinkRecommendations ================
+  // const { foodDetails: { drinkRecommendations } } = useContext(GlobalContext);
+  const { foodDetails: { setDrinkRecommendations } } = useContext(GlobalContext);
+  // const { strDrink } = drinkRecommendations;
+  // =================== routes ==============================
   const { match } = props;
   const { params } = match;
   const { recipeId } = params;
@@ -18,14 +24,14 @@ function FoodDetails(props) {
 
   const formatIngredientList = (data) => {
     const ingredientKeys = Object
-      .keys(data).filter((item) => item?.includes('strIngredient'));
+      .keys(data).filter((item) => item.includes('strIngredient'));
     const measureKeys = Object
-      .keys(data).filter((item) => item?.includes('strMeasure'));
+      .keys(data).filter((item) => item.includes('strMeasure'));
 
-    const ingredientsValues = ingredientKeys?.map((key) => (data[key]))
+    const ingredientsValues = ingredientKeys.map((key) => (data[key]))
       .filter((item) => item !== '');
 
-    const measureValues = measureKeys?.map((key) => (data[key]))
+    const measureValues = measureKeys.map((key) => (data[key]))
       .filter((item) => item !== '');
 
     const ingAndMeasure = ingredientsValues
@@ -34,6 +40,8 @@ function FoodDetails(props) {
   };
 
   useEffect(() => {
+    console.log(recipeId);
+    console.log('fetchFoodsDetailsForRecipeId', recipeId);
     fetchFoodsDetailsForRecipeId(recipeId)
       .then(({ meals }) => {
         setDetails(meals[0]);
@@ -43,14 +51,21 @@ function FoodDetails(props) {
   }, []);
 
   useEffect(() => {
-    fetchDrinksForName('')
+    fetchDrinks()
       .then(({ drinks }) => {
+        const MAX_DRINKS = 6;
         console.log(drinks);
+        if (drinks.length > MAX_DRINKS) {
+          const newDrinks = [...drinks];
+          const firstSixDrinks = newDrinks.splice(0, MAX_DRINKS);
+          console.log(firstSixDrinks);
+          setDrinkRecommendations(firstSixDrinks);
+        } else {
+          setDrinkRecommendations(drinks);
+        }
       });
   }, []);
 
-  const testArray = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
-  console.log(testArray);
   return (
     <div>
       <h1>FoodDetails</h1>
@@ -59,11 +74,7 @@ function FoodDetails(props) {
 
       <img data-testid="recipe-photo" alt="x" />
 
-      <span
-        data-testid="recipe-title"
-      >
-        {strMeal !== undefined && strMeal}
-      </span>
+      <span data-testid="recipe-title">{strMeal !== undefined && strMeal}</span>
 
       <button type="button" data-testid="share-btn">
         Compartilhar
@@ -90,15 +101,17 @@ function FoodDetails(props) {
 
       <span data-testid="instructions">{strInstructions}</span>
 
-      {pathname === `/foods/${recipeId}`
-      && (<iframe title="frametitle" data-testid="video">Video</iframe>)}
+      {pathname === `/foods/${recipeId}` && (
+        <iframe title="frametitle" data-testid="video">
+          Video
+        </iframe>
+      )}
 
-      <div data-testid="0-recomendation-card">Recomendations</div>
+      <RecommendedDrinksCarousel />
 
       <button type="button" data-testid="start-recipe-btn">
         Iniciar receita
       </button>
-
     </div>
   );
 }
