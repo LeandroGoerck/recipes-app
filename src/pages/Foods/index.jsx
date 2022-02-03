@@ -3,7 +3,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import CardList from '../../components/CardList';
 import GlobalContext from '../../Context/GlobalContext';
-import { fetchFoods, fetchCategoryFoods } from '../../services/fetchFoods';
+import { fetchFoods } from '../../services/fetchFoods';
 import Categories from '../../components/Categories';
 
 function Foods() {
@@ -12,17 +12,17 @@ function Foods() {
     fetchFoods()
       .then(({ meals }) => {
         const TWELVE = 12;
-        const firstTwelveFoods = meals.splice(0, TWELVE);
+        const firstTwelveFoods = meals.slice(0, TWELVE);
         setMeals(firstTwelveFoods);
       });
   }, []);
   return (
-    <div>
+    <>
       <Header>Foods</Header>
-      <Categories fetchCategories={ fetchCategoryFoods } topicRecipe="meals" />
+      <Categories />
       <CardList />
       <Footer />
-    </div>
+    </>
   );
 }
 

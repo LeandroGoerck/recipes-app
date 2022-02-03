@@ -11,7 +11,8 @@ import {
   Simg,
   SinvDiv,
   SbuttonSearch,
-  SdivBarSearch } from '../../style/Header';
+  SdivBarSearch,
+} from '../../style/Header';
 
 function Header({ children, displayIconSearch }) {
   const [displayInputSearch, setDisplayInputSearch] = useState(false);

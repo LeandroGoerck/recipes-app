@@ -6,10 +6,10 @@ const footerStyle = {
   left: '0',
   background:
   'linear-gradient(0deg, rgba(255,0,0,1) 0%, rgba(196,0,0,1) 100%, rgba(255,0,0,1) 100%)',
-  'justify-content': 'space-around',
-  'border-top-left-radius': '20%',
-  'border-top-right-radius': '20%',
-  'border-top': '5px solid rgba(196,0,0,1)',
+  justifyContent: 'space-around',
+  borderTopLeftRadius: '20%',
+  borderTopRightRadius: '20%',
+  borderTop: '5px solid rgba(196,0,0,1)',
   borderBottom: '2px solid black',
 };
 

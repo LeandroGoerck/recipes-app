@@ -4,6 +4,13 @@ function fetchDrinks() {
     .catch((error) => global.alert(error));
 }
 
+function fetchFilterCategoryDrinks(category) {
+  return fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`)
+    .then((response) => response.json())
+    .then((data) => data.drinks)
+    .catch((error) => global.alert(error));
+}
+
 function fetchCategoryDrinks() {
   return fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list')
     .then((response) => response.json())
@@ -28,8 +35,8 @@ function fetchDrinksForFirstLetter(firstLetter) {
     .catch((error) => global.alert(error));
 }
 
-function fetchDrinkDetailsForRecipeId(recipeId) {
-  return fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${recipeId}`)
+function fetchDrinkDetailsForRecipeId(id) {
+  return fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
     .then((response) => response.json())
     .catch((error) => global.alert(error));
 }
@@ -37,6 +44,7 @@ function fetchDrinkDetailsForRecipeId(recipeId) {
 export {
   fetchDrinks,
   fetchCategoryDrinks,
+  fetchFilterCategoryDrinks,
   fetchDrinksForIngredients,
   fetchDrinksForName,
   fetchDrinksForFirstLetter,

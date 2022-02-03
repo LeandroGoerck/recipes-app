@@ -44,10 +44,12 @@ function FoodDetails(props) {
     console.log('fetchFoodsDetailsForRecipeId', recipeId);
     fetchFoodsDetailsForRecipeId(recipeId)
       .then(({ meals }) => {
+        console.log({ meals });
         setDetails(meals[0]);
         const ingAndMeasure = formatIngredientList(meals[0]);
         setIngredients(ingAndMeasure);
-      });
+      })
+      .catch((error) => (console.log(error)));
   }, []);
 
   useEffect(() => {

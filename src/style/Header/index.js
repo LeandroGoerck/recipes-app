@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Sheader = styled.header`
-  position: fixed;
+  /* position: fixed; */
   top: 0;
   display: flex;
   flex-direction: column;

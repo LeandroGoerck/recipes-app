@@ -44,7 +44,8 @@ function DrinksDetails(props) {
         console.log(drinks[0]);
         const ingAndMeasure = formatIngredientList(drinks[0]);
         setDrinkIngredients(ingAndMeasure);
-      });
+      })
+      .catch((error) => (console.log(error)));
 
     fetchFoods()
       .then(({ meals }) => {

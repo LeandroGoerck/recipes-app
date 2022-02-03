@@ -3,7 +3,7 @@ import React from 'react';
 import RecommendedFoodCard from '../RecommendedFoodCard';
 
 function RecommendedFoodsCarousel() {
-  const INTERVAL_TIME = 1000;
+  const INTERVAL_TIME = 0;
   return (
     <Carousel
       indicators={ false }

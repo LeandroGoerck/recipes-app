@@ -3,7 +3,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import CardList from '../../components/CardList';
 import GlobalContext from '../../Context/GlobalContext';
-import { fetchDrinks, fetchCategoryDrinks } from '../../services/fetchDrinks';
+import { fetchDrinks } from '../../services/fetchDrinks';
 import Categories from '../../components/Categories';
 
 function Drinks() {
@@ -13,7 +13,7 @@ function Drinks() {
     fetchDrinks()
       .then(({ drinks }) => {
         const TWELVE = 12;
-        const firstTwelveDrinks = drinks.splice(0, TWELVE);
+        const firstTwelveDrinks = drinks.slice(0, TWELVE);
         setDrinks(firstTwelveDrinks);
       });
   }, []);
@@ -21,7 +21,7 @@ function Drinks() {
   return (
     <div>
       <Header>Drinks</Header>
-      <Categories fetchCategories={ fetchCategoryDrinks } topicRecipe="drinks" />
+      <Categories />
       <CardList />
       <Footer />
     </div>
