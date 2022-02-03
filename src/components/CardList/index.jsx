@@ -1,45 +1,56 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import GlobalContext from '../../Context/GlobalContext';
-import IngredientCard from '../IngredientCard';
-import MealCard from '../MealCard';
+import Card from '../Card';
 import { ScardList } from '../../style/CardList';
 
 function CardList() {
   const { location: { pathname } } = useHistory();
   const {
     recipesList: { meals, drinks },
-    ingredientsList: { ingredientsX, drinksIngredientsX } } = useContext(GlobalContext);
+    ingredientsList: { ingredientsX, drinksIngredientsX },
+    requestAPI: { firstTwelveFoods } } = useContext(GlobalContext);
+
+  const verificateFetchFood = () => {
+    if (meals.length === 0) firstTwelveFoods();
+  };
+
+  useEffect(() => verificateFetchFood(), []);
+
   function handleList() {
-    if (pathname === '/foods') {
+    if (pathname === '/foods' || pathname === '/explore/foods/nationalities') {
       return (
-        meals.map((recipe, index) => (
-          <MealCard
-            key={ index }
-            recipeCardId={ `${index}-recipe-card` }
-            cardImgId={ `${index}-card-img` }
-            imgSrc={ recipe.strMealThumb }
-            imgStr={ recipe.strMeal }
-            cardName={ `${index}-card-name` }
-            recipeId={ recipe.idMeal }
-          />
-        ))
+        <div>
+          {meals.map((recipe, index) => (
+            <Card
+              key={ index }
+              testId={ `${index}-recipe-card` }
+              cardImgId={ `${index}-card-img` }
+              imgSrc={ recipe.strMealThumb }
+              imgStr={ recipe.strMeal }
+              cardName={ `${index}-card-name` }
+              recipeId={ recipe.idMeal }
+            />
+          ))}
+        </div>
       );
     }
 
     if (pathname === '/drinks') {
       return (
-        drinks.map((recipe, index) => (
-          <MealCard
-            key={ index }
-            recipeCardId={ `${index}-recipe-card` }
-            cardImgId={ `${index}-card-img` }
-            imgSrc={ recipe.strDrinkThumb }
-            imgStr={ recipe.strDrink }
-            cardName={ `${index}-card-name` }
-            recipeId={ recipe.idDrink }
-          />
-        ))
+        <div>
+          {drinks.map((recipe, index) => (
+            <Card
+              key={ index }
+              testId={ `${index}-recipe-card` }
+              cardImgId={ `${index}-card-img` }
+              imgSrc={ recipe.strDrinkThumb }
+              imgStr={ recipe.strDrink }
+              cardName={ `${index}-card-name` }
+              recipeId={ recipe.idDrink }
+            />
+          ))}
+        </div>
       );
     }
 
@@ -47,9 +58,9 @@ function CardList() {
       return (
         <div>
           {ingredientsX.map((ingredient, index) => (
-            <IngredientCard
+            <Card
               key={ index }
-              ingredientCardId={ `${index}-ingredient-card` }
+              testId={ `${index}-ingredient-card` }
               cardImgId={ `${index}-card-img` }
               imgSrc={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
               imgStr={ ingredient.strIngredient }
@@ -64,9 +75,9 @@ function CardList() {
       return (
         <div>
           {drinksIngredientsX.map((ingredient, index) => (
-            <IngredientCard
+            <Card
               key={ index }
-              ingredientCardId={ `${index}-ingredient-card` }
+              testId={ `${index}-ingredient-card` }
               cardImgId={ `${index}-card-img` }
               imgSrc={ `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Small.png` }
               imgStr={ ingredient.strIngredient1 }

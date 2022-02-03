@@ -11,7 +11,7 @@ function ExploreDrinksIngredients() {
     fetchDrinksIngredients()
       .then(({ drinks }) => {
         const TWELVE = 12;
-        const firstTwelveIngredients = drinks.splice(0, TWELVE);
+        const firstTwelveIngredients = drinks.slice(0, TWELVE);
         setDrinksIngredientsX(firstTwelveIngredients);
       });
   }, []);

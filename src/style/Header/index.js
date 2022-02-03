@@ -28,9 +28,8 @@ cursor: pointer;
 background: rgba(255, 0, 0, 0);
 `;
 const Sdiv = styled.div`
-   display: flex;
-   justify-content: space-around;
-   border-top: 2px solid black;
+  display: flex;
+  justify-content: space-around;
 `;
 const SinvDiv = styled.div`
   height: 47px;

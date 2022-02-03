@@ -10,7 +10,6 @@ const footerStyle = {
   borderTopLeftRadius: '20%',
   borderTopRightRadius: '20%',
   borderTop: '5px solid rgba(196,0,0,1)',
-  borderBottom: '2px solid black',
 };
 
 export default footerStyle;
