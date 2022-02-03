@@ -13,7 +13,6 @@ function DrinksDetails(props) {
   const { drinkDetails: { drinkIngredients } } = useContext(GlobalContext);
   const { strDrink, strAlcoholic, strInstructions } = drinkDetails;
   // =================== mealRecommendations ================
-  const { drinkDetails: { mealRecommendations } } = useContext(GlobalContext);
   const { drinkDetails: { setMealRecommendations } } = useContext(GlobalContext);
   const { match } = props;
   const { params } = match;
@@ -109,14 +108,6 @@ function DrinksDetails(props) {
           Video
         </iframe>
       )}
-
-      <div>
-        {mealRecommendations !== [] && mealRecommendations.map((meal, index) => (
-          <div key={ index } data-testid={ `${index}-recomendation-card` }>
-            <span data-testid={ `${index}-recomendation-title` }>{meal.strMeal}</span>
-          </div>
-        ))}
-      </div>
 
       <RecommendedFoodsCarousel />
 

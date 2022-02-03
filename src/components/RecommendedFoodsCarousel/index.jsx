@@ -3,7 +3,7 @@ import React from 'react';
 import RecommendedFoodCard from '../RecommendedFoodCard';
 
 function RecommendedFoodsCarousel() {
-  const INTERVAL_TIME = 0;
+  const INTERVAL_TIME = 50000;
   return (
     <Carousel
       indicators={ false }
@@ -16,13 +16,13 @@ function RecommendedFoodsCarousel() {
         </div>
       </Carousel.Item>
       <Carousel.Item interval={ INTERVAL_TIME }>
-        <div className="d-flex flex-row w-100">
+        <div className="d-flex flex-row w-100" style={ { display: 'none' } }>
           <RecommendedFoodCard index={ 2 } />
           <RecommendedFoodCard index={ 3 } />
         </div>
       </Carousel.Item>
       <Carousel.Item interval={ INTERVAL_TIME }>
-        <div className="d-flex flex-row w-100">
+        <div className="d-flex flex-row w-100" style={ { display: 'none' } }>
           <RecommendedFoodCard index={ 4 } />
           <RecommendedFoodCard index={ 5 } />
         </div>
