@@ -5,6 +5,7 @@ import RecommendedFoodsCarousel from '../../components/RecommendedFoodsCarousel'
 import GlobalContext from '../../Context/GlobalContext';
 import { fetchDrinkDetailsForRecipeId } from '../../services/fetchDrinks';
 import { fetchFoods } from '../../services/fetchFoods';
+import BtnStart from '../../components/BtnStart';
 
 function DrinksDetails(props) {
   const { drinkDetails: { drinkDetails } } = useContext(GlobalContext);
@@ -110,14 +111,7 @@ function DrinksDetails(props) {
       )}
 
       <RecommendedFoodsCarousel />
-
-      <button
-        className="BtnStart"
-        type="button"
-        data-testid="start-recipe-btn"
-      >
-        Start Recipe
-      </button>
+      <BtnStart />
     </div>
   );
 }
