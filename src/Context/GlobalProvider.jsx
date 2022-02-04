@@ -14,6 +14,8 @@ function GlobalProvider({ children }) {
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [canShow, setCanShow] = useState(false);
+  // =================== Favorite ================
+  const [isFinish, setIsFinish] = useState(false);
   // =================== FoodDetails ================
   const [details, setDetails] = useState([]);
   const [ingredients, setIngredients] = useState([]);
@@ -49,6 +51,10 @@ function GlobalProvider({ children }) {
     searchBar: {
       displayInputSearch,
       setDisplayInputSearch,
+    },
+    favorite: {
+      isFinish,
+      setIsFinish,
     },
     recipesList: {
       meals,

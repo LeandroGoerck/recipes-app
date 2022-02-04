@@ -6,6 +6,8 @@ import GlobalContext from '../../Context/GlobalContext';
 import { fetchDrinkDetailsForRecipeId } from '../../services/fetchDrinks';
 import { fetchFoods } from '../../services/fetchFoods';
 import BtnStart from '../../components/BtnStart';
+import BtnFavorite from '../../components/BtnFavorite';
+import BtnShare from '../../components/BtnShare';
 
 function DrinksDetails(props) {
   const { drinkDetails: { drinkDetails } } = useContext(GlobalContext);
@@ -41,7 +43,6 @@ function DrinksDetails(props) {
     fetchDrinkDetailsForRecipeId(recipeId)
       .then(({ drinks }) => {
         setDrinkDetails(drinks[0]);
-        console.log(drinks[0]);
         const ingAndMeasure = formatIngredientList(drinks[0]);
         setDrinkIngredients(ingAndMeasure);
       })
@@ -79,13 +80,10 @@ function DrinksDetails(props) {
         {strDrink !== undefined && strDrink}
       </span>
 
-      <button type="button" data-testid="share-btn">
-        Compartilhar
-      </button>
-
-      <button type="button" data-testid="favorite-btn">
-        Favoritar
-      </button>
+      <span>
+        <BtnShare />
+        <BtnFavorite />
+      </span>
 
       <span data-testid="recipe-category">{strAlcoholic}</span>
 

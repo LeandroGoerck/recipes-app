@@ -23,7 +23,32 @@ a {
   text-decoration: none;
 }
 
+.favorite-btn {
+  background-color: transparent;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.favorite-btn:active {
+  transform: scale(1.2);
+}
+
 .BtnStart {
   bottom: 0;
   position: fixed;
+}
+
+.fillHeart {
+  color: #F20;
+  font-size: 20px;
+}
+
+.share-btn {
+  background-color: transparent;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.share-btn:active {
+  transform: scale(1.2);
 }
