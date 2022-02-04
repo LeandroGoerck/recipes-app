@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AiOutlineShareAlt } from 'react-icons/ai';
 import { toast, ToastContainer } from 'react-toastify';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../style/style.css';
+import GlobalContext from '../../Context/GlobalContext';
 
 function BtnShare() {
-  const [saveLink, setSaveLink] = useState(undefined);
+  const { shareLink } = useContext(GlobalContext);
+  const { saveLink, setSaveLink } = shareLink;
+
+  useEffect(() => {
+    localStorage.setItem('link', saveLink);
+  }, [saveLink]);
 
   const notify = () => {
     toast.success('Link copied to clipboard!', {
@@ -19,10 +26,11 @@ function BtnShare() {
     });
   };
 
-  const handleShare = ({ target }) => {
-    const { baseURI } = target;
+  const handleShare = (event) => {
+    event.preventDefault();
+    const { baseURI } = event.target;
+    console.dir(event.target);
     setSaveLink(baseURI);
-    localStorage.setItem('link', JSON.stringify(saveLink));
     notify();
   };
 
@@ -39,14 +47,18 @@ function BtnShare() {
         draggable
         pauseOnHover
       />
-      <button
-        type="button"
-        data-testid="share-btn"
-        className="share-btn"
-        onClick={ handleShare }
+      <CopyToClipboard
+        text={ saveLink }
       >
-        <AiOutlineShareAlt />
-      </button>
+        <button
+          type="submit"
+          data-testid="share-btn"
+          className="share-btn"
+          onClick={ handleShare }
+        >
+          <AiOutlineShareAlt />
+        </button>
+      </CopyToClipboard>
     </>
   );
 }
