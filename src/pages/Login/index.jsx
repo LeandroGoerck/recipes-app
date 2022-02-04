@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
-import { BsFillEyeSlashFill } from 'react-icons/bs';
+// import { BsFillEyeSlashFill } from 'react-icons/bs';
 // import { IoEyeSharp } from 'react-icons/io';
 import { useHistory } from 'react-router-dom';
 import { Sform, Sinput, Sbutton } from '../../style/Login/index';
@@ -29,6 +29,7 @@ function Login() {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
     localStorage.setItem('user', JSON.stringify({ email }));
+    localStorage.setItem('link', JSON.stringify(undefined));
     history.push('/foods');
   };
 
@@ -54,7 +55,7 @@ function Login() {
           placeholder="Enter your password"
           onChange={ handleChange }
         />
-        <BsFillEyeSlashFill className="icon-password" />
+        {/* <BsFillEyeSlashFill className="icon-password" /> */}
         <Sbutton
           disabled={ login.btnLogin }
           type="submit"
