@@ -106,7 +106,7 @@ function GlobalProvider({ children }) {
     favRecipes: {
       favoriteRecipes,
       setFavoritesRecipes,
-  },
+    },
     inProgressRecipes: {
       cocktails: inProgCocktails,
       meals: inProgMeals,
