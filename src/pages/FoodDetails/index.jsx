@@ -40,27 +40,22 @@ function FoodDetails(props) {
   };
 
   useEffect(() => {
-    console.log(recipeId);
-    console.log('fetchFoodsDetailsForRecipeId', recipeId);
     fetchFoodsDetailsForRecipeId(recipeId)
       .then(({ meals }) => {
-        console.log({ meals });
         setDetails(meals[0]);
         const ingAndMeasure = formatIngredientList(meals[0]);
         setIngredients(ingAndMeasure);
       })
-      .catch((error) => (console.log(error)));
+      .catch((error) => (console.error(error)));
   }, []);
 
   useEffect(() => {
     fetchDrinks()
       .then(({ drinks }) => {
         const MAX_DRINKS = 6;
-        console.log(drinks);
         if (drinks.length > MAX_DRINKS) {
           const newDrinks = [...drinks];
           const firstSixDrinks = newDrinks.splice(0, MAX_DRINKS);
-          console.log(firstSixDrinks);
           setDrinkRecommendations(firstSixDrinks);
         } else {
           setDrinkRecommendations(drinks);

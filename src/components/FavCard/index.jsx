@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import React, { useState, useEffect, useContext } from 'react';
 import ShareIcon from '../../images/shareIcon.svg';
 import DesfavoriteIcon from '../../images/blackHeartIcon.svg';
@@ -32,14 +33,16 @@ function Card({ cardName, srcImg, type, index, nationality, category, alcoholic,
 
   return (
     <Scard>
-      <Simg
-        data-testid={ `${index}-horizontal-image` }
-        src={ srcImg }
-        alt="imagem da receita"
-      />
-      <strong data-testid={ `${index}-horizontal-name` }>
-        {cardName}
-      </strong>
+      <Link to={ `/${type}s/${id}` }>
+        <Simg
+          data-testid={ `${index}-horizontal-image` }
+          src={ srcImg }
+          alt="imagem da receita"
+        />
+        <strong data-testid={ `${index}-horizontal-name` }>
+          {cardName}
+        </strong>
+      </Link>
       {
         type === 'food' && (
           <Stitle

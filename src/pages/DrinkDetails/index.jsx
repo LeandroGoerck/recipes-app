@@ -40,7 +40,6 @@ function DrinksDetails(props) {
     fetchDrinkDetailsForRecipeId(recipeId)
       .then(({ drinks }) => {
         setDrinkDetails(drinks[0]);
-        console.log(drinks[0]);
         const ingAndMeasure = formatIngredientList(drinks[0]);
         setDrinkIngredients(ingAndMeasure);
       })

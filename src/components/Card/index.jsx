@@ -23,13 +23,17 @@ function Card({ testId, cardImgId, imgSrc, imgStr, cardName, recipeId }) {
   );
 }
 
+Card.defaultProps = {
+  recipeId: '',
+};
+
 Card.propTypes = {
   cardImgId: PropTypes.string.isRequired,
   imgSrc: PropTypes.string.isRequired,
   imgStr: PropTypes.string.isRequired,
   testId: PropTypes.string.isRequired,
   cardName: PropTypes.string.isRequired,
-  recipeId: PropTypes.string.isRequired,
+  recipeId: PropTypes.string,
 };
 
 export default Card;
