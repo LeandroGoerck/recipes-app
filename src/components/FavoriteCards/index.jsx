@@ -9,12 +9,13 @@ function FavoriteCards({ favoriteRecipes }) {
         <FavCard
           index={ index }
           key={ recipe.id }
+          id={ recipe.id }
           type={ recipe.type }
           srcImg={ recipe.image }
           cardName={ recipe.name }
           nationality={ recipe.nationality }
           category={ recipe.category }
-          alcoholicOrNot={ recipe.alcoholicOrNot }
+          alcoholic={ recipe.alcoholicOrNot }
         />
       )) : null }
     </div>
