@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import BtnFavorite from '../../components/BtnFavorite';
+import BtnShare from '../../components/BtnShare';
 import DrinkIngredientsWithCheckboxes
 from '../../components/DrinkIngredientsWithCheckboxes';
 import RecommendedFoodsCarousel from '../../components/RecommendedFoodsCarousel';
@@ -84,13 +86,10 @@ function DrinkInProgress(props) {
         {strDrink !== undefined && strDrink}
       </span>
 
-      <button type="button" data-testid="share-btn">
-        Compartilhar
-      </button>
-
-      <button type="button" data-testid="favorite-btn">
-        Favoritar
-      </button>
+      <span>
+        <BtnShare />
+        <BtnFavorite />
+      </span>
 
       <span data-testid="recipe-category">{strAlcoholic}</span>
 

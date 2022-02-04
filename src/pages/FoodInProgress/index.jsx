@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import BtnFavorite from '../../components/BtnFavorite';
+import BtnShare from '../../components/BtnShare';
 import FoodIngredientsWithCheckboxes
 from '../../components/FoodIngredientsWithCheckboxes';
 import RecommendedDrinksCarousel from '../../components/RecommendedDrinksCarousel';
@@ -66,48 +68,12 @@ function FoodInProgress(props) {
       });
   }, []);
 
-  // const handleInProgressArray = (ingrNumber) => {
-  //   if (inProgMeals[recipeId] !== undefined) {
-  //     if (inProgMeals[recipeId].some((number) => number === ingrNumber)) {
-  //       const filteredIngredients = [...inProgMeals[recipeId]
-  //         .filter((number) => number !== ingrNumber)];
-  //       return filteredIngredients;
-  //     }
-  //     const addNewIngredient = [...inProgMeals[recipeId], ingrNumber];
-  //     const newUsedIngredients = [...addNewIngredient.sort((a, b) => a - b)];
-  //     return newUsedIngredients;
-  //   }
-  //   return [ingrNumber];
-  // };
-
-  // const saveToGlobalProvider = (recipeId_, ingredientsArray_) => {
-  //   const newMealsObj = {
-  //     [recipeId_]: ingredientsArray_,
-  //   };
-  //   console.log('saveToGlobalProvider Test', newMealsObj);
-  //   setInProgMeals(newMealsObj);
-  // };
-
   useEffect(() => {
     const saveInProgressRecipesProviderToLocalStorage = () => {
       localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
     };
     saveInProgressRecipesProviderToLocalStorage();
   }, [inProgMeals[recipeId]]);
-
-  // const hangleOnChange = (event) => {
-  //   const ingredientNumber = (Number(event.target.value) + 1);
-  //   const ingredientsArray = handleInProgressArray(ingredientNumber);
-  //   saveToGlobalProvider(recipeId, ingredientsArray);
-  // };
-
-  // const handleCheckedBoxes = (index_) => {
-  //   if (inProgMeals[recipeId] !== undefined) {
-  //     return inProgMeals[recipeId]
-  //       .some((ingNumb) => ingNumb === (index_ + 1));
-  //   }
-  //   return false;
-  // };
 
   return (
     <div>
@@ -121,36 +87,12 @@ function FoodInProgress(props) {
 
       <span data-testid="recipe-title">{strMeal !== undefined && strMeal}</span>
 
-      <button type="button" data-testid="share-btn">
-        Compartilhar
-      </button>
-
-      <button type="button" data-testid="favorite-btn">
-        Favoritar
-      </button>
+      <span>
+        <BtnShare />
+        <BtnFavorite />
+      </span>
 
       <span data-testid="recipe-category">{strCategory}</span>
-
-      {/* {ingredients !== undefined && (
-        <ol>
-          {ingredients.map((item, index) => (
-            <li
-              key={ index }
-              data-testid={ `${index}-ingredient-step` }
-            >
-              <input
-                type="checkbox"
-                name={ item }
-                id={ item }
-                value={ index }
-                checked={ handleCheckedBoxes(index) }
-                onChange={ hangleOnChange }
-              />
-              {item}
-            </li>
-          ))}
-        </ol>
-      )} */}
 
       <FoodIngredientsWithCheckboxes recipeId={ recipeId } />
 
