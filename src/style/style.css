@@ -22,3 +22,41 @@
 a {
   text-decoration: none;
 }
+
+.favorite-btn {
+  background-color: transparent;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.favorite-btn:active {
+  transform: scale(1.2);
+}
+
+.BtnStart {
+  background-color: rgb(255, 34, 0);
+  border: none;
+  border-radius: 5px;
+  bottom: 0;
+  color: white;
+  position: fixed;
+  right: 33vw;
+  text-shadow: 1px 1px 3px #688d6e;
+  text-transform: uppercase;
+}
+
+.fillHeart {
+  color: #f20;
+  font-size: 20px;
+}
+
+.share-btn {
+  background-color: transparent;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.share-btn:active {
+  transform: scale(1.2);
+}
+
