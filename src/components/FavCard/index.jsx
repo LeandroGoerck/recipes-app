@@ -1,14 +1,17 @@
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ShareIcon from '../../images/shareIcon.svg';
 import DesfavoriteIcon from '../../images/blackHeartIcon.svg';
 import { Simg, Scard, Stitle } from '../../style/CardList';
 import ButtonGeneric from '../../subcomponents/ButtonGeneric';
+import Context from '../../Context/GlobalContext';
 
 const copy = require('clipboard-copy');
 
 function Card({ cardName, srcImg, type, index, nationality, category, alcoholic, id }) {
   const [showText, setShowText] = useState(false);
+
+  const { favRecipes: { favoriteRecipes, setFavoritesRecipes } } = useContext(Context);
 
   useEffect(() => {
     const ONE_SECOND = 1000;
@@ -18,6 +21,13 @@ function Card({ cardName, srcImg, type, index, nationality, category, alcoholic,
   const copyURL = () => {
     copy(`http://localhost:3000/${type}s/${id}`);
     setShowText(true);
+  };
+
+  const desfavoriteRecipe = () => {
+    const filterFavorites = favoriteRecipes
+      .filter((recipe) => recipe.id !== id);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(filterFavorites));
+    setFavoritesRecipes(filterFavorites);
   };
 
   return (
@@ -52,7 +62,7 @@ function Card({ cardName, srcImg, type, index, nationality, category, alcoholic,
           data-testid={ `${index}-horizontal-share-btn` }
         />
       </ButtonGeneric>
-      <ButtonGeneric>
+      <ButtonGeneric ClickEvent={ desfavoriteRecipe }>
         <img
           src={ DesfavoriteIcon }
           alt="desfavorite"

@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Header from '../../components/Header';
 import ButtonFilters from '../../components/ButtonFilters';
 import FavoriteCards from '../../components/FavoriteCards';
+import GlobalContext from '../../Context/GlobalContext';
 
 function FavoriteRecipes() {
-  const [favoriteRecipes, setFavoritesRecipes] = useState([]);
+  const {
+    favRecipes: { favoriteRecipes, setFavoritesRecipes } } = useContext(GlobalContext);
 
   const catchFavoritesRecipes = () => {
     const favoriteStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));

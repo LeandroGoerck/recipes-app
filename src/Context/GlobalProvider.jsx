@@ -27,6 +27,8 @@ function GlobalProvider({ children }) {
   const [drinksIngredientsX, setDrinksIngredientsX] = useState([]);
   // =================== Explore ====================
   const [nationalities, setNationalities] = useState([]);
+  // =================== Favorites Recipes ==========
+  const [favoriteRecipes, setFavoritesRecipes] = useState([]);
   // =================== Request Api ================
   const firstTwelveFoods = () => {
     fetchFoods()
@@ -86,6 +88,10 @@ function GlobalProvider({ children }) {
     },
     requestAPI: {
       firstTwelveFoods,
+    },
+    favRecipes: {
+      favoriteRecipes,
+      setFavoritesRecipes,
     },
   };
 
