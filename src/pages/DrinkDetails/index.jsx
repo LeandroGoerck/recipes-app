@@ -111,8 +111,12 @@ function DrinksDetails(props) {
 
       <RecommendedFoodsCarousel />
 
-      <button type="button" data-testid="start-recipe-btn">
-        Iniciar receita
+      <button
+        className="BtnStart"
+        type="button"
+        data-testid="start-recipe-btn"
+      >
+        Start Recipe
       </button>
     </div>
   );
