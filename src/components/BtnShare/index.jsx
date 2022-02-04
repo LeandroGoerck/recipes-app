@@ -15,7 +15,7 @@ function BtnShare() {
   }, [saveLink]);
 
   const notify = () => {
-    toast.success('Link copied to clipboard!', {
+    toast.success('Link copied!', {
       position: 'top-center',
       autoClose: 2000,
       hideProgressBar: false,
