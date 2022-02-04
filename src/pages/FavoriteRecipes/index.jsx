@@ -7,18 +7,14 @@ import GlobalContext from '../../Context/GlobalContext';
 function FavoriteRecipes() {
   const {
     favRecipes: { favoriteRecipes, setFavoritesRecipes } } = useContext(GlobalContext);
+  const favoriteStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
-  const catchFavoritesRecipes = () => {
-    const favoriteStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    setFavoritesRecipes(favoriteStorage);
-  };
-
-  useEffect(() => catchFavoritesRecipes(), []);
+  useEffect(() => setFavoritesRecipes(favoriteStorage), []);
 
   return (
     <>
       <Header displayIconSearch={ false }>Favorite Recipes</Header>
-      <ButtonFilters />
+      <ButtonFilters favoriteStorage={ favoriteStorage } />
       <FavoriteCards favoriteRecipes={ favoriteRecipes } />
     </>
   );
