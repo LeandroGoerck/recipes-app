@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../../style/style.css';
 
 function BtnShare() {
-  const [saveLink, setSaveLink] = useState('');
+  const [saveLink, setSaveLink] = useState(undefined);
 
   const notify = () => {
     toast.success('Link copied to clipboard!', {
@@ -21,11 +21,9 @@ function BtnShare() {
 
   const handleShare = ({ target }) => {
     const { baseURI } = target;
-    if (baseURI) {
-      localStorage.setItem('link', saveLink);
-      setSaveLink(baseURI);
-      notify();
-    }
+    setSaveLink(baseURI);
+    localStorage.setItem('link', JSON.stringify(saveLink));
+    notify();
   };
 
   return (
