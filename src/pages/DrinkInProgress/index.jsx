@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import DrinkIngredientsWithCheckboxes
+from '../../components/DrinkIngredientsWithCheckboxes';
 import RecommendedFoodsCarousel from '../../components/RecommendedFoodsCarousel';
 import GlobalContext from '../../Context/GlobalContext';
 import formatIngredientList from '../../helpers/formatIngredientList';
@@ -13,12 +15,28 @@ function DrinkInProgress(props) {
   const { drinkDetails: { setDrinkIngredients } } = useContext(GlobalContext);
   const { drinkDetails: { drinkIngredients } } = useContext(GlobalContext);
   const { strDrink, strAlcoholic, strInstructions } = drinkDetails;
+  // =================== inProgressRecipes ============
+  const { inProgressRecipes: { setInProgMeals } } = useContext(GlobalContext);
+  const { inProgressRecipes: { setInProgCocktails } } = useContext(GlobalContext);
+  const { inProgressRecipes: { cocktails: inProgCocktails } } = useContext(GlobalContext);
+  const { inProgressRecipes } = useContext(GlobalContext);
   // =================== mealRecommendations ================
   const { drinkDetails: { setMealRecommendations } } = useContext(GlobalContext);
   const { match } = props;
   const { params } = match;
   const { recipeId } = params;
   const { location: { pathname } } = useHistory();
+
+  useEffect(() => {
+    if (localStorage.getItem('inProgressRecipes')) {
+      const localStorageData = localStorage.getItem('inProgressRecipes');
+      const parsedData = JSON.parse(localStorageData);
+      const inProgressRecipeMeals = parsedData.meals;
+      const inProgressRecipeCocktails = parsedData.cocktails;
+      setInProgMeals(inProgressRecipeMeals);
+      setInProgCocktails(inProgressRecipeCocktails);
+    }
+  }, []);
 
   useEffect(() => {
     fetchDrinkDetailsForRecipeId(recipeId)
@@ -43,12 +61,16 @@ function DrinkInProgress(props) {
       });
   }, []);
 
+  useEffect(() => {
+    const saveInProgressRecipesProviderToLocalStorage = () => {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+    };
+    saveInProgressRecipesProviderToLocalStorage();
+  }, [inProgCocktails[recipeId]]);
+
   return (
     <div>
       <h1>DrinkInProgress</h1>
-      <p>{pathname}</p>
-      <p>{recipeId}</p>
-
       <img
         style={ { width: 100, display: 'flex', flexDirection: 'row' } }
         src={ drinkDetails?.strDrinkThumb }
@@ -85,6 +107,8 @@ function DrinkInProgress(props) {
           ))}
         </ol>
       )}
+
+      <DrinkIngredientsWithCheckboxes recipeId={ recipeId } />
 
       <span data-testid="instructions">{strInstructions}</span>
 

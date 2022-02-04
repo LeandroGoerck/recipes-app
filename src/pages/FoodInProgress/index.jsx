@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import FoodIngredientsWithCheckboxes
+from '../../components/FoodIngredientsWithCheckboxes';
 import RecommendedDrinksCarousel from '../../components/RecommendedDrinksCarousel';
 import GlobalContext from '../../Context/GlobalContext';
 import formatIngredientList from '../../helpers/formatIngredientList';
@@ -11,19 +13,15 @@ function FoodInProgress(props) {
   const { foodDetails: { details } } = useContext(GlobalContext);
   const { foodDetails: { setDetails } } = useContext(GlobalContext);
   const { foodDetails: { setIngredients } } = useContext(GlobalContext);
-  const { foodDetails: { ingredients } } = useContext(GlobalContext);
+  // const { foodDetails: { ingredients } } = useContext(GlobalContext);
   const { strMeal, strCategory, strInstructions } = details;
   // =================== inProgressRecipes ============
-  // const [usedIngredients, setUsedIngredients] = useState([]);
   const { inProgressRecipes: { setInProgMeals } } = useContext(GlobalContext);
   const { inProgressRecipes: { setInProgCocktails } } = useContext(GlobalContext);
   const { inProgressRecipes: { meals: inProgMeals } } = useContext(GlobalContext);
   const { inProgressRecipes } = useContext(GlobalContext);
-  // const [canSaveToLocalStore, setCanSaveToLocalStore] = useState(false);
   // =================== drinkRecommendations ================
-  // const { foodDetails: { drinkRecommendations } } = useContext(GlobalContext);
   const { foodDetails: { setDrinkRecommendations } } = useContext(GlobalContext);
-  // const { strDrink } = drinkRecommendations;
   // =================== routes ==============================
   const { match } = props;
   const { params } = match;
@@ -31,7 +29,6 @@ function FoodInProgress(props) {
   const { location: { pathname } } = useHistory();
 
   useEffect(() => {
-    // console.log('reading from localStorage');
     if (localStorage.getItem('inProgressRecipes')) {
       const localStorageData = localStorage.getItem('inProgressRecipes');
       const parsedData = JSON.parse(localStorageData);
@@ -39,14 +36,10 @@ function FoodInProgress(props) {
       const inProgressRecipeCocktails = parsedData.cocktails;
       setInProgMeals(inProgressRecipeMeals);
       setInProgCocktails(inProgressRecipeCocktails);
-      // console.log(inProgressRecipeMeals);
-      // console.log(inProgressRecipeCocktails);
     }
   }, []);
 
   useEffect(() => {
-    // console.log(recipeId);
-    // console.log('fetchFoodsDetailsForRecipeId', recipeId);
     fetchFoodsDetailsForRecipeId(recipeId)
       .then(({ meals }) => {
         console.log({ meals });
@@ -73,29 +66,27 @@ function FoodInProgress(props) {
       });
   }, []);
 
-  const handleInProgressArray = (ingrNumber) => {
-    if (inProgMeals[recipeId] !== undefined) {
-      if (inProgMeals[recipeId].some((number) => number === ingrNumber)) {
-        const filteredIngredients = [...inProgMeals[recipeId]
-          .filter((number) => number !== ingrNumber)];
-        // setUsedIngredients(() => filteredIngredients);
-        return filteredIngredients;
-      }
-      const addNewIngredient = [...inProgMeals[recipeId], ingrNumber];
-      const newUsedIngredients = [...addNewIngredient.sort((a, b) => a - b)];
-      // setUsedIngredients(() => newUsedIngredients);
-      return newUsedIngredients;
-    }
-    return [ingrNumber];
-  };
+  // const handleInProgressArray = (ingrNumber) => {
+  //   if (inProgMeals[recipeId] !== undefined) {
+  //     if (inProgMeals[recipeId].some((number) => number === ingrNumber)) {
+  //       const filteredIngredients = [...inProgMeals[recipeId]
+  //         .filter((number) => number !== ingrNumber)];
+  //       return filteredIngredients;
+  //     }
+  //     const addNewIngredient = [...inProgMeals[recipeId], ingrNumber];
+  //     const newUsedIngredients = [...addNewIngredient.sort((a, b) => a - b)];
+  //     return newUsedIngredients;
+  //   }
+  //   return [ingrNumber];
+  // };
 
-  const saveToGlobalProvider = (recipeId_, ingredientsArray_) => {
-    const newMealsObj = {
-      [recipeId_]: ingredientsArray_,
-    };
-    console.log('saveToGlobalProvider Test', newMealsObj);
-    setInProgMeals(newMealsObj);
-  };
+  // const saveToGlobalProvider = (recipeId_, ingredientsArray_) => {
+  //   const newMealsObj = {
+  //     [recipeId_]: ingredientsArray_,
+  //   };
+  //   console.log('saveToGlobalProvider Test', newMealsObj);
+  //   setInProgMeals(newMealsObj);
+  // };
 
   useEffect(() => {
     const saveInProgressRecipesProviderToLocalStorage = () => {
@@ -104,26 +95,23 @@ function FoodInProgress(props) {
     saveInProgressRecipesProviderToLocalStorage();
   }, [inProgMeals[recipeId]]);
 
-  const hangleOnChange = (event) => {
-    const ingredientNumber = (Number(event.target.value) + 1);
-    const ingredientsArray = handleInProgressArray(ingredientNumber);
-    saveToGlobalProvider(recipeId, ingredientsArray);
-  };
+  // const hangleOnChange = (event) => {
+  //   const ingredientNumber = (Number(event.target.value) + 1);
+  //   const ingredientsArray = handleInProgressArray(ingredientNumber);
+  //   saveToGlobalProvider(recipeId, ingredientsArray);
+  // };
 
-  const handleCheckedBoxes = (index_) => {
-    if (inProgMeals[recipeId] !== undefined) {
-      return inProgMeals[recipeId]
-        .some((ingNumb) => ingNumb === (index_ + 1));
-    }
-    return false;
-  };
+  // const handleCheckedBoxes = (index_) => {
+  //   if (inProgMeals[recipeId] !== undefined) {
+  //     return inProgMeals[recipeId]
+  //       .some((ingNumb) => ingNumb === (index_ + 1));
+  //   }
+  //   return false;
+  // };
 
   return (
     <div>
-      <h1>FoodDetails</h1>
-      <p>{pathname}</p>
-      <p>{recipeId}</p>
-
+      <h1>FoodInProgress</h1>
       <img
         style={ { width: 100, display: 'flex', flexDirection: 'row' } }
         src={ details?.strMealThumb }
@@ -143,7 +131,7 @@ function FoodInProgress(props) {
 
       <span data-testid="recipe-category">{strCategory}</span>
 
-      {ingredients !== undefined && (
+      {/* {ingredients !== undefined && (
         <ol>
           {ingredients.map((item, index) => (
             <li
@@ -162,7 +150,9 @@ function FoodInProgress(props) {
             </li>
           ))}
         </ol>
-      )}
+      )} */}
+
+      <FoodIngredientsWithCheckboxes recipeId={ recipeId } />
 
       <span data-testid="instructions">{strInstructions}</span>
 
