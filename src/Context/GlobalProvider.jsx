@@ -18,16 +18,16 @@ function GlobalProvider({ children }) {
   const [details, setDetails] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [drinkRecommendations, setDrinkRecommendations] = useState([]);
-  // =================== DrinkDetails ================
+  // =================== DrinkDetails ===============
   const [drinkDetails, setDrinkDetails] = useState([]);
   const [drinkIngredients, setDrinkIngredients] = useState([]);
   const [mealRecommendations, setMealRecommendations] = useState([]);
   // ================= IngredientList ===============
   const [ingredientsX, setIngredientsX] = useState([]);
   const [drinksIngredientsX, setDrinksIngredientsX] = useState([]);
-  // =================== Explore ================
+  // =================== Explore ====================
   const [nationalities, setNationalities] = useState([]);
-  // =================== Request Api ============
+  // =================== Request Api ================
   const firstTwelveFoods = () => {
     fetchFoods()
       .then((data) => {

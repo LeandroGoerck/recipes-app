@@ -3,7 +3,7 @@ import React from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { Simg, Scard, Stitle } from '../../style/CardList';
 
-function MealCard({ testId, cardImgId, imgSrc, imgStr, cardName, recipeId }) {
+function Card({ testId, cardImgId, imgSrc, imgStr, cardName, recipeId }) {
   const { location: { pathname } } = useHistory();
 
   const handleRoute = () => {
@@ -23,7 +23,7 @@ function MealCard({ testId, cardImgId, imgSrc, imgStr, cardName, recipeId }) {
   );
 }
 
-MealCard.propTypes = {
+Card.propTypes = {
   cardImgId: PropTypes.string.isRequired,
   imgSrc: PropTypes.string.isRequired,
   imgStr: PropTypes.string.isRequired,
@@ -32,4 +32,4 @@ MealCard.propTypes = {
   recipeId: PropTypes.string.isRequired,
 };
 
-export default MealCard;
+export default Card;
