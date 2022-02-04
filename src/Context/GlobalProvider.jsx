@@ -27,6 +27,9 @@ function GlobalProvider({ children }) {
   const [drinksIngredientsX, setDrinksIngredientsX] = useState([]);
   // =================== Explore ================
   const [nationalities, setNationalities] = useState([]);
+  // =================== In Progress Recipes ============
+  const [inProgCocktails, setInProgCocktails] = useState([]);
+  const [inProgMeals, setInProgMeals] = useState([]);
   // =================== Request Api ============
   const firstTwelveFoods = () => {
     fetchFoods()
@@ -86,6 +89,12 @@ function GlobalProvider({ children }) {
     },
     requestAPI: {
       firstTwelveFoods,
+    },
+    inProgressRecipes: {
+      cocktails: inProgCocktails,
+      meals: inProgMeals,
+      setInProgCocktails,
+      setInProgMeals,
     },
   };
 
