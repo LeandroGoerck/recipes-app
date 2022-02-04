@@ -6,7 +6,7 @@ function DrinkIngredientsWithCheckboxes(props) {
   const { recipeId } = props;
   const { inProgressRecipes: { setInProgCocktails } } = useContext(GlobalContext);
   const { inProgressRecipes: { cocktails: inProgCocktails } } = useContext(GlobalContext);
-  const { drinkDetails: { ingredients } } = useContext(GlobalContext);
+  const { drinkDetails: { drinkIngredients } } = useContext(GlobalContext);
 
   const handleInProgressArray = (ingrNumber) => {
     if (inProgCocktails[recipeId] !== undefined) {
@@ -47,9 +47,9 @@ function DrinkIngredientsWithCheckboxes(props) {
 
   return (
     <div>
-      {ingredients !== undefined && (
+      {drinkIngredients !== undefined && (
         <ol>
-          {ingredients.map((item, index) => (
+          {drinkIngredients.map((item, index) => (
             <li
               key={ index }
               data-testid={ `${index}-ingredient-step` }

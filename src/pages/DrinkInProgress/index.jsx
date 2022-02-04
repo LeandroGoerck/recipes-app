@@ -13,7 +13,7 @@ function DrinkInProgress(props) {
   const { drinkDetails: { drinkDetails } } = useContext(GlobalContext);
   const { drinkDetails: { setDrinkDetails } } = useContext(GlobalContext);
   const { drinkDetails: { setDrinkIngredients } } = useContext(GlobalContext);
-  const { drinkDetails: { drinkIngredients } } = useContext(GlobalContext);
+  // const { drinkDetails: { drinkIngredients } } = useContext(GlobalContext);
   const { strDrink, strAlcoholic, strInstructions } = drinkDetails;
   // =================== inProgressRecipes ============
   const { inProgressRecipes: { setInProgMeals } } = useContext(GlobalContext);
@@ -93,20 +93,6 @@ function DrinkInProgress(props) {
       </button>
 
       <span data-testid="recipe-category">{strAlcoholic}</span>
-
-      {drinkIngredients !== undefined && (
-        <ol>
-          {drinkIngredients.map((item, index) => (
-            <li
-              key={ index }
-              data-testid={ `${index}-ingredient-step` }
-            >
-              <input type="checkbox" name={ item } id={ item } />
-              {item}
-            </li>
-          ))}
-        </ol>
-      )}
 
       <DrinkIngredientsWithCheckboxes recipeId={ recipeId } />
 
