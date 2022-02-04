@@ -4,6 +4,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../style/style.css';
+import copy from 'clipboard-copy';
 import GlobalContext from '../../Context/GlobalContext';
 
 function BtnShare() {
@@ -26,10 +27,16 @@ function BtnShare() {
     });
   };
 
+  const handleCopyText = () => {
+    const myURL = window.location.href.split('/in-progress')[0];
+    console.log('tentando salvar', myURL);
+    return myURL;
+  };
+
   const handleShare = (event) => {
     event.preventDefault();
     const { baseURI } = event.target;
-    console.dir(event.target);
+    copy(handleCopyText());
     setSaveLink(baseURI);
     notify();
   };
@@ -48,7 +55,7 @@ function BtnShare() {
         pauseOnHover
       />
       <CopyToClipboard
-        text={ saveLink }
+        text={ handleCopyText() }
       >
         <button
           type="submit"
