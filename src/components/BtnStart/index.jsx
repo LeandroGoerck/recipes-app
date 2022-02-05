@@ -4,16 +4,14 @@ import '../../style/style.css';
 import GlobalContext from '../../Context/GlobalContext';
 
 function BtnStart() {
+  const { location: { pathname } } = useHistory();
+  const history = useHistory();
   const {
     favorite: isFinish,
-    startButton: { isStart, setIsStart },
+    startButton: { isStart },
   } = useContext(GlobalContext);
 
-  const history = useHistory();
-  const { location: { pathname } } = useHistory();
-
   function handleStart() {
-    setIsStart(!isFinish);
     history.push(`${pathname}/in-progress`);
   }
 
@@ -24,6 +22,7 @@ function BtnStart() {
       data-testid="start-recipe-btn"
       hidden={ !isFinish }
       onClick={ handleStart }
+      style={ { display: isFinish ? 'initial' : 'none' } }
     >
       { isStart ? 'Start Recipe' : 'Continue Recipe'}
     </button>

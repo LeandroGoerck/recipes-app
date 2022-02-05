@@ -4,9 +4,12 @@ import GlobalContext from '../../Context/GlobalContext';
 
 function FoodIngredientsWithCheckboxes(props) {
   const { recipeId } = props;
-  const { inProgressRecipes: { setInProgMeals } } = useContext(GlobalContext);
-  const { inProgressRecipes: { meals: inProgMeals } } = useContext(GlobalContext);
-  const { foodDetails: { ingredients } } = useContext(GlobalContext);
+
+  const {
+    inProgressRecipes: { setInProgMeals },
+    inProgressRecipes: { meals: inProgMeals },
+    foodDetails: { ingredients },
+  } = useContext(GlobalContext);
 
   const handleInProgressArray = (ingrNumber) => {
     if (inProgMeals[recipeId] !== undefined) {

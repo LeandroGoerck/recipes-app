@@ -10,6 +10,7 @@ import { fetchDrinkDetailsForRecipeId } from '../../services/fetchDrinks';
 import { fetchFoods } from '../../services/fetchFoods';
 import BtnShare from '../../components/BtnShare';
 import BtnFavorite from '../../components/BtnFavorite';
+import BtnFinish from '../../components/BtnFinish';
 
 function DrinkInProgress(props) {
   const { drinkDetails: { drinkDetails } } = useContext(GlobalContext);
@@ -103,9 +104,7 @@ function DrinkInProgress(props) {
 
       <RecommendedFoodsCarousel />
 
-      <button type="button" data-testid="finish-recipe-btn">
-        Finalizar receita
-      </button>
+      <BtnFinish />
     </div>
   );
 }
