@@ -8,8 +8,11 @@ import GlobalContext from '../../Context/GlobalContext';
 import formatIngredientList from '../../helpers/formatIngredientList';
 import { fetchDrinks } from '../../services/fetchDrinks';
 import { fetchFoodsDetailsForRecipeId } from '../../services/fetchFoods';
+import BtnShare from '../../components/BtnShare';
+import BtnFavorite from '../../components/BtnFavorite';
 
 function FoodInProgress(props) {
+  const { startButton: { setIsStart } } = useContext(GlobalContext);
   const { foodDetails: { details } } = useContext(GlobalContext);
   const { foodDetails: { setDetails } } = useContext(GlobalContext);
   const { foodDetails: { setIngredients } } = useContext(GlobalContext);
@@ -27,7 +30,7 @@ function FoodInProgress(props) {
   const { params } = match;
   const { recipeId } = params;
   const { location: { pathname } } = useHistory();
-
+  console.log(strCategory);
   useEffect(() => {
     if (localStorage.getItem('inProgressRecipes')) {
       const localStorageData = localStorage.getItem('inProgressRecipes');
@@ -37,6 +40,7 @@ function FoodInProgress(props) {
       setInProgMeals(inProgressRecipeMeals);
       setInProgCocktails(inProgressRecipeCocktails);
     }
+    setIsStart(false);
   }, []);
 
   useEffect(() => {
@@ -121,13 +125,8 @@ function FoodInProgress(props) {
 
       <span data-testid="recipe-title">{strMeal !== undefined && strMeal}</span>
 
-      <button type="button" data-testid="share-btn">
-        Compartilhar
-      </button>
-
-      <button type="button" data-testid="favorite-btn">
-        Favoritar
-      </button>
+      <BtnShare />
+      <BtnFavorite />
 
       <span data-testid="recipe-category">{strCategory}</span>
 
@@ -163,10 +162,6 @@ function FoodInProgress(props) {
       )}
 
       <RecommendedDrinksCarousel />
-
-      <button type="button" data-testid="finish-recipe-btn">
-        Finalizar receita
-      </button>
     </div>
   );
 }

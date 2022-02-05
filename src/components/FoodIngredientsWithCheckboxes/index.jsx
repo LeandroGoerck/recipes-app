@@ -26,7 +26,6 @@ function FoodIngredientsWithCheckboxes(props) {
     const newMealsObj = {
       [recipeId_]: ingredientsArray_,
     };
-    console.log('saveToGlobalProvider Test', newMealsObj);
     setInProgMeals(newMealsObj);
   };
 

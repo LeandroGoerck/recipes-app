@@ -17,6 +17,8 @@ function GlobalProvider({ children }) {
   // =================== Favorite ================
   const [isFinish, setIsFinish] = useState(false);
   const [saveLink, setSaveLink] = useState();
+  // =================== Button Start ================
+  const [isStart, setIsStart] = useState(true);
   // =================== FoodDetails ================
   const [details, setDetails] = useState([]);
   const [ingredients, setIngredients] = useState([]);
@@ -55,6 +57,10 @@ function GlobalProvider({ children }) {
     searchBar: {
       displayInputSearch,
       setDisplayInputSearch,
+    },
+    startButton: {
+      isStart,
+      setIsStart,
     },
     favorite: {
       isFinish,
