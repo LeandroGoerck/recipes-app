@@ -35,6 +35,8 @@ function GlobalProvider({ children }) {
   // =================== In Progress Recipes ============
   const [inProgCocktails, setInProgCocktails] = useState([]);
   const [inProgMeals, setInProgMeals] = useState([]);
+  // =================== Done Recipes ==========
+  const [doneList, setDoneList] = useState([]);
   // =================== Request Api ============
   const firstTwelveFoods = () => {
     fetchFoods()
@@ -112,6 +114,10 @@ function GlobalProvider({ children }) {
       meals: inProgMeals,
       setInProgCocktails,
       setInProgMeals,
+    },
+    doneRecipes: {
+      doneList,
+      setDoneList,
     },
   };
 
