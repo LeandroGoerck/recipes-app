@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import RecommendedFoodsCarousel from '../../components/RecommendedFoodsCarousel';
 import GlobalContext from '../../Context/GlobalContext';
 import formatIngredientList from '../../helpers/formatIngredientList';
+import NewFavoriteRecipeObj from '../../helpers/NewFavoriteRecipeObj';
 import { fetchDrinkDetailsForRecipeId } from '../../services/fetchDrinks';
 import { fetchFoods } from '../../services/fetchFoods';
 import BtnStart from '../../components/BtnStart';
@@ -64,7 +65,7 @@ function DrinksDetails(props) {
 
       <span>
         <BtnShare />
-        <BtnFavorite />
+        <BtnFavorite recipeObj={ NewFavoriteRecipeObj('drink') } />
       </span>
 
       <span data-testid="recipe-category">{strAlcoholic}</span>

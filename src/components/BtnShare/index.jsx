@@ -29,7 +29,6 @@ function BtnShare() {
 
   const handleCopyText = () => {
     const myURL = window.location.href.split('/in-progress')[0];
-    console.log('tentando salvar', myURL);
     return myURL;
   };
 

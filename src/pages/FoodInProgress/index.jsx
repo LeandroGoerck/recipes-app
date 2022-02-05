@@ -8,6 +8,7 @@ from '../../components/FoodIngredientsWithCheckboxes';
 import RecommendedDrinksCarousel from '../../components/RecommendedDrinksCarousel';
 import GlobalContext from '../../Context/GlobalContext';
 import formatIngredientList from '../../helpers/formatIngredientList';
+import NewFavoriteRecipeObj from '../../helpers/NewFavoriteRecipeObj';
 import { fetchDrinks } from '../../services/fetchDrinks';
 import { fetchFoodsDetailsForRecipeId } from '../../services/fetchFoods';
 
@@ -89,7 +90,7 @@ function FoodInProgress(props) {
 
       <span>
         <BtnShare />
-        <BtnFavorite />
+        <BtnFavorite recipeObj={ NewFavoriteRecipeObj('food') } />
       </span>
 
       <span data-testid="recipe-category">{strCategory}</span>

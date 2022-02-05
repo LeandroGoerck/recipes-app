@@ -8,6 +8,7 @@ from '../../components/DrinkIngredientsWithCheckboxes';
 import RecommendedFoodsCarousel from '../../components/RecommendedFoodsCarousel';
 import GlobalContext from '../../Context/GlobalContext';
 import formatIngredientList from '../../helpers/formatIngredientList';
+import NewFavoriteRecipeObj from '../../helpers/NewFavoriteRecipeObj';
 import { fetchDrinkDetailsForRecipeId } from '../../services/fetchDrinks';
 import { fetchFoods } from '../../services/fetchFoods';
 
@@ -44,7 +45,7 @@ function DrinkInProgress(props) {
     fetchDrinkDetailsForRecipeId(recipeId)
       .then(({ drinks }) => {
         setDrinkDetails(drinks[0]);
-        console.log(drinks[0]);
+        // console.log(drinks[0]);
         const ingAndMeasure = formatIngredientList(drinks[0]);
         setDrinkIngredients(ingAndMeasure);
       })
@@ -88,7 +89,7 @@ function DrinkInProgress(props) {
 
       <span>
         <BtnShare />
-        <BtnFavorite />
+        <BtnFavorite recipeObj={ NewFavoriteRecipeObj('drink') } />
       </span>
 
       <span data-testid="recipe-category">{strAlcoholic}</span>
