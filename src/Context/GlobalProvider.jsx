@@ -15,8 +15,21 @@ function GlobalProvider({ children }) {
   const [drinks, setDrinks] = useState([]);
   const [canShow, setCanShow] = useState(false);
   // =================== Favorite ================
-  const [isFinish, setIsFinish] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [favList, setFavList] = useState([
+    {
+      id: 0,
+      type: '',
+      nationality: '',
+      category: '',
+      alcoholicOrNot: '',
+      name: '',
+      image: '',
+    }]);
+  // =================== Save Link ================
   const [saveLink, setSaveLink] = useState();
+  // =================== Button Finish ================
+  const [isFinish, setIsFinish] = useState(false);
   // =================== Button Start ================
   const [isStart, setIsStart] = useState(true);
   // =================== FoodDetails ================
@@ -63,6 +76,10 @@ function GlobalProvider({ children }) {
       setIsStart,
     },
     favorite: {
+      isFavorite,
+      setIsFavorite,
+      favList,
+      setFavList,
       isFinish,
       setIsFinish,
     },

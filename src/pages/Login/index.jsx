@@ -9,7 +9,7 @@ import ImageCook from './image/cookLogin.svg';
 import GlobalContext from '../../Context/GlobalContext';
 
 function Login() {
-  const { login } = useContext(GlobalContext);
+  const { login, favorite: { favList } } = useContext(GlobalContext);
   const history = useHistory();
 
   const handleChange = ({ target: { value, type } }) => {
@@ -30,6 +30,7 @@ function Login() {
     localStorage.setItem('cocktailsToken', 1);
     localStorage.setItem('user', JSON.stringify({ email }));
     localStorage.setItem('link', JSON.stringify(undefined));
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favList));
     history.push('/foods');
   };
 

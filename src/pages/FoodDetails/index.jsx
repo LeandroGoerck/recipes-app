@@ -10,15 +10,14 @@ import BtnShare from '../../components/BtnShare';
 import BtnFavorite from '../../components/BtnFavorite';
 
 function FoodDetails(props) {
-  const { foodDetails: { details } } = useContext(GlobalContext);
-  const { foodDetails: { setDetails } } = useContext(GlobalContext);
-  const { foodDetails: { setIngredients } } = useContext(GlobalContext);
-  const { foodDetails: { ingredients } } = useContext(GlobalContext);
+  const { foodDetails: { details,
+    setDetails,
+    setIngredients,
+    ingredients,
+  } } = useContext(GlobalContext);
   const { strMeal, strCategory, strInstructions } = details;
   // =================== drinkRecommendations ================
-  // const { foodDetails: { drinkRecommendations } } = useContext(GlobalContext);
   const { foodDetails: { setDrinkRecommendations } } = useContext(GlobalContext);
-  // const { strDrink } = drinkRecommendations;
   // =================== routes ==============================
   const { match } = props;
   const { params } = match;
@@ -43,27 +42,22 @@ function FoodDetails(props) {
   };
 
   useEffect(() => {
-    console.log(recipeId);
-    console.log('fetchFoodsDetailsForRecipeId', recipeId);
     fetchFoodsDetailsForRecipeId(recipeId)
       .then(({ meals }) => {
-        console.log({ meals });
         setDetails(meals[0]);
         const ingAndMeasure = formatIngredientList(meals[0]);
         setIngredients(ingAndMeasure);
       })
-      .catch((error) => (console.log(error)));
+      .catch((error) => (error));
   }, []);
 
   useEffect(() => {
     fetchDrinks()
       .then(({ drinks }) => {
         const MAX_DRINKS = 6;
-        console.log(drinks);
         if (drinks.length > MAX_DRINKS) {
           const newDrinks = [...drinks];
           const firstSixDrinks = newDrinks.splice(0, MAX_DRINKS);
-          console.log(firstSixDrinks);
           setDrinkRecommendations(firstSixDrinks);
         } else {
           setDrinkRecommendations(drinks);
