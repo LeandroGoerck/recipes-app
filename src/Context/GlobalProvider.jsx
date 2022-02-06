@@ -16,16 +16,7 @@ function GlobalProvider({ children }) {
   const [canShow, setCanShow] = useState(false);
   // =================== Favorite ================
   const [isFavorite, setIsFavorite] = useState(false);
-  const [favList, setFavList] = useState([
-    {
-      id: 0,
-      type: '',
-      nationality: '',
-      category: '',
-      alcoholicOrNot: '',
-      name: '',
-      image: '',
-    }]);
+  const [favList, setFavList] = useState([]);
   // =================== Save Link ================
   const [saveLink, setSaveLink] = useState();
   // =================== Button Finish ================

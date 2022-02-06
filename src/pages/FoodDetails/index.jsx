@@ -10,18 +10,16 @@ import BtnShare from '../../components/BtnShare';
 import BtnFavorite from '../../components/BtnFavorite';
 
 function FoodDetails(props) {
-  const { foodDetails: { details,
-    setDetails,
-    setIngredients,
-    ingredients,
-  } } = useContext(GlobalContext);
+  const {
+    foodDetails: { details,
+      setDetails,
+      setIngredients,
+      ingredients,
+      setDrinkRecommendations,
+    } } = useContext(GlobalContext);
   const { strMeal, strCategory, strInstructions } = details;
-  // =================== drinkRecommendations ================
-  const { foodDetails: { setDrinkRecommendations } } = useContext(GlobalContext);
   // =================== routes ==============================
-  const { match } = props;
-  const { params } = match;
-  const { recipeId } = params;
+  const { match: { params: { recipeId } } } = props;
   const { location: { pathname } } = useHistory();
 
   const formatIngredientList = (data) => {

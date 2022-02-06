@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+// import { useParams } from 'react-router-dom';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import GlobalContext from '../../Context/GlobalContext';
 import '../../style/style.css';
@@ -10,16 +11,20 @@ function BtnFavorite() {
     foodDetails: {
       details,
     },
-    favorite: {
-      isFavorite,
-      setIsFavorite,
-      // setFavList,
-    } } = useContext(GlobalContext);
+  } = useContext(GlobalContext);
+  const initLocal = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const { idMeal } = details;
+  const [isColor, setIsColor] = useState(false);
+  // const { id } = useParams();
+
+  useEffect(() => {
+    if (initLocal) {
+      setIsColor(initLocal.filter((e) => window.location.href.includes(e.id)).length > 0);
+    }
+  }, []);
 
   const handleFavorite = (evt) => {
     evt.preventDefault();
-    setIsFavorite(!isFavorite);
-    const { idMeal } = details;
     const getLocal = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const favRecipe = {
       id: idMeal,
@@ -29,19 +34,24 @@ function BtnFavorite() {
       name: details.strMeal,
       image: details.strMealThumb,
     };
-    if (getLocal.id !== idMeal) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify(favRecipe));
+    if (getLocal.filter((e) => e.id === idMeal).length < 1) {
+      setIsColor(true);
+      localStorage.setItem('favoriteRecipes', JSON.stringify([...getLocal, favRecipe]));
+    } else {
+      setIsColor(false);
+      localStorage.setItem('favoriteRecipes',
+        JSON.stringify(getLocal.filter((e) => e.id !== idMeal)));
     }
   };
   return (
     <button
-      src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+      src={ isColor ? blackHeartIcon : whiteHeartIcon }
       type="submit"
       data-testid="favorite-btn"
       className="favorite-btn"
       onClick={ handleFavorite }
     >
-      {isFavorite ? <AiFillHeart className="fillHeart" />
+      {isColor ? <AiFillHeart className="fillHeart" />
         : <AiOutlineHeart className="outlineHeart" />}
     </button>
   );
