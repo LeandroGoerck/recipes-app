@@ -8,7 +8,7 @@ function Explore() {
   const history = useHistory();
 
   return (
-    <div>
+    <>
       <Header displayIconSearch={ false }>Explore</Header>
       <SdivExplore>
         <SbuttonExplore
@@ -27,7 +27,7 @@ function Explore() {
         </SbuttonExplore>
       </SdivExplore>
       <Footer />
-    </div>
+    </>
   );
 }
 

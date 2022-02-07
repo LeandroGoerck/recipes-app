@@ -40,7 +40,7 @@ const Scard = styled.div`
 `;
 
 const ScardList = styled.div`
-  margin-bottom: 80px;
+padding-bottom: 100px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
