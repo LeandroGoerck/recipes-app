@@ -19,8 +19,12 @@
   width: 180px;
 }
 
-a {
+.link-card {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
   text-decoration: none;
+  width: 35%;
 }
 
 .favorite-btn {

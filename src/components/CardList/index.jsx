@@ -20,71 +20,63 @@ function CardList() {
   function handleList() {
     if (pathname === '/foods' || pathname === '/explore/foods/nationalities') {
       return (
-        <div>
-          {meals.map((recipe, index) => (
-            <Card
-              key={ index }
-              testId={ `${index}-recipe-card` }
-              cardImgId={ `${index}-card-img` }
-              imgSrc={ recipe.strMealThumb }
-              imgStr={ recipe.strMeal }
-              cardName={ `${index}-card-name` }
-              recipeId={ recipe.idMeal }
-            />
-          ))}
-        </div>
+        meals.map((recipe, index) => (
+          <Card
+            key={ index }
+            testId={ `${index}-recipe-card` }
+            cardImgId={ `${index}-card-img` }
+            imgSrc={ recipe.strMealThumb }
+            imgStr={ recipe.strMeal }
+            cardName={ `${index}-card-name` }
+            recipeId={ recipe.idMeal }
+          />
+        ))
       );
     }
 
     if (pathname === '/drinks') {
       return (
-        <div>
-          {drinks.map((recipe, index) => (
-            <Card
-              key={ index }
-              testId={ `${index}-recipe-card` }
-              cardImgId={ `${index}-card-img` }
-              imgSrc={ recipe.strDrinkThumb }
-              imgStr={ recipe.strDrink }
-              cardName={ `${index}-card-name` }
-              recipeId={ recipe.idDrink }
-            />
-          ))}
-        </div>
+        drinks.map((recipe, index) => (
+          <Card
+            key={ index }
+            testId={ `${index}-recipe-card` }
+            cardImgId={ `${index}-card-img` }
+            imgSrc={ recipe.strDrinkThumb }
+            imgStr={ recipe.strDrink }
+            cardName={ `${index}-card-name` }
+            recipeId={ recipe.idDrink }
+          />
+        ))
       );
     }
 
     if (pathname === '/explore/foods/ingredients') {
       return (
-        <div>
-          {ingredientsX.map((ingredient, index) => (
-            <Card
-              key={ index }
-              testId={ `${index}-ingredient-card` }
-              cardImgId={ `${index}-card-img` }
-              imgSrc={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
-              imgStr={ ingredient.strIngredient }
-              cardName={ `${index}-card-name` }
-            />
-          ))}
-        </div>
+        ingredientsX.map((ingredient, index) => (
+          <Card
+            key={ index }
+            testId={ `${index}-ingredient-card` }
+            cardImgId={ `${index}-card-img` }
+            imgSrc={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
+            imgStr={ ingredient.strIngredient }
+            cardName={ `${index}-card-name` }
+          />
+        ))
       );
     }
 
     if (pathname === '/explore/drinks/ingredients') {
       return (
-        <div>
-          {drinksIngredientsX.map((ingredient, index) => (
-            <Card
-              key={ index }
-              testId={ `${index}-ingredient-card` }
-              cardImgId={ `${index}-card-img` }
-              imgSrc={ `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Small.png` }
-              imgStr={ ingredient.strIngredient1 }
-              cardName={ `${index}-card-name` }
-            />
-          ))}
-        </div>
+        drinksIngredientsX.map((ingredient, index) => (
+          <Card
+            key={ index }
+            testId={ `${index}-ingredient-card` }
+            cardImgId={ `${index}-card-img` }
+            imgSrc={ `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Small.png` }
+            imgStr={ ingredient.strIngredient1 }
+            cardName={ `${index}-card-name` }
+          />
+        ))
       );
     }
   }

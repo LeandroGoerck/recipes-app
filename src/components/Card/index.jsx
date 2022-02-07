@@ -14,6 +14,7 @@ function Card({ testId, cardImgId, imgSrc, imgStr, cardName, recipeId }) {
   return (
     <Link
       to={ handleRoute() }
+      className="link-card"
     >
       <Scard data-testid={ testId }>
         <Simg src={ imgSrc } alt={ imgStr } data-testid={ cardImgId } />
