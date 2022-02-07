@@ -16,7 +16,7 @@ function DrinkInProgress(props) {
   const { drinkDetails: { drinkDetails } } = useContext(GlobalContext);
   const { drinkDetails: { setDrinkDetails } } = useContext(GlobalContext);
   const { drinkDetails: { setDrinkIngredients } } = useContext(GlobalContext);
-  // const { drinkDetails: { drinkIngredients } } = useContext(GlobalContext);
+  const { drinkDetails: { drinkIngredients } } = useContext(GlobalContext);
   const { strDrink, strAlcoholic, strInstructions } = drinkDetails;
   // =================== inProgressRecipes ============
   const { inProgressRecipes: { setInProgMeals } } = useContext(GlobalContext);
@@ -29,6 +29,7 @@ function DrinkInProgress(props) {
   const { params } = match;
   const { recipeId } = params;
   const { location: { pathname } } = useHistory();
+  const history = useHistory();
 
   useEffect(() => {
     if (localStorage.getItem('inProgressRecipes')) {
@@ -71,6 +72,11 @@ function DrinkInProgress(props) {
     saveInProgressRecipesProviderToLocalStorage();
   }, [inProgCocktails[recipeId]]);
 
+  const handleDisabled = () => {
+    if (drinkIngredients.length === inProgCocktails[recipeId]?.length) return false;
+    return true;
+  };
+
   return (
     <div>
       <h1>DrinkInProgress</h1>
@@ -106,7 +112,12 @@ function DrinkInProgress(props) {
 
       <RecommendedFoodsCarousel />
 
-      <button type="button" data-testid="finish-recipe-btn">
+      <button
+        type="button"
+        data-testid="finish-recipe-btn"
+        disabled={ handleDisabled() }
+        onClick={ () => history.push('/done-recipes') }
+      >
         Finalizar receita
       </button>
     </div>
