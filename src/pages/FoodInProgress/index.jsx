@@ -11,8 +11,10 @@ import formatIngredientList from '../../helpers/formatIngredientList';
 import NewFavoriteRecipeObj from '../../helpers/NewFavoriteRecipeObj';
 import { fetchDrinks } from '../../services/fetchDrinks';
 import { fetchFoodsDetailsForRecipeId } from '../../services/fetchFoods';
+// import BtnFinish from '../../components/BtnFinish';
 
 function FoodInProgress(props) {
+  const { startButton: { setIsStart } } = useContext(GlobalContext);
   const { foodDetails: { details } } = useContext(GlobalContext);
   const { foodDetails: { setDetails } } = useContext(GlobalContext);
   const { foodDetails: { setIngredients } } = useContext(GlobalContext);
@@ -26,9 +28,7 @@ function FoodInProgress(props) {
   // =================== drinkRecommendations ================
   const { foodDetails: { setDrinkRecommendations } } = useContext(GlobalContext);
   // =================== routes ==============================
-  const { match } = props;
-  const { params } = match;
-  const { recipeId } = params;
+  const { match: { params: { recipeId } } } = props;
   const { location: { pathname } } = useHistory();
   const history = useHistory();
 
@@ -41,28 +41,26 @@ function FoodInProgress(props) {
       setInProgMeals(inProgressRecipeMeals);
       setInProgCocktails(inProgressRecipeCocktails);
     }
+    setIsStart(false);
   }, []);
 
   useEffect(() => {
     fetchFoodsDetailsForRecipeId(recipeId)
       .then(({ meals }) => {
-        console.log({ meals });
         setDetails(meals[0]);
         const ingAndMeasure = formatIngredientList(meals[0]);
         setIngredients(ingAndMeasure);
       })
-      .catch((error) => (console.log(error)));
+      .catch((error) => (error));
   }, []);
 
   useEffect(() => {
     fetchDrinks()
       .then(({ drinks }) => {
         const MAX_DRINKS = 6;
-        console.log(drinks);
         if (drinks.length > MAX_DRINKS) {
           const newDrinks = [...drinks];
           const firstSixDrinks = newDrinks.splice(0, MAX_DRINKS);
-          console.log(firstSixDrinks);
           setDrinkRecommendations(firstSixDrinks);
         } else {
           setDrinkRecommendations(drinks);
@@ -112,7 +110,7 @@ function FoodInProgress(props) {
       )}
 
       <RecommendedDrinksCarousel />
-
+      {/* <BtnFinish /> */}
       <button
         type="button"
         data-testid="finish-recipe-btn"
