@@ -9,7 +9,7 @@ const SdivExploreFoods = styled.div`
 `;
 
 const SbuttonExplore = styled.button`
-    color: black;
+  color: black;
   font-size: 24px;
   font-weight: 600;
   padding: 15px;
