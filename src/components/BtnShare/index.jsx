@@ -53,18 +53,14 @@ function BtnShare() {
         draggable
         pauseOnHover
       />
-      {/* <CopyToClipboard
-        text={ handleCopyText() }
-      > */}
       <button
         type="button"
         data-testid="share-btn"
         className="share-btn"
         onClick={ handleShare }
       >
-        <AiOutlineShareAlt />
+        <AiOutlineShareAlt size={ 35 } />
       </button>
-      {/* </CopyToClipboard> */}
     </>
   );
 }
