@@ -1,47 +1,49 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { SbuttonSearch } from '../../style/SearchBar';
 
-function ButtonGeneric({ TestId, Type, Class, Disabled, ClickEvent, children }) {
+function ButtonSearch({ TestId, Type, Text, Class, Disabled, ClickEvent }) {
   const buttonDisabled = (
-    <button
+    <SbuttonSearch
       id={ TestId }
       data-testid={ TestId }
       type={ Type !== 'button' ? 'submit' : 'button' }
       className={ Class }
       disabled
     >
-      {children}
-    </button>
+      {Text}
+    </SbuttonSearch>
   );
 
   const buttonEnabled = (
-    <button
+    <SbuttonSearch
       id={ TestId }
       data-testid={ TestId }
       type={ Type !== 'button' ? 'submit' : 'button' }
       className={ Class }
       onClick={ ClickEvent }
     >
-      {children}
-    </button>
+      {Text}
+    </SbuttonSearch>
   );
 
   return (Disabled ? buttonDisabled : buttonEnabled);
 }
 
-ButtonGeneric.defaultProps = {
+ButtonSearch.defaultProps = {
   TestId: '',
   Type: 'button',
+  Text: '',
   Class: '',
   Disabled: false,
 };
 
-ButtonGeneric.propTypes = {
+ButtonSearch.propTypes = {
   TestId: PropTypes.string,
   Type: PropTypes.string,
+  Text: PropTypes.string,
   Class: PropTypes.string,
   Disabled: PropTypes.bool,
-  children: PropTypes.node.isRequired,
 };
 
-export default ButtonGeneric;
+export default ButtonSearch;

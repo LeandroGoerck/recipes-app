@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import ButtonGeneric from '../../subcomponents/ButtonGeneric';
+import ButtonSearch from '../../subcomponents/ButtonSearch';
 import InputGeneric from '../../subcomponents/InputGeneric';
 import {
   fetchFoodsForIngredients,
@@ -102,7 +102,7 @@ function SearchBar() {
           onChange={ handleInputChange }
           placeholder="Search Recipe"
         />
-        <ButtonGeneric
+        <ButtonSearch
           TestId="exec-search-btn"
           Text="Search"
           ClickEvent={ handleClick }

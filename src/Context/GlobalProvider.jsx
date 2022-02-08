@@ -27,18 +27,22 @@ function GlobalProvider({ children }) {
   const [details, setDetails] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [drinkRecommendations, setDrinkRecommendations] = useState([]);
-  // =================== DrinkDetails ================
+  // =================== DrinkDetails ===============
   const [drinkDetails, setDrinkDetails] = useState([]);
   const [drinkIngredients, setDrinkIngredients] = useState([]);
   const [mealRecommendations, setMealRecommendations] = useState([]);
   // ================= IngredientList ===============
   const [ingredientsX, setIngredientsX] = useState([]);
   const [drinksIngredientsX, setDrinksIngredientsX] = useState([]);
-  // =================== Explore ================
+  // =================== Explore ====================
   const [nationalities, setNationalities] = useState([]);
+  // =================== Favorites Recipes ==========
+  const [favoriteRecipes, setFavoritesRecipes] = useState([]);
   // =================== In Progress Recipes ============
   const [inProgCocktails, setInProgCocktails] = useState([]);
   const [inProgMeals, setInProgMeals] = useState([]);
+  // =================== Done Recipes ==========
+  const [doneList, setDoneList] = useState([]);
   // =================== Request Api ============
   const firstTwelveFoods = () => {
     fetchFoods()
@@ -117,11 +121,19 @@ function GlobalProvider({ children }) {
     requestAPI: {
       firstTwelveFoods,
     },
+    favRecipes: {
+      favoriteRecipes,
+      setFavoritesRecipes,
+    },
     inProgressRecipes: {
       cocktails: inProgCocktails,
       meals: inProgMeals,
       setInProgCocktails,
       setInProgMeals,
+    },
+    doneRecipes: {
+      doneList,
+      setDoneList,
     },
   };
 

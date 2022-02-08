@@ -4,7 +4,7 @@ const Scategories = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 190px;
+  margin-top: 50px;
   margin-bottom: 50px;
 `;
 

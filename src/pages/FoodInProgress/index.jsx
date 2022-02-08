@@ -1,23 +1,24 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import BtnFavorite from '../../components/BtnFavorite';
+import BtnShare from '../../components/BtnShare';
 import FoodIngredientsWithCheckboxes
 from '../../components/FoodIngredientsWithCheckboxes';
 import RecommendedDrinksCarousel from '../../components/RecommendedDrinksCarousel';
 import GlobalContext from '../../Context/GlobalContext';
 import formatIngredientList from '../../helpers/formatIngredientList';
+import NewFavoriteRecipeObj from '../../helpers/NewFavoriteRecipeObj';
 import { fetchDrinks } from '../../services/fetchDrinks';
 import { fetchFoodsDetailsForRecipeId } from '../../services/fetchFoods';
-import BtnShare from '../../components/BtnShare';
-import BtnFavorite from '../../components/BtnFavorite';
-import BtnFinish from '../../components/BtnFinish';
+// import BtnFinish from '../../components/BtnFinish';
 
 function FoodInProgress(props) {
   const { startButton: { setIsStart } } = useContext(GlobalContext);
   const { foodDetails: { details } } = useContext(GlobalContext);
   const { foodDetails: { setDetails } } = useContext(GlobalContext);
   const { foodDetails: { setIngredients } } = useContext(GlobalContext);
-  // const { foodDetails: { ingredients } } = useContext(GlobalContext);
+  const { foodDetails: { ingredients } } = useContext(GlobalContext);
   const { strMeal, strCategory, strInstructions } = details;
   // =================== inProgressRecipes ============
   const { inProgressRecipes: { setInProgMeals } } = useContext(GlobalContext);
@@ -29,6 +30,7 @@ function FoodInProgress(props) {
   // =================== routes ==============================
   const { match: { params: { recipeId } } } = props;
   const { location: { pathname } } = useHistory();
+  const history = useHistory();
 
   useEffect(() => {
     if (localStorage.getItem('inProgressRecipes')) {
@@ -73,6 +75,11 @@ function FoodInProgress(props) {
     saveInProgressRecipesProviderToLocalStorage();
   }, [inProgMeals[recipeId]]);
 
+  const handleDisabled = () => {
+    if (ingredients.length === inProgMeals[recipeId]?.length) return false;
+    return true;
+  };
+
   return (
     <div>
       <h1>FoodInProgress</h1>
@@ -85,8 +92,10 @@ function FoodInProgress(props) {
 
       <span data-testid="recipe-title">{strMeal !== undefined && strMeal}</span>
 
-      <BtnShare />
-      <BtnFavorite />
+      <span>
+        <BtnShare />
+        <BtnFavorite recipeObj={ NewFavoriteRecipeObj('food') } />
+      </span>
 
       <span data-testid="recipe-category">{strCategory}</span>
 
@@ -101,7 +110,15 @@ function FoodInProgress(props) {
       )}
 
       <RecommendedDrinksCarousel />
-      <BtnFinish />
+      {/* <BtnFinish /> */}
+      <button
+        type="button"
+        data-testid="finish-recipe-btn"
+        disabled={ handleDisabled() }
+        onClick={ () => history.push('/done-recipes') }
+      >
+        Finalizar receita
+      </button>
     </div>
   );
 }

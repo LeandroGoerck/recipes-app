@@ -36,7 +36,7 @@ function Login() {
   };
 
   return (
-    <>
+    <div className="container-login">
       <img className="image-cook" src={ ImageCook } alt="CookImage" />
       <Sform>
         <Sinput
@@ -67,7 +67,7 @@ function Login() {
           Enter
         </Sbutton>
       </Sform>
-    </>
+    </div>
   );
 }
 

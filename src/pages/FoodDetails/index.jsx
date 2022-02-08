@@ -3,6 +3,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import RecommendedDrinksCarousel from '../../components/RecommendedDrinksCarousel';
 import GlobalContext from '../../Context/GlobalContext';
+import formatIngredientList from '../../helpers/formatIngredientList';
+import NewFavoriteRecipeObj from '../../helpers/NewFavoriteRecipeObj';
 import { fetchDrinks } from '../../services/fetchDrinks';
 import { fetchFoodsDetailsForRecipeId } from '../../services/fetchFoods';
 import BtnStart from '../../components/BtnStart';
@@ -21,25 +23,7 @@ function FoodDetails(props) {
   // =================== routes ==============================
   const { match: { params: { recipeId } } } = props;
   const { location: { pathname } } = useHistory();
-
   const [getLocal, setGetLocal] = useState([]);
-
-  const formatIngredientList = (data) => {
-    const ingredientKeys = Object
-      .keys(data).filter((item) => item.includes('strIngredient'));
-    const measureKeys = Object
-      .keys(data).filter((item) => item.includes('strMeasure'));
-
-    const ingredientsValues = ingredientKeys.map((key) => (data[key]))
-      .filter((item) => item !== '');
-
-    const measureValues = measureKeys.map((key) => (data[key]))
-      .filter((item) => item !== '');
-
-    const ingAndMeasure = ingredientsValues
-      .map((ingr, index) => (`${[ingr]} - ${measureValues[index]}`));
-    return ingAndMeasure;
-  };
 
   useEffect(() => {
     setGetLocal(JSON.parse(localStorage.getItem('startRecipes')));
@@ -52,7 +36,7 @@ function FoodDetails(props) {
         const ingAndMeasure = formatIngredientList(meals[0]);
         setIngredients(ingAndMeasure);
       })
-      .catch((error) => (error));
+      .catch((error) => (console.error(error)));
   }, []);
 
   useEffect(() => {
@@ -71,22 +55,19 @@ function FoodDetails(props) {
 
   return (
     <div>
-      <h1>FoodDetails</h1>
-      <p>{pathname}</p>
-      <p>{recipeId}</p>
-
       <img
         style={ { width: 100, display: 'flex', flexDirection: 'row' } }
         src={ details?.strMealThumb }
         data-testid="recipe-photo"
         alt="x"
+        className="recipe-details-img"
       />
 
       <span data-testid="recipe-title">{strMeal !== undefined && strMeal}</span>
 
       <span>
         <BtnShare />
-        <BtnFavorite />
+        <BtnFavorite recipeObj={ NewFavoriteRecipeObj('food') } />
       </span>
 
       <span data-testid="recipe-category">{strCategory}</span>
@@ -104,7 +85,9 @@ function FoodDetails(props) {
         </ul>
       )}
 
-      <span data-testid="instructions">{strInstructions}</span>
+      <div className="instructions-div">
+        <span data-testid="instructions">{strInstructions}</span>
+      </div>
 
       {pathname === `/foods/${recipeId}` && (
         <iframe title="frametitle" data-testid="video">
