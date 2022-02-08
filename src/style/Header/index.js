@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Sheader = styled.header`
-  /* position: fixed; */
+  // position: sticky;
   top: 0;
   display: flex;
   flex-direction: column;
@@ -61,8 +61,12 @@ const SdivBarSearch = styled.div`
 `;
 
 const Stitle = styled.p`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 20px;
   font-weight: 700;
+  margin: 0;
 `;
 
 export {

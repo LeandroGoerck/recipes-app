@@ -1,3 +1,8 @@
+body, .root {
+  height: 100vh;
+  width: 100%;
+}
+
 .icon-user {
   margin-left: 5px;
   position: absolute;
@@ -13,14 +18,16 @@
 }
 
 .image-cook {
-  left: 70px;
-  position: relative;
-  top: -70px;
+  margin-bottom: 20px;
   width: 180px;
 }
 
-a {
+.link-card {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
   text-decoration: none;
+  width: 35%;
 }
 
 .favorite-btn {
@@ -39,6 +46,7 @@ a {
   border-radius: 5px;
   bottom: 0;
   color: white;
+  margin-bottom: 15px;
   position: fixed;
   right: 33vw;
   text-shadow: 1px 1px 3px #688d6e;
@@ -60,3 +68,38 @@ a {
   transform: scale(1.2);
 }
 
+.div-explore {
+  height: 100vh;
+  width: 100%;
+}
+
+.food-icon {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  margin: 50px auto;
+  position: initial;
+}
+
+.container-login {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  margin: auto;
+}
+
+.instructions-div {
+  background-color: lightgray;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.recipe-details-img {
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+}

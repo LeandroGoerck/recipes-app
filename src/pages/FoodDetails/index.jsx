@@ -18,9 +18,7 @@ function FoodDetails(props) {
   const { foodDetails: { ingredients } } = useContext(GlobalContext);
   const { strMeal, strCategory, strInstructions } = details;
   // =================== drinkRecommendations ================
-  // const { foodDetails: { drinkRecommendations } } = useContext(GlobalContext);
   const { foodDetails: { setDrinkRecommendations } } = useContext(GlobalContext);
-  // const { strDrink } = drinkRecommendations;
   // =================== routes ==============================
   const { match } = props;
   const { params } = match;
@@ -28,27 +26,22 @@ function FoodDetails(props) {
   const { location: { pathname } } = useHistory();
 
   useEffect(() => {
-    console.log(recipeId);
-    console.log('fetchFoodsDetailsForRecipeId', recipeId);
     fetchFoodsDetailsForRecipeId(recipeId)
       .then(({ meals }) => {
-        console.log({ meals });
         setDetails(meals[0]);
         const ingAndMeasure = formatIngredientList(meals[0]);
         setIngredients(ingAndMeasure);
       })
-      .catch((error) => (console.log(error)));
+      .catch((error) => (console.error(error)));
   }, []);
 
   useEffect(() => {
     fetchDrinks()
       .then(({ drinks }) => {
         const MAX_DRINKS = 6;
-        console.log(drinks);
         if (drinks.length > MAX_DRINKS) {
           const newDrinks = [...drinks];
           const firstSixDrinks = newDrinks.splice(0, MAX_DRINKS);
-          console.log(firstSixDrinks);
           setDrinkRecommendations(firstSixDrinks);
         } else {
           setDrinkRecommendations(drinks);
@@ -58,12 +51,12 @@ function FoodDetails(props) {
 
   return (
     <div>
-      <h1>FoodDetails</h1>
       <img
         style={ { width: 100, display: 'flex', flexDirection: 'row' } }
         src={ details?.strMealThumb }
         data-testid="recipe-photo"
         alt="x"
+        className="recipe-details-img"
       />
 
       <span data-testid="recipe-title">{strMeal !== undefined && strMeal}</span>
@@ -88,7 +81,9 @@ function FoodDetails(props) {
         </ul>
       )}
 
-      <span data-testid="instructions">{strInstructions}</span>
+      <div className="instructions-div">
+        <span data-testid="instructions">{strInstructions}</span>
+      </div>
 
       {pathname === `/foods/${recipeId}` && (
         <iframe title="frametitle" data-testid="video">

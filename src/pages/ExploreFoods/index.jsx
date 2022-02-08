@@ -15,7 +15,7 @@ function ExploreFoods() {
   }
 
   return (
-    <div>
+    <>
       <Header displayIconSearch={ false }>Explore Foods</Header>
       <SdivExploreFoods>
         <SbuttonExplore
@@ -43,7 +43,7 @@ function ExploreFoods() {
         </SbuttonExplore>
       </SdivExploreFoods>
       <Footer />
-    </div>
+    </>
   );
 }
 

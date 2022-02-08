@@ -4,7 +4,7 @@ import { useHistory, Link } from 'react-router-dom';
 import { Simg, Scard, Stitle } from '../../style/CardList';
 import GlobalContext from '../../Context/GlobalContext';
 
-function MealCard({ testId, cardImgId, imgSrc, imgStr, cardName, recipeId }) {
+function Card({ testId, cardImgId, imgSrc, imgStr, cardName, recipeId }) {
   const { location: { pathname } } = useHistory();
   const {
     recipesList: { setFilteredIngredient, setFilteredDrinkIngredient },
@@ -28,6 +28,7 @@ function MealCard({ testId, cardImgId, imgSrc, imgStr, cardName, recipeId }) {
     <Link
       to={ handleRoute() }
       onClick={ () => handleIngredientClick(imgStr) }
+      className="link-card"
     >
       <Scard data-testid={ testId }>
         <Simg src={ imgSrc } alt={ imgStr } data-testid={ cardImgId } />
@@ -37,13 +38,17 @@ function MealCard({ testId, cardImgId, imgSrc, imgStr, cardName, recipeId }) {
   );
 }
 
-MealCard.propTypes = {
+Card.defaultProps = {
+  recipeId: '',
+};
+
+Card.propTypes = {
   cardImgId: PropTypes.string.isRequired,
   imgSrc: PropTypes.string.isRequired,
   imgStr: PropTypes.string.isRequired,
   testId: PropTypes.string.isRequired,
   cardName: PropTypes.string.isRequired,
-  recipeId: PropTypes.string.isRequired,
+  recipeId: PropTypes.string,
 };
 
-export default MealCard;
+export default Card;

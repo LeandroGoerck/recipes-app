@@ -6,8 +6,8 @@ const Simg = styled.img`
   cursor: pointer;
   inset: 0;
   margin-bottom: 15px;
-  height: 5%;
   width: 100%;
+  aspect-ratio: 1 / 1;
 `;
 
 const Stitle = styled.span`
@@ -24,7 +24,6 @@ const Stitle = styled.span`
 
 const Scard = styled.div`
   inset: 0;
-  margin: 20px auto;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -33,7 +32,7 @@ const Scard = styled.div`
   border: 3px solid lightgray;
   border-radius: 15px;
   background: lightgray;
-  width: 50%;
+  width: 100%;
   &:hover {
     transition: 0.5s;
     box-shadow: 0px 15px 25px -4px #959595;
@@ -41,7 +40,10 @@ const Scard = styled.div`
 `;
 
 const ScardList = styled.div`
-  margin-bottom: 80px;
+padding-bottom: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 export {
