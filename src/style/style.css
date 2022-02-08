@@ -46,11 +46,11 @@ body, .root {
   border-radius: 5px;
   bottom: 0;
   color: white;
+  margin-bottom: 15px;
   position: fixed;
   right: 33vw;
   text-shadow: 1px 1px 3px #688d6e;
   text-transform: uppercase;
-  margin-bottom: 15px;
 }
 
 .fillHeart {
@@ -92,8 +92,8 @@ body, .root {
 
 .instructions-div {
   background-color: lightgray;
-  margin: 10px;
   border-radius: 10px;
+  margin: 10px;
   padding: 10px;
 }
 
@@ -101,5 +101,5 @@ body, .root {
   border-radius: 10px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 15px;  
+  margin-top: 15px;
 }
