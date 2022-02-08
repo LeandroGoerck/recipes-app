@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { AiOutlineShareAlt } from 'react-icons/ai';
 import { toast, ToastContainer } from 'react-toastify';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+// import { CopyToClipboard } from 'react-copy-to-clipboard';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../style/style.css';
 import copy from 'clipboard-copy';
@@ -53,18 +53,18 @@ function BtnShare() {
         draggable
         pauseOnHover
       />
-      <CopyToClipboard
+      {/* <CopyToClipboard
         text={ handleCopyText() }
+      > */}
+      <button
+        type="button"
+        data-testid="share-btn"
+        className="share-btn"
+        onClick={ handleShare }
       >
-        <button
-          type="submit"
-          data-testid="share-btn"
-          className="share-btn"
-          onClick={ handleShare }
-        >
-          <AiOutlineShareAlt />
-        </button>
-      </CopyToClipboard>
+        <AiOutlineShareAlt />
+      </button>
+      {/* </CopyToClipboard> */}
     </>
   );
 }
