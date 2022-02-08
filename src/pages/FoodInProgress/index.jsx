@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect } from 'react';
+import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import BtnFavorite from '../../components/BtnFavorite';
 import BtnShare from '../../components/BtnShare';
@@ -11,7 +12,7 @@ import formatIngredientList from '../../helpers/formatIngredientList';
 import NewFavoriteRecipeObj from '../../helpers/NewFavoriteRecipeObj';
 import { fetchDrinks } from '../../services/fetchDrinks';
 import { fetchFoodsDetailsForRecipeId } from '../../services/fetchFoods';
-// import BtnFinish from '../../components/BtnFinish';
+import ButtonBack from '../../components/BtnBack';
 
 function FoodInProgress(props) {
   const { startButton: { setIsStart } } = useContext(GlobalContext);
@@ -80,19 +81,23 @@ function FoodInProgress(props) {
     return true;
   };
 
+  const Simg = styled.img`
+    width: 100vw;
+    height: 40vh;
+  `;
+
   return (
     <div>
-      <h1>FoodInProgress</h1>
-      <img
-        style={ { width: 100, display: 'flex', flexDirection: 'row' } }
+      <Simg
         src={ details?.strMealThumb }
         data-testid="recipe-photo"
-        alt="x"
+        alt="Image food"
       />
 
       <span data-testid="recipe-title">{strMeal !== undefined && strMeal}</span>
 
       <span>
+        <ButtonBack />
         <BtnShare />
         <BtnFavorite recipeObj={ NewFavoriteRecipeObj('food') } />
       </span>

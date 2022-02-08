@@ -1,13 +1,12 @@
-import PropTypes, { string } from 'prop-types';
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import '../../style/style.css';
 import GlobalContext from '../../Context/GlobalContext';
 
-function BtnStart(props) {
-  const { getLocal } = props;
+function BtnStart() {
   const { location: { pathname } } = useHistory();
   const {
+    startButton: { getLocal },
     buttonFinish: { isFinish },
     startButton: { isStart, setIsStart },
     foodDetails: { details },
@@ -41,9 +40,5 @@ function BtnStart(props) {
       </button>)
   );
 }
-
-BtnStart.propTypes = {
-  getLocal: PropTypes.arrayOf(string).isRequired,
-};
 
 export default BtnStart;

@@ -10,6 +10,7 @@ import { fetchFoodsDetailsForRecipeId } from '../../services/fetchFoods';
 import BtnStart from '../../components/BtnStart';
 import BtnShare from '../../components/BtnShare';
 import BtnFavorite from '../../components/BtnFavorite';
+import { SdivDetails, Simg, Stitle, Sicons } from '../../style/Details';
 
 function FoodDetails(props) {
   const {
@@ -57,21 +58,20 @@ function FoodDetails(props) {
   }, []);
 
   return (
-    <div>
-      <img
-        style={ { width: 100, display: 'flex', flexDirection: 'row' } }
+    <SdivDetails>
+      <Simg
         src={ details?.strMealThumb }
         data-testid="recipe-photo"
         alt="x"
         className="recipe-details-img"
       />
 
-      <span data-testid="recipe-title">{strMeal !== undefined && strMeal}</span>
+      <Stitle data-testid="recipe-title">{strMeal !== undefined && strMeal}</Stitle>
 
-      <span>
+      <Sicons>
         <BtnShare />
         <BtnFavorite recipeObj={ NewFavoriteRecipeObj('food') } />
-      </span>
+      </Sicons>
 
       <span data-testid="recipe-category">{strCategory}</span>
 
@@ -99,8 +99,8 @@ function FoodDetails(props) {
       )}
 
       <RecommendedDrinksCarousel />
-      <BtnStart getLocal={ getLocal } />
-    </div>
+      <BtnStart />
+    </SdivDetails>
   );
 }
 
