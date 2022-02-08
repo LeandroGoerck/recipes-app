@@ -50,6 +50,7 @@ body, .root {
   right: 33vw;
   text-shadow: 1px 1px 3px #688d6e;
   text-transform: uppercase;
+  margin-bottom: 15px;
 }
 
 .fillHeart {
@@ -89,15 +90,11 @@ body, .root {
   margin: auto;
 }
 
-.BtnStart {
-  margin-bottom: 15px;
-}
-
 .instructions-div {
   background-color: lightgray;
   margin: 10px;
-  padding: 10px;
   border-radius: 10px;
+  padding: 10px;
 }
 
 .recipe-details-img {
