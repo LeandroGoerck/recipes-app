@@ -68,15 +68,13 @@ function FoodDetails(props) {
 
   return (
     <div>
-      <h1>FoodDetails</h1>
-      <p>{pathname}</p>
-      <p>{recipeId}</p>
 
       <img
         style={ { width: 100, display: 'flex', flexDirection: 'row' } }
         src={ details?.strMealThumb }
         data-testid="recipe-photo"
         alt="x"
+        className="recipe-details-img"
       />
 
       <span data-testid="recipe-title">{strMeal !== undefined && strMeal}</span>
@@ -101,7 +99,9 @@ function FoodDetails(props) {
         </ul>
       )}
 
-      <span data-testid="instructions">{strInstructions}</span>
+      <div className="instructions-div">
+        <span data-testid="instructions">{strInstructions}</span>
+      </div>
 
       {pathname === `/foods/${recipeId}` && (
         <iframe title="frametitle" data-testid="video">
