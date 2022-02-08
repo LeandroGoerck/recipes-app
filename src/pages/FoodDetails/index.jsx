@@ -13,18 +13,25 @@ import BtnFavorite from '../../components/BtnFavorite';
 import { SdivDetails, Simg, Stitle, Sicons } from '../../style/Details';
 
 function FoodDetails(props) {
-  const { foodDetails: { details } } = useContext(GlobalContext);
-  const { foodDetails: { setDetails } } = useContext(GlobalContext);
-  const { foodDetails: { setIngredients } } = useContext(GlobalContext);
-  const { foodDetails: { ingredients } } = useContext(GlobalContext);
+  const {
+    foodDetails: { details,
+      setDetails,
+      setIngredients,
+      ingredients,
+      setDrinkRecommendations,
+    },
+    startButton: { getLocal, setGetLocal },
+  } = useContext(GlobalContext);
   const { strMeal, strCategory, strInstructions } = details;
-  // =================== drinkRecommendations ================
-  const { foodDetails: { setDrinkRecommendations } } = useContext(GlobalContext);
   // =================== routes ==============================
-  const { match } = props;
-  const { params } = match;
-  const { recipeId } = params;
+  const { match: { params: { recipeId } } } = props;
   const { location: { pathname } } = useHistory();
+
+  useEffect(() => {
+    if (getLocal.length !== 0) {
+      setGetLocal(JSON.parse(localStorage.getItem('startRecipes')));
+    }
+  }, [getLocal]);
 
   useEffect(() => {
     fetchFoodsDetailsForRecipeId(recipeId)
@@ -92,7 +99,7 @@ function FoodDetails(props) {
       )}
 
       <RecommendedDrinksCarousel />
-      <BtnStart />
+      <BtnStart getLocal={ getLocal } />
     </SdivDetails>
   );
 }

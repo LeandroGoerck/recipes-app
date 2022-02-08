@@ -18,11 +18,19 @@ function DrinksDetails(props) {
   const { drinkDetails: { drinkIngredients } } = useContext(GlobalContext);
   const { strDrink, strAlcoholic, strInstructions } = drinkDetails;
   // =================== mealRecommendations ================
-  const { drinkDetails: { setMealRecommendations } } = useContext(GlobalContext);
+  const { drinkDetails: { setMealRecommendations },
+    startButton: { getLocal, setGetLocal },
+  } = useContext(GlobalContext);
   const { match } = props;
   const { params } = match;
   const { recipeId } = params;
   const { location: { pathname } } = useHistory();
+
+  useEffect(() => {
+    if (getLocal.length !== 0) {
+      setGetLocal(JSON.parse(localStorage.getItem('startRecipes')));
+    }
+  }, [getLocal]);
 
   useEffect(() => {
     fetchDrinkDetailsForRecipeId(recipeId)
@@ -92,7 +100,7 @@ function DrinksDetails(props) {
       )}
 
       <RecommendedFoodsCarousel />
-      <BtnStart />
+      <BtnStart getLocal={ getLocal } />
     </div>
   );
 }

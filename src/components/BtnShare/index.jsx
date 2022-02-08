@@ -34,6 +34,10 @@ function BtnShare() {
 
   const handleShare = (event) => {
     event.preventDefault();
+    // const urlCopy = window.location.href;
+    // navigator.clipboard.writeText(urlCopy);
+    // console.log(navigator.clipboard);
+    // setSaveLink(urlCopy);
     const { baseURI } = event.target;
     copy(handleCopyText());
     setSaveLink(baseURI);

@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import BtnFavorite from '../../components/BtnFavorite';
 import BtnShare from '../../components/BtnShare';
+// import BtnFinish from '../../components/BtnFinish';
 import DrinkIngredientsWithCheckboxes
 from '../../components/DrinkIngredientsWithCheckboxes';
 import RecommendedFoodsCarousel from '../../components/RecommendedFoodsCarousel';
@@ -92,18 +93,13 @@ function DrinkInProgress(props) {
       >
         {strDrink !== undefined && strDrink}
       </span>
-
       <span>
         <BtnShare />
         <BtnFavorite recipeObj={ NewFavoriteRecipeObj('drink') } />
       </span>
-
       <span data-testid="recipe-category">{strAlcoholic}</span>
-
       <DrinkIngredientsWithCheckboxes recipeId={ recipeId } />
-
       <span data-testid="instructions">{strInstructions}</span>
-
       {pathname === `/drinks/${recipeId}` && (
         <iframe title="frametitle" data-testid="video">
           Video
@@ -111,7 +107,7 @@ function DrinkInProgress(props) {
       )}
 
       <RecommendedFoodsCarousel />
-
+      {/* <BtnFinish /> */}
       <button
         type="button"
         data-testid="finish-recipe-btn"
