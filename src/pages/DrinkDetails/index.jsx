@@ -3,6 +3,8 @@ import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import RecommendedFoodsCarousel from '../../components/RecommendedFoodsCarousel';
 import GlobalContext from '../../Context/GlobalContext';
+import formatIngredientList from '../../helpers/formatIngredientList';
+import NewFavoriteRecipeObj from '../../helpers/NewFavoriteRecipeObj';
 import { fetchDrinkDetailsForRecipeId } from '../../services/fetchDrinks';
 import { fetchFoods } from '../../services/fetchFoods';
 import BtnStart from '../../components/BtnStart';
@@ -21,23 +23,6 @@ function DrinksDetails(props) {
   const { params } = match;
   const { recipeId } = params;
   const { location: { pathname } } = useHistory();
-
-  const formatIngredientList = (data) => {
-    const ingredientKeys = Object
-      .keys(data).filter((item) => item.includes('strIngredient'));
-    const measureKeys = Object
-      .keys(data).filter((item) => item.includes('strMeasure'));
-
-    const ingredientsValues = ingredientKeys.map((key) => (data[key]))
-      .filter((item) => item !== '');
-
-    const measureValues = measureKeys.map((key) => (data[key]))
-      .filter((item) => item !== '');
-
-    const ingAndMeasure = ingredientsValues
-      .map((ingr, index) => (`${[ingr]} - ${measureValues[index]}`));
-    return ingAndMeasure;
-  };
 
   useEffect(() => {
     fetchDrinkDetailsForRecipeId(recipeId)
@@ -64,8 +49,6 @@ function DrinksDetails(props) {
   return (
     <div>
       <h1>DrinksDetails</h1>
-      <p>{pathname}</p>
-      <p>{recipeId}</p>
 
       <img
         style={ { width: 100, display: 'flex', flexDirection: 'row' } }
@@ -82,7 +65,7 @@ function DrinksDetails(props) {
 
       <span>
         <BtnShare />
-        <BtnFavorite />
+        <BtnFavorite recipeObj={ NewFavoriteRecipeObj('drink') } />
       </span>
 
       <span data-testid="recipe-category">{strAlcoholic}</span>
