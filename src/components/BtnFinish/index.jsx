@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import GlobalContext from '../../Context/GlobalContext';
 
 function BtnFinish() {
-  const { favorite: { setIsFinish } } = useContext(GlobalContext);
+  const { buttonFinish: { setIsFinish } } = useContext(GlobalContext);
+  const history = useHistory();
 
   function handleFinish() {
     setIsFinish(true);
+    history.goBack();
   }
 
   return (

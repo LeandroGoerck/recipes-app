@@ -31,6 +31,7 @@ function Login() {
     localStorage.setItem('user', JSON.stringify({ email }));
     localStorage.setItem('link', JSON.stringify(undefined));
     localStorage.setItem('favoriteRecipes', JSON.stringify(favList));
+    localStorage.setItem('startRecipes', JSON.stringify([]));
     history.push('/foods');
   };
 

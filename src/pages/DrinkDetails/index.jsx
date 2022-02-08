@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import RecommendedFoodsCarousel from '../../components/RecommendedFoodsCarousel';
 import GlobalContext from '../../Context/GlobalContext';
@@ -22,6 +22,8 @@ function DrinksDetails(props) {
   const { recipeId } = params;
   const { location: { pathname } } = useHistory();
 
+  const [getLocal, setGetLocal] = useState([]);
+
   const formatIngredientList = (data) => {
     const ingredientKeys = Object
       .keys(data).filter((item) => item.includes('strIngredient'));
@@ -38,6 +40,10 @@ function DrinksDetails(props) {
       .map((ingr, index) => (`${[ingr]} - ${measureValues[index]}`));
     return ingAndMeasure;
   };
+
+  useEffect(() => {
+    setGetLocal(JSON.parse(localStorage.getItem('startRecipes')));
+  }, []);
 
   useEffect(() => {
     fetchDrinkDetailsForRecipeId(recipeId)
@@ -109,7 +115,7 @@ function DrinksDetails(props) {
       )}
 
       <RecommendedFoodsCarousel />
-      <BtnStart />
+      <BtnStart getLocal={ getLocal } />
     </div>
   );
 }
