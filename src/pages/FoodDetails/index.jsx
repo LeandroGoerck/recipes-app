@@ -16,9 +16,7 @@ function FoodDetails(props) {
   const { foodDetails: { ingredients } } = useContext(GlobalContext);
   const { strMeal, strCategory, strInstructions } = details;
   // =================== drinkRecommendations ================
-  // const { foodDetails: { drinkRecommendations } } = useContext(GlobalContext);
   const { foodDetails: { setDrinkRecommendations } } = useContext(GlobalContext);
-  // const { strDrink } = drinkRecommendations;
   // =================== routes ==============================
   const { match } = props;
   const { params } = match;
