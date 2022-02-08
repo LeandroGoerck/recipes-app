@@ -100,11 +100,6 @@ function BtnFavorite({ recipeObj }) {
       className="favorite-btn"
       onClick={ handleFavorite }
     >
-      {/* {isColor ? <AiFillHeart className="fillHeart" />
-        : <AiOutlineHeart className="outlineHeart" />}
-      onClick={ () => handleFavorite() }
-      src="whiteHeartIconblackHeartIcon"
-    > */}
       <AiOutlineHeart className="outlineHeart" />
     </button>
   );

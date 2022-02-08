@@ -19,18 +19,14 @@ function BtnStart(props) {
     ? infoProduct.idMeal : infoProduct.idDrink;
 
   useEffect(() => {
-    if (id) {
+    if (getLocal.length !== 0) {
       setIsStart(getLocal.includes(id));
-      console.log(`Dentro:   ${id}`);
     }
-    console.log(`Fora: ${id}`);
-  }, []);
+  }, [getLocal]);
 
   function handleStart() {
+    localStorage?.setItem('startRecipes', JSON.stringify([...getLocal, id]));
     history.push(`${pathname}/in-progress`);
-    if (!getLocal.includes(id)) {
-      localStorage.setItem('startRecipes', JSON.stringify([...getLocal, id]));
-    }
   }
 
   return (

@@ -23,6 +23,7 @@ function GlobalProvider({ children }) {
   const [isFinish, setIsFinish] = useState(false);
   // =================== Button Start ================
   const [isStart, setIsStart] = useState(false);
+  const [getLocal, setGetLocal] = useState([]);
   // =================== FoodDetails ================
   const [details, setDetails] = useState([]);
   const [ingredients, setIngredients] = useState([]);
@@ -69,6 +70,8 @@ function GlobalProvider({ children }) {
     startButton: {
       isStart,
       setIsStart,
+      getLocal,
+      setGetLocal,
     },
     favorite: {
       isFavorite,

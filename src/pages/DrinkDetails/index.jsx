@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import RecommendedFoodsCarousel from '../../components/RecommendedFoodsCarousel';
 import GlobalContext from '../../Context/GlobalContext';
@@ -18,17 +18,19 @@ function DrinksDetails(props) {
   const { drinkDetails: { drinkIngredients } } = useContext(GlobalContext);
   const { strDrink, strAlcoholic, strInstructions } = drinkDetails;
   // =================== mealRecommendations ================
-  const { drinkDetails: { setMealRecommendations } } = useContext(GlobalContext);
+  const { drinkDetails: { setMealRecommendations },
+    startButton: { getLocal, setGetLocal },
+  } = useContext(GlobalContext);
   const { match } = props;
   const { params } = match;
   const { recipeId } = params;
   const { location: { pathname } } = useHistory();
 
-  const [getLocal, setGetLocal] = useState([]);
-
   useEffect(() => {
-    setGetLocal(JSON.parse(localStorage.getItem('startRecipes')));
-  }, []);
+    if (getLocal.length !== 0) {
+      setGetLocal(JSON.parse(localStorage.getItem('startRecipes')));
+    }
+  }, [getLocal]);
 
   useEffect(() => {
     fetchDrinkDetailsForRecipeId(recipeId)
