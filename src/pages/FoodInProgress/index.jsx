@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect } from 'react';
+import '../../style/style.css';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import BtnFavorite from '../../components/BtnFavorite';
@@ -94,9 +95,14 @@ function FoodInProgress(props) {
         alt="Image food"
       />
 
-      <span data-testid="recipe-title">{strMeal !== undefined && strMeal}</span>
+      <span
+        data-testid="recipe-title"
+        className="title-recipes"
+      >
+        {strMeal !== undefined && strMeal}
+      </span>
 
-      <span>
+      <span className="container-button">
         <ButtonBack />
         <BtnShare />
         <BtnFavorite recipeObj={ NewFavoriteRecipeObj('food') } />
@@ -115,7 +121,6 @@ function FoodInProgress(props) {
       )}
 
       <RecommendedDrinksCarousel />
-      {/* <BtnFinish /> */}
       <button
         type="button"
         data-testid="finish-recipe-btn"

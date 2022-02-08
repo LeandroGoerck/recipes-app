@@ -99,11 +99,7 @@ function FoodDetails(props) {
       )}
 
       <RecommendedDrinksCarousel />
-<<<<<<< HEAD
       <BtnStart />
-=======
-      <BtnStart getLocal={ getLocal } />
->>>>>>> 570530059a7af2d39bffa9bb7abae56ee2456dd7
     </SdivDetails>
   );
 }

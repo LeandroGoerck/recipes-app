@@ -61,6 +61,8 @@ body, .root {
 .share-btn {
   background-color: transparent;
   border: none;
+  margin-right: 85px;
+  padding: 0;
   transition: all 0.2s ease;
 }
 
@@ -103,3 +105,22 @@ body, .root {
   margin-right: auto;
   margin-top: 15px;
 }
+
+.container-button {
+  background-color: rgb(235, 229, 229);
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+  width: 100vw;
+}
+
+.title-recipes {
+  background-color: rgb(235, 229, 229);
+  display: flex;
+  font-weight: 600;
+  justify-content: center;
+  letter-spacing: 1.5px;
+  text-shadow: 1px 1px 5px white;
+  text-transform: uppercase;
+}
+
