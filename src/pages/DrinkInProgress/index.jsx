@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import BtnFavorite from '../../components/BtnFavorite';
+import BtnShare from '../../components/BtnShare';
 import DrinkIngredientsWithCheckboxes
 from '../../components/DrinkIngredientsWithCheckboxes';
 import RecommendedFoodsCarousel from '../../components/RecommendedFoodsCarousel';
 import GlobalContext from '../../Context/GlobalContext';
 import formatIngredientList from '../../helpers/formatIngredientList';
+import NewFavoriteRecipeObj from '../../helpers/NewFavoriteRecipeObj';
 import { fetchDrinkDetailsForRecipeId } from '../../services/fetchDrinks';
 import { fetchFoods } from '../../services/fetchFoods';
 
@@ -13,7 +16,7 @@ function DrinkInProgress(props) {
   const { drinkDetails: { drinkDetails } } = useContext(GlobalContext);
   const { drinkDetails: { setDrinkDetails } } = useContext(GlobalContext);
   const { drinkDetails: { setDrinkIngredients } } = useContext(GlobalContext);
-  // const { drinkDetails: { drinkIngredients } } = useContext(GlobalContext);
+  const { drinkDetails: { drinkIngredients } } = useContext(GlobalContext);
   const { strDrink, strAlcoholic, strInstructions } = drinkDetails;
   // =================== inProgressRecipes ============
   const { inProgressRecipes: { setInProgMeals } } = useContext(GlobalContext);
@@ -26,6 +29,7 @@ function DrinkInProgress(props) {
   const { params } = match;
   const { recipeId } = params;
   const { location: { pathname } } = useHistory();
+  const history = useHistory();
 
   useEffect(() => {
     if (localStorage.getItem('inProgressRecipes')) {
@@ -42,7 +46,7 @@ function DrinkInProgress(props) {
     fetchDrinkDetailsForRecipeId(recipeId)
       .then(({ drinks }) => {
         setDrinkDetails(drinks[0]);
-        console.log(drinks[0]);
+        // console.log(drinks[0]);
         const ingAndMeasure = formatIngredientList(drinks[0]);
         setDrinkIngredients(ingAndMeasure);
       })
@@ -68,6 +72,11 @@ function DrinkInProgress(props) {
     saveInProgressRecipesProviderToLocalStorage();
   }, [inProgCocktails[recipeId]]);
 
+  const handleDisabled = () => {
+    if (drinkIngredients.length === inProgCocktails[recipeId]?.length) return false;
+    return true;
+  };
+
   return (
     <div>
       <h1>DrinkInProgress</h1>
@@ -84,13 +93,10 @@ function DrinkInProgress(props) {
         {strDrink !== undefined && strDrink}
       </span>
 
-      <button type="button" data-testid="share-btn">
-        Compartilhar
-      </button>
-
-      <button type="button" data-testid="favorite-btn">
-        Favoritar
-      </button>
+      <span>
+        <BtnShare />
+        <BtnFavorite recipeObj={ NewFavoriteRecipeObj('drink') } />
+      </span>
 
       <span data-testid="recipe-category">{strAlcoholic}</span>
 
@@ -106,7 +112,12 @@ function DrinkInProgress(props) {
 
       <RecommendedFoodsCarousel />
 
-      <button type="button" data-testid="finish-recipe-btn">
+      <button
+        type="button"
+        data-testid="finish-recipe-btn"
+        disabled={ handleDisabled() }
+        onClick={ () => history.push('/done-recipes') }
+      >
         Finalizar receita
       </button>
     </div>
