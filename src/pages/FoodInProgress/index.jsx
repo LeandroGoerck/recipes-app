@@ -84,7 +84,7 @@ function FoodInProgress(props) {
 
   const Simg = styled.img`
     width: 100vw;
-    height: 40vh;
+    height: 55vh;
   `;
 
   return (
@@ -108,7 +108,15 @@ function FoodInProgress(props) {
         <BtnFavorite recipeObj={ NewFavoriteRecipeObj('food') } />
       </span>
 
-      <span data-testid="recipe-category">{strCategory}</span>
+      <span
+        data-testid="recipe-category"
+        className="category-name"
+      >
+        Catergory:
+        <p className="name-category">
+          {strCategory}
+        </p>
+      </span>
 
       <FoodIngredientsWithCheckboxes recipeId={ recipeId } />
 

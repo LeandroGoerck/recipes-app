@@ -120,7 +120,21 @@ body, .root {
   font-weight: 600;
   justify-content: center;
   letter-spacing: 1.5px;
+  padding-bottom: 15px;
+  padding-top: 15px;
   text-shadow: 1px 1px 5px white;
   text-transform: uppercase;
 }
 
+.category-name {
+  background-color: rgb(235, 229, 229);
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.name-category {
+  font-weight: 500;
+  margin-left: 10px;
+  text-transform: uppercase;
+}
