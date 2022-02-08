@@ -54,10 +54,6 @@ function BtnShare() {
         pauseOnHover
       />
       {/* <CopyToClipboard
-        text={ saveLink }
-      > */}
-      <button
-        type="submit"
         text={ handleCopyText() }
       > */}
       <button
