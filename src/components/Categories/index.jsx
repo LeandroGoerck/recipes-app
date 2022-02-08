@@ -5,11 +5,13 @@ import {
   fetchDrinks,
   fetchFilterCategoryDrinks,
   fetchCategoryDrinks,
+  fetchDrinksForIngredients,
 } from '../../services/fetchDrinks';
 import {
   fetchFoods,
   fetchFilterCategoryFoods,
   fetchCategoryFoods,
+  fetchFoodsForIngredients,
 } from '../../services/fetchFoods';
 import { Scategories, Scategory } from '../../style/Categories';
 
@@ -17,7 +19,16 @@ function Categories() {
   const { location: { pathname } } = useHistory();
 
   //  ================== Contexto ================
-  const { recipesList: { setMeals, setDrinks } } = useContext(GlobalContext);
+  const {
+    recipesList: {
+      setMeals,
+      setDrinks,
+      filteredIngredient,
+      setFilteredIngredient,
+      filteredDrinkIngredient,
+      setFilteredDrinkIngredient,
+    },
+  } = useContext(GlobalContext);
 
   // =================== State ===================
   const [categories, setCategories] = useState([]);
@@ -81,8 +92,28 @@ function Categories() {
     }
   };
 
+  const handleFoodIngredient = (filteredIngredientName) => {
+    fetchFoodsForIngredients(filteredIngredientName)
+      .then(({ meals }) => setMeals(meals));
+  };
+
+  const handleDrinkIngredient = (filteredIngredientName) => {
+    fetchDrinksForIngredients(filteredIngredientName)
+      .then(({ drinks }) => {
+        const TWELVE = 12;
+        const filteredTwelveDrinks = drinks.slice(0, TWELVE);
+        setDrinks(filteredTwelveDrinks);
+      });
+  };
+
   useEffect(() => {
-    if (filterCategory.filter === false) {
+    if (filteredIngredient) {
+      handleFoodIngredient(filteredIngredient);
+      setFilteredIngredient('');
+    } else if (filteredDrinkIngredient) {
+      handleDrinkIngredient(filteredDrinkIngredient);
+      setFilteredDrinkIngredient('');
+    } else if (filterCategory.filter === false) {
       handleNoFilter();
     } else {
       handleSearchFilterCategory();

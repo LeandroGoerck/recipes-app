@@ -14,6 +14,8 @@ function GlobalProvider({ children }) {
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [canShow, setCanShow] = useState(false);
+  const [filteredIngredient, setFilteredIngredient] = useState('');
+  const [filteredDrinkIngredient, setFilteredDrinkIngredient] = useState('');
   // =================== Favorite ================
   const [isFinish, setIsFinish] = useState(false);
   const [saveLink, setSaveLink] = useState();
@@ -67,6 +69,10 @@ function GlobalProvider({ children }) {
       setDrinks,
       canShow,
       setCanShow,
+      filteredIngredient,
+      setFilteredIngredient,
+      filteredDrinkIngredient,
+      setFilteredDrinkIngredient,
     },
     shareLink: {
       saveLink,
