@@ -53,6 +53,10 @@ body, .root {
   text-transform: uppercase;
 }
 
+div {
+  background-color: rgb(235, 229, 229);
+}
+
 .fillHeart {
   color: #f20;
   font-size: 20px;
@@ -183,4 +187,18 @@ body, .root {
   line-height: 25px;
   padding: 15px;
   text-align: justify;
+}
+
+.carousel-container {
+  background-color: rgb(235, 229, 229);
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+
+.btn-finish {
+  background-color: rgb(235, 229, 229);
+  border-radius: 5px;
+  margin-left: 23%;
+  text-transform: uppercase;
 }

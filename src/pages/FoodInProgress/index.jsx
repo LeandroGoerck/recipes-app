@@ -138,12 +138,15 @@ function FoodInProgress(props) {
         </iframe>
       )}
 
-      <RecommendedDrinksCarousel />
+      <div className="carousel-container">
+        <RecommendedDrinksCarousel />
+      </div>
       <button
         type="button"
         data-testid="finish-recipe-btn"
+        className="btn-finish"
         disabled={ handleDisabled() }
-        onClick={ () => history.push('/done-recipes') }
+        onClick={ () => history.goBack() }
       >
         Finalizar receita
       </button>
