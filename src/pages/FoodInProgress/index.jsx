@@ -44,6 +44,7 @@ function FoodInProgress(props) {
       setInProgCocktails(inProgressRecipeCocktails);
     }
     setIsStart(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -54,6 +55,7 @@ function FoodInProgress(props) {
         setIngredients(ingAndMeasure);
       })
       .catch((error) => (error));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -68,6 +70,7 @@ function FoodInProgress(props) {
           setDrinkRecommendations(drinks);
         }
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -75,6 +78,7 @@ function FoodInProgress(props) {
       localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
     };
     saveInProgressRecipesProviderToLocalStorage();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inProgMeals[recipeId]]);
 
   const handleDisabled = () => {

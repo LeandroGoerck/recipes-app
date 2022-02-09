@@ -10,6 +10,7 @@ import { fetchFoodsDetailsForRecipeId } from '../../services/fetchFoods';
 import BtnStart from '../../components/BtnStart';
 import BtnShare from '../../components/BtnShare';
 import BtnFavorite from '../../components/BtnFavorite';
+import BtnBack from '../../components/BtnBack';
 import { SdivDetails, Simg, Stitle, Sicons } from '../../style/Details';
 
 function FoodDetails(props) {
@@ -31,6 +32,7 @@ function FoodDetails(props) {
     if (getLocal.length !== 0) {
       setGetLocal(JSON.parse(localStorage.getItem('startRecipes')));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getLocal]);
 
   useEffect(() => {
@@ -41,6 +43,7 @@ function FoodDetails(props) {
         setIngredients(ingAndMeasure);
       })
       .catch((error) => (console.error(error)));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -55,6 +58,7 @@ function FoodDetails(props) {
           setDrinkRecommendations(drinks);
         }
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -69,6 +73,7 @@ function FoodDetails(props) {
       <Stitle data-testid="recipe-title">{strMeal !== undefined && strMeal}</Stitle>
 
       <Sicons>
+        <BtnBack />
         <BtnShare />
         <BtnFavorite recipeObj={ NewFavoriteRecipeObj('food') } />
       </Sicons>

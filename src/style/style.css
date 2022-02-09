@@ -181,7 +181,7 @@ div {
 }
 
 .instructions-container {
-  background-color: rgb(235, 229, 229);
+  background-color: rgb(211, 211, 211);
   display: flex;
   justify-content: justify;
   line-height: 25px;
@@ -201,4 +201,14 @@ div {
   border-radius: 5px;
   margin-left: 23%;
   text-transform: uppercase;
+}
+
+.item-carousel {
+  border: none;
+  margin-right: 20px;
+}
+
+.sr-only {
+  color: transparent;
+  display: none;
 }
