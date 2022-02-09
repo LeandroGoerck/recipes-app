@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import BtnFavorite from '../../components/BtnFavorite';
 import BtnShare from '../../components/BtnShare';
@@ -29,6 +29,7 @@ function FoodInProgress(props) {
   const { foodDetails: { setDrinkRecommendations } } = useContext(GlobalContext);
   // =================== routes ==============================
   const { match: { params: { recipeId } } } = props;
+  const [doneRecipe, setDoneRecipe] = useState([]);
   const { location: { pathname } } = useHistory();
   const history = useHistory();
 
@@ -42,6 +43,18 @@ function FoodInProgress(props) {
       setInProgCocktails(inProgressRecipeCocktails);
     }
     setIsStart(false);
+    const catchDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    setDoneRecipe([...catchDoneRecipes, {
+      id: details.idMeal,
+      type: 'food',
+      nationality: details.strArea,
+      category: strCategory,
+      alcoholicOrNot: '',
+      name: strMeal,
+      image: details.strMealThumb,
+      doneDate: '09/02/2022',
+      tags: [details.strTags],
+    }]);
   }, []);
 
   useEffect(() => {
@@ -80,6 +93,11 @@ function FoodInProgress(props) {
     return true;
   };
 
+  const handleFinishRecipe = () => {
+    localStorage.setItem('doneRecipes', JSON.stringify(doneRecipe));
+    history.push('/done-recipes');
+  };
+
   return (
     <div>
       <h1>FoodInProgress</h1>
@@ -115,7 +133,7 @@ function FoodInProgress(props) {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ handleDisabled() }
-        onClick={ () => history.push('/done-recipes') }
+        onClick={ handleFinishRecipe }
       >
         Finalizar receita
       </button>

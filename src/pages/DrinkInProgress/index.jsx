@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import BtnFavorite from '../../components/BtnFavorite';
 import BtnShare from '../../components/BtnShare';
@@ -31,6 +31,7 @@ function DrinkInProgress(props) {
   const { recipeId } = params;
   const { location: { pathname } } = useHistory();
   const history = useHistory();
+  const [doneRecipe, setDoneRecipe] = useState([]);
 
   useEffect(() => {
     if (localStorage.getItem('inProgressRecipes')) {
@@ -41,6 +42,18 @@ function DrinkInProgress(props) {
       setInProgMeals(inProgressRecipeMeals);
       setInProgCocktails(inProgressRecipeCocktails);
     }
+    const catchDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    setDoneRecipe([...catchDoneRecipes, {
+      id: drinkDetails.idDrink,
+      type: 'drink',
+      nationality: drinkDetails.strArea,
+      category: drinkDetails.strCategory,
+      alcoholicOrNot: drinkDetails.strAlcoholic,
+      name: strDrink,
+      image: drinkDetails.strDrinkThumb,
+      doneDate: '09/02/2022',
+      tags: [drinkDetails.strTags],
+    }]);
   }, []);
 
   useEffect(() => {
@@ -78,8 +91,14 @@ function DrinkInProgress(props) {
     return true;
   };
 
+  const handleFinishRecipe = () => {
+    localStorage.setItem('doneRecipes', JSON.stringify(doneRecipe));
+    history.push('/done-recipes');
+  };
+
   return (
     <div>
+      {console.log(drinkDetails)}
       <h1>DrinkInProgress</h1>
       <img
         style={ { width: 100, display: 'flex', flexDirection: 'row' } }
@@ -112,7 +131,7 @@ function DrinkInProgress(props) {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ handleDisabled() }
-        onClick={ () => history.push('/done-recipes') }
+        onClick={ handleFinishRecipe }
       >
         Finalizar receita
       </button>
