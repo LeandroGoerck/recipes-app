@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Sheader = styled.header`
-  // position: sticky;
+  position: sticky;
   top: 0;
   display: flex;
   flex-direction: column;
@@ -15,6 +15,8 @@ const Sheader = styled.header`
   background: linear-gradient(180deg,rgba(255,0,0,1) 0%,
    rgba(196,0,0,1) 100%, rgba(255,0,0,1) 100%);
   div {
+    background: linear-gradient(180deg,rgba(255,0,0,1) 0%,
+    rgba(196,0,0,1) 100%, rgba(255,0,0,1) 100%);
     display: flex;
     flex-direction: row;
   }
