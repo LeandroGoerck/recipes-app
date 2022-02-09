@@ -107,6 +107,7 @@ function FoodInProgress(props) {
         <BtnShare />
         <BtnFavorite recipeObj={ NewFavoriteRecipeObj('food') } />
       </span>
+      <hr className="line-separation" />
 
       <span
         data-testid="recipe-category"
@@ -117,11 +118,20 @@ function FoodInProgress(props) {
           {strCategory}
         </p>
       </span>
+      <hr className="line-separation" />
 
+      <h2 className="sub-title">Ingredients</h2>
       <FoodIngredientsWithCheckboxes recipeId={ recipeId } />
 
-      <span data-testid="instructions">{strInstructions}</span>
+      <h2 className="sub-title">Instructions</h2>
+      <div
+        data-testid="instructions"
+        className="instructions-container"
+      >
+        {strInstructions}
+      </div>
 
+      <h2 className="sub-title">Recommendations</h2>
       {pathname === `/foods/${recipeId}` && (
         <iframe title="frametitle" data-testid="video">
           Video
