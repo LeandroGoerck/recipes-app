@@ -13,6 +13,7 @@ const Sform = styled.form`
 `;
 
 const Sinput = styled.input`
+  background-color: transparent;
   border: none;
   border-bottom: 2px solid gray;
   padding: 5px;

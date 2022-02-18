@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import '../../style/style.css';
 import React, { useContext } from 'react';
 import GlobalContext from '../../Context/GlobalContext';
 
@@ -7,7 +8,7 @@ function RecommendedDrinkCard({ index }) {
   return (
     <div
       data-testid={ `${index}-recomendation-card` }
-      className="border border-light rounded-20 shadow p-3 mb-5"
+      className="item-carousel"
     >
       <img
         className="d-flex w-100 rounded-circle"

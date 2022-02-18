@@ -87,7 +87,7 @@ function BtnFavorite({ recipeObj }) {
         onClick={ () => handleFavorite() }
         src="blackHeartIconwhiteHeartIcon"
       >
-        <AiFillHeart className="fillHeart" />
+        <AiFillHeart className="fillHeart" size={ 35 } />
       </button>
     );
   }
@@ -100,7 +100,7 @@ function BtnFavorite({ recipeObj }) {
       className="favorite-btn"
       onClick={ handleFavorite }
     >
-      <AiOutlineHeart className="outlineHeart" />
+      <AiOutlineHeart className="outlineHeart" size={ 35 } />
     </button>
   );
 }

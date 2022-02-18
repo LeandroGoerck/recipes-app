@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import GlobalContext from '../../Context/GlobalContext';
+import '../../style/style.css';
 
 function FoodIngredientsWithCheckboxes(props) {
   const { recipeId } = props;
@@ -47,9 +48,9 @@ function FoodIngredientsWithCheckboxes(props) {
   };
 
   return (
-    <div>
+    <div className="container-ingredients">
       {ingredients !== undefined && (
-        <ol>
+        <ol className="ingredients-list">
           {ingredients.map((item, index) => (
             <li
               key={ index }

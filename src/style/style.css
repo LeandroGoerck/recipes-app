@@ -53,6 +53,10 @@ body, .root {
   text-transform: uppercase;
 }
 
+div {
+  background-color: rgb(235, 229, 229);
+}
+
 .fillHeart {
   color: #f20;
   font-size: 20px;
@@ -61,6 +65,8 @@ body, .root {
 .share-btn {
   background-color: transparent;
   border: none;
+  margin-right: 85px;
+  padding: 0;
   transition: all 0.2s ease;
 }
 
@@ -102,4 +108,107 @@ body, .root {
   margin-left: auto;
   margin-right: auto;
   margin-top: 15px;
+}
+
+.container-button {
+  background-color: rgb(235, 229, 229);
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+  width: 100vw;
+}
+
+.title-recipes {
+  background-color: rgb(235, 229, 229);
+  display: flex;
+  font-weight: 600;
+  justify-content: center;
+  letter-spacing: 1.5px;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  text-shadow: 1px 1px 5px white;
+  text-transform: uppercase;
+}
+
+.category-name {
+  background-color: rgb(235, 229, 229);
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.name-category {
+  font-weight: 500;
+  margin-left: 10px;
+  text-transform: uppercase;
+}
+
+.line-separation {
+  background-color: lightgray;
+  height: 2vh;
+  margin: 0;
+  width: 100vw;
+}
+
+.sub-title {
+  background-color: rgb(235, 229, 229);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  text-shadow: 2px 2px 2px white;
+}
+
+.container-ingredients {
+  background-color: rgb(235, 229, 229);
+  display: flex;
+  margin: 0;
+}
+
+.ingredients-list {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 0;
+  margin-bottom: 40px;
+  padding: 0;
+}
+
+.ingredients-list > li {
+  align-items: center;
+  display: flex;
+  justify-content: justify;
+  margin-left: 10px;
+  width: 100vw;
+}
+
+.instructions-container {
+  background-color: rgb(211, 211, 211);
+  display: flex;
+  justify-content: justify;
+  line-height: 25px;
+  padding: 15px;
+  text-align: justify;
+}
+
+.carousel-container {
+  background-color: rgb(235, 229, 229);
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+
+.btn-finish {
+  background-color: rgb(235, 229, 229);
+  border-radius: 5px;
+  margin-left: 23%;
+  text-transform: uppercase;
+}
+
+.item-carousel {
+  border: none;
+  margin-right: 20px;
+}
+
+.sr-only {
+  color: transparent;
+  display: none;
 }

@@ -10,6 +10,8 @@ import { fetchFoods } from '../../services/fetchFoods';
 import BtnStart from '../../components/BtnStart';
 import BtnFavorite from '../../components/BtnFavorite';
 import BtnShare from '../../components/BtnShare';
+import { SdivDetails, Simg, Stitle, Sicons } from '../../style/Details';
+import BtnBack from '../../components/BtnBack';
 
 function DrinksDetails(props) {
   const { drinkDetails: { drinkDetails } } = useContext(GlobalContext);
@@ -55,26 +57,24 @@ function DrinksDetails(props) {
   }, []);
 
   return (
-    <div>
-      <h1>DrinksDetails</h1>
-
-      <img
-        style={ { width: 100, display: 'flex', flexDirection: 'row' } }
+    <SdivDetails>
+      <Simg
         src={ drinkDetails?.strDrinkThumb }
         data-testid="recipe-photo"
         alt="x"
       />
 
-      <span
+      <Stitle
         data-testid="recipe-title"
       >
         {strDrink !== undefined && strDrink}
-      </span>
+      </Stitle>
 
-      <span>
+      <Sicons>
+        <BtnBack />
         <BtnShare />
         <BtnFavorite recipeObj={ NewFavoriteRecipeObj('drink') } />
-      </span>
+      </Sicons>
 
       <span data-testid="recipe-category">{strAlcoholic}</span>
 
@@ -91,7 +91,9 @@ function DrinksDetails(props) {
         </ul>
       )}
 
-      <span data-testid="instructions">{strInstructions}</span>
+      <div className="instructions-div">
+        <span data-testid="instructions">{strInstructions}</span>
+      </div>
 
       {pathname === `/drinks/${recipeId}` && (
         <iframe title="frametitle" data-testid="video">
@@ -101,7 +103,7 @@ function DrinksDetails(props) {
 
       <RecommendedFoodsCarousel />
       <BtnStart getLocal={ getLocal } />
-    </div>
+    </SdivDetails>
   );
 }
 

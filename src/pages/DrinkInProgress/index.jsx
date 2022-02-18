@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 import BtnFavorite from '../../components/BtnFavorite';
 import BtnShare from '../../components/BtnShare';
 // import BtnFinish from '../../components/BtnFinish';
@@ -12,6 +13,8 @@ import formatIngredientList from '../../helpers/formatIngredientList';
 import NewFavoriteRecipeObj from '../../helpers/NewFavoriteRecipeObj';
 import { fetchDrinkDetailsForRecipeId } from '../../services/fetchDrinks';
 import { fetchFoods } from '../../services/fetchFoods';
+import '../../style/style.css';
+import ButtonBack from '../../components/BtnBack';
 
 function DrinkInProgress(props) {
   const { drinkDetails: { drinkDetails } } = useContext(GlobalContext);
@@ -30,8 +33,8 @@ function DrinkInProgress(props) {
   const { params } = match;
   const { recipeId } = params;
   const { location: { pathname } } = useHistory();
-  const history = useHistory();
-  const [doneRecipe, setDoneRecipe] = useState([]);
+  // const history = useHistory();
+  // const [doneRecipe, setDoneRecipe] = useState([]);
 
   useEffect(() => {
     if (localStorage.getItem('inProgressRecipes')) {
@@ -91,17 +94,15 @@ function DrinkInProgress(props) {
     return true;
   };
 
-  const handleFinishRecipe = () => {
-    localStorage.setItem('doneRecipes', JSON.stringify(doneRecipe));
-    history.push('/done-recipes');
-  };
+  const Simg = styled.img`
+  width: 100vw;
+  height: 55vh;
+
+`;
 
   return (
     <div>
-      {console.log(drinkDetails)}
-      <h1>DrinkInProgress</h1>
-      <img
-        style={ { width: 100, display: 'flex', flexDirection: 'row' } }
+      <Simg
         src={ drinkDetails?.strDrinkThumb }
         data-testid="recipe-photo"
         alt="x"
@@ -109,26 +110,50 @@ function DrinkInProgress(props) {
 
       <span
         data-testid="recipe-title"
+        className="title-recipes"
       >
         {strDrink !== undefined && strDrink}
       </span>
-      <span>
+
+      <span className="container-button">
+        <ButtonBack />
         <BtnShare />
         <BtnFavorite recipeObj={ NewFavoriteRecipeObj('drink') } />
       </span>
-      <span data-testid="recipe-category">{strAlcoholic}</span>
+      <hr className="line-separation" />
+
+      <span
+        data-testid="recipe-category"
+        className="category-name"
+      >
+        {strAlcoholic}
+      </span>
+      <hr className="line-separation" />
+
+      <h2 className="sub-title">Ingredients</h2>
       <DrinkIngredientsWithCheckboxes recipeId={ recipeId } />
-      <span data-testid="instructions">{strInstructions}</span>
+
+      <h2 className="sub-title">Instructions</h2>
+      <span
+        data-testid="instructions"
+        className="instructions-container"
+      >
+        {strInstructions}
+      </span>
+
+      <h2 className="sub-title">Recommendations</h2>
       {pathname === `/drinks/${recipeId}` && (
         <iframe title="frametitle" data-testid="video">
           Video
         </iframe>
       )}
 
-      <RecommendedFoodsCarousel />
-      {/* <BtnFinish /> */}
+      <div className="carousel-container">
+        <RecommendedFoodsCarousel />
+      </div>
       <button
         type="button"
+        className="btn-finish"
         data-testid="finish-recipe-btn"
         disabled={ handleDisabled() }
         onClick={ handleFinishRecipe }

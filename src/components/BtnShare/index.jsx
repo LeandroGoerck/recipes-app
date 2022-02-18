@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { AiOutlineShareAlt } from 'react-icons/ai';
 import { toast, ToastContainer } from 'react-toastify';
-// import { CopyToClipboard } from 'react-copy-to-clipboard';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../style/style.css';
 import copy from 'clipboard-copy';
@@ -34,10 +33,6 @@ function BtnShare() {
 
   const handleShare = (event) => {
     event.preventDefault();
-    // const urlCopy = window.location.href;
-    // navigator.clipboard.writeText(urlCopy);
-    // console.log(navigator.clipboard);
-    // setSaveLink(urlCopy);
     const { baseURI } = event.target;
     copy(handleCopyText());
     setSaveLink(baseURI);
@@ -57,18 +52,14 @@ function BtnShare() {
         draggable
         pauseOnHover
       />
-      {/* <CopyToClipboard
-        text={ handleCopyText() }
-      > */}
       <button
         type="button"
         data-testid="share-btn"
         className="share-btn"
         onClick={ handleShare }
       >
-        <AiOutlineShareAlt />
+        <AiOutlineShareAlt size={ 35 } />
       </button>
-      {/* </CopyToClipboard> */}
     </>
   );
 }

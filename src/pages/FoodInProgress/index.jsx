@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
+import '../../style/style.css';
+import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import BtnFavorite from '../../components/BtnFavorite';
 import BtnShare from '../../components/BtnShare';
@@ -11,7 +13,7 @@ import formatIngredientList from '../../helpers/formatIngredientList';
 import NewFavoriteRecipeObj from '../../helpers/NewFavoriteRecipeObj';
 import { fetchDrinks } from '../../services/fetchDrinks';
 import { fetchFoodsDetailsForRecipeId } from '../../services/fetchFoods';
-// import BtnFinish from '../../components/BtnFinish';
+import ButtonBack from '../../components/BtnBack';
 
 function FoodInProgress(props) {
   const { startButton: { setIsStart } } = useContext(GlobalContext);
@@ -29,7 +31,7 @@ function FoodInProgress(props) {
   const { foodDetails: { setDrinkRecommendations } } = useContext(GlobalContext);
   // =================== routes ==============================
   const { match: { params: { recipeId } } } = props;
-  const [doneRecipe, setDoneRecipe] = useState([]);
+  // const [doneRecipe, setDoneRecipe] = useState([]);
   const { location: { pathname } } = useHistory();
   const history = useHistory();
 
@@ -43,18 +45,7 @@ function FoodInProgress(props) {
       setInProgCocktails(inProgressRecipeCocktails);
     }
     setIsStart(false);
-    const catchDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-    setDoneRecipe([...catchDoneRecipes, {
-      id: details.idMeal,
-      type: 'food',
-      nationality: details.strArea,
-      category: strCategory,
-      alcoholicOrNot: '',
-      name: strMeal,
-      image: details.strMealThumb,
-      doneDate: '09/02/2022',
-      tags: [details.strTags],
-    }]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -65,6 +56,7 @@ function FoodInProgress(props) {
         setIngredients(ingAndMeasure);
       })
       .catch((error) => (error));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -79,6 +71,7 @@ function FoodInProgress(props) {
           setDrinkRecommendations(drinks);
         }
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -86,6 +79,7 @@ function FoodInProgress(props) {
       localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
     };
     saveInProgressRecipesProviderToLocalStorage();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inProgMeals[recipeId]]);
 
   const handleDisabled = () => {
@@ -93,47 +87,71 @@ function FoodInProgress(props) {
     return true;
   };
 
-  const handleFinishRecipe = () => {
-    localStorage.setItem('doneRecipes', JSON.stringify(doneRecipe));
-    history.push('/done-recipes');
-  };
+  const Simg = styled.img`
+    width: 100vw;
+    height: 55vh;
+  `;
 
   return (
     <div>
-      <h1>FoodInProgress</h1>
-      <img
-        style={ { width: 100, display: 'flex', flexDirection: 'row' } }
+      <Simg
         src={ details?.strMealThumb }
         data-testid="recipe-photo"
-        alt="x"
+        alt="Image food"
       />
 
-      <span data-testid="recipe-title">{strMeal !== undefined && strMeal}</span>
+      <span
+        data-testid="recipe-title"
+        className="title-recipes"
+      >
+        {strMeal !== undefined && strMeal}
+      </span>
 
-      <span>
+      <span className="container-button">
+        <ButtonBack />
         <BtnShare />
         <BtnFavorite recipeObj={ NewFavoriteRecipeObj('food') } />
       </span>
+      <hr className="line-separation" />
 
-      <span data-testid="recipe-category">{strCategory}</span>
+      <span
+        data-testid="recipe-category"
+        className="category-name"
+      >
+        Catergory:
+        <p className="name-category">
+          {strCategory}
+        </p>
+      </span>
+      <hr className="line-separation" />
 
+      <h2 className="sub-title">Ingredients</h2>
       <FoodIngredientsWithCheckboxes recipeId={ recipeId } />
 
-      <span data-testid="instructions">{strInstructions}</span>
+      <h2 className="sub-title">Instructions</h2>
+      <div
+        data-testid="instructions"
+        className="instructions-container"
+      >
+        {strInstructions}
+      </div>
 
+      <h2 className="sub-title">Recommendations</h2>
       {pathname === `/foods/${recipeId}` && (
         <iframe title="frametitle" data-testid="video">
           Video
         </iframe>
       )}
 
-      <RecommendedDrinksCarousel />
-      {/* <BtnFinish /> */}
+      <div className="carousel-container">
+        <RecommendedDrinksCarousel />
+      </div>
       <button
         type="button"
         data-testid="finish-recipe-btn"
+        className="btn-finish"
         disabled={ handleDisabled() }
-        onClick={ handleFinishRecipe }
+        onClick={ () => history.goBack() }
       >
         Finalizar receita
       </button>
