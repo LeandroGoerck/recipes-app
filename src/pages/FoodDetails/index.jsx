@@ -36,6 +36,7 @@ function FoodDetails(props) {
     fetchFoodsDetailsForRecipeId(recipeId)
       .then(({ meals }) => {
         setDetails(meals[0]);
+        console.log(meals[0]);
         const ingAndMeasure = formatIngredientList(meals[0]);
         setIngredients(ingAndMeasure);
       })
@@ -93,7 +94,16 @@ function FoodDetails(props) {
       </div>
 
       {pathname === `/foods/${recipeId}` && (
-        <iframe title="frametitle" data-testid="video">
+        <iframe
+          width="340"
+          height="160"
+          title="frametitle"
+          data-testid="video"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write;
+          encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        >
           Video
         </iframe>
       )}
