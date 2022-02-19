@@ -28,6 +28,12 @@ function FoodDetails(props) {
   const { match: { params: { recipeId } } } = props;
   const { location: { pathname } } = useHistory();
 
+  // Lógica construida com ajuda do grupo 8
+  const createEmbedYouTubeURL = (url) => {
+    const videoId = url.split('https://www.youtube.com/watch?v=')[1];
+    return `https://www.youtube.com/embed/${videoId}`;
+  };
+
   useEffect(() => {
     if (getLocal.length !== 0) {
       setGetLocal(JSON.parse(localStorage.getItem('startRecipes')));
@@ -39,7 +45,6 @@ function FoodDetails(props) {
     fetchFoodsDetailsForRecipeId(recipeId)
       .then(({ meals }) => {
         setDetails(meals[0]);
-        console.log(meals[0]);
         const ingAndMeasure = formatIngredientList(meals[0]);
         setIngredients(ingAndMeasure);
       })
@@ -98,12 +103,13 @@ function FoodDetails(props) {
         <span data-testid="instructions">{strInstructions}</span>
       </div>
 
-      {pathname === `/foods/${recipeId}` && (
+      {pathname === `/foods/${recipeId}` && details.strYoutube && (
         <iframe
           width="340"
-          height="160"
+          height="200"
           title="frametitle"
           data-testid="video"
+          src={ createEmbedYouTubeURL(details.strYoutube) }
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write;
           encrypted-media; gyroscope; picture-in-picture"
