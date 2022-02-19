@@ -111,8 +111,7 @@ function FoodDetails(props) {
           data-testid="video"
           src={ createEmbedYouTubeURL(details.strYoutube) }
           frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write;
-          encrypted-media; gyroscope; picture-in-picture"
+          allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         >
           Video
