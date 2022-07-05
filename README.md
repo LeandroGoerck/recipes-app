@@ -5,13 +5,13 @@
 Clone o repositório:
 
 ```
-git clone git@github.com/LeandroGoerck/recipes-app
+git clone git@github.com/LeandroGoerck/recipes-app.git
 ```
 
 Acesse a pasta do repositório
 
 ```
-cd project-recipe-app
+cd recipes-app
 ```
 
 Instale as dependências:
