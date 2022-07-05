@@ -1,5 +1,5 @@
-<h1 align="center">Projeto - App de Receitas</h1>
-
+# :tropical_drink: App de Receitas :spaghetti:
+Um sistema que permite visualizar, buscar, filtrar, favoritar, compartilhar e acompanhar o processo de preparação de receitas e drinks.
 ## 💻 Instalando o projeto
 
 Clone o repositório:
