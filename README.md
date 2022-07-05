@@ -1,4 +1,4 @@
-<h1 align="center">Recipes App</h1>
+<h1 align="center">Projeto - App de Receitas</h1>
 
 ## 💻 Instalando o projeto
 
