@@ -5,7 +5,7 @@
 Clone o repositório:
 
 ```
-git clone git@github.com:lramos33/project-recipe-app.git
+git clone git@github.com/LeandroGoerck/recipes-app
 ```
 
 Acesse a pasta do repositório
